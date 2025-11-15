@@ -1,65 +1,105 @@
 {
+  "contact": {
+    "name": "Thiruvikraman Anand",
+    "email": "anand.thiruvikraman@gmail.com",
+    "phone": "+44 74 7233 1230",
+    "linkedin": "thiruvikraman-anand",
+    "github": null,
+    "location": "London, UK"
+  },
+  "education": [
+    {
+      "degree": "MSc in Artificial Intelligence Applications And Innovation",
+      "institution": "Imperial College London",
+      "field": null,
+      "year": null,
+      "gpa": null
+    },
+    {
+      "degree": "BTech in Computer Science Engineering",
+      "institution": "Vellore Institute of Technology, Chennai",
+      "field": null,
+      "year": null,
+      "gpa": null
+    }
+  ],
+  "experience": [
+    {
+      "title": "Lead GenAI Engineer",
+      "company": "Anarix",
+      "duration": "Sept 2025 \u2013 Present",
+      "location": null
+    },
+    {
+      "title": "Machine Learning Engineer And AMC Lead",
+      "company": "Anarix",
+      "duration": "Dec 2023 \u2013 Aug 2025",
+      "location": null
+    },
+    {
+      "title": "Data Analyst Intern",
+      "company": "NapQueen Sleep",
+      "duration": "Sep 2023 \u2013 Nov 2023",
+      "location": null
+    }
+  ],
   "projects": [
     {
       "name": "JIVA 2.0",
       "github_link": null,
-      "description": "An advanced AI agent for reporting, reasoning, and intelligent automation built on Model Context Protocol (MCP) and GPT-4.1"
+      "description": "Advanced AI agent for reporting, reasoning, and intelligent automation using Model Context Protocol and GPT-4.1"
     },
     {
-      "name": "JIVA",
+      "name": "Amazon Marketing Cloud 2.0",
       "github_link": null,
-      "description": "AI agent prototype built on RAG architecture and integrated with AWS Bedrock"
+      "description": "Upgraded capabilities by integrating Large Language Models"
     },
     {
-      "name": "AI Bidder System",
+      "name": "Review Sentiment Analysis Platform",
       "github_link": null,
-      "description": "Advanced bidding system for Amazon advertisers"
+      "description": "Powered by GPT-4 for product enhancement and marketing optimization"
     },
     {
-      "name": "Competitor Price Index system",
+      "name": "Competitor Price Index System",
       "github_link": null,
       "description": "Real-time analysis of pricing dynamics"
     },
     {
-      "name": "Review Sentiment Analysis platform",
+      "name": "AI Bidding System",
       "github_link": null,
-      "description": "Powered by GPT-4"
-    },
-    {
-      "name": "Amazon Marketing Cloud 2.0 upgrade",
-      "github_link": null,
-      "description": "Integration of Large Language Models"
-    },
-    {
-      "name": "Time series forecasting model",
-      "github_link": null,
-      "description": "Inventory management system for NapQueen Sleep"
+      "description": "Advanced system for Amazon advertisers using AWS SageMaker"
     }
   ],
   "tools": [
     "Python",
+    "LLM",
     "PyTorch",
-    "TensorFlow",
-    "LangChain",
-    "OpenAI API",
+    "Tensorflow",
+    "RAG",
     "GPT-4",
-    "NumPy",
-    "Pandas",
-    "XGBoost",
-    "Mediapipe",
+    "LangChain",
     "AWS EC2",
     "AWS SageMaker",
     "AWS S3",
     "AWS Lambda",
     "AWS Bedrock",
-    "Amazon Marketing Cloud",
     "PostgreSQL",
     "Redis",
     "FastAPI",
+    "NumPy",
+    "Pandas",
     "Docker",
     "Streamlit",
-    "Large Language Models",
-    "Model Context Protocol",
-    "Retrieval-Augmented Generation"
-  ]
+    "Amazon Marketing Cloud"
+  ],
+  "certifications": [
+    "Technical Product Innovation Award \u2013 Walmart Connect 2025",
+    "Honorary Mention \u2013 AMD Hackathon 2025",
+    "Runner-Up \u2013 App Frenzy 2.0 2023",
+    "Amazon Marketing Cloud Certification \u2013 Amazon",
+    "Neural Network and Deep Learning \u2013 DeepLearning.AI",
+    "Python for Data Science and Machine Learning Bootcamp \u2013 Jose Portilla",
+    "The Complete Python Bootcamp From Zero to Hero \u2013 Jose Portilla"
+  ],
+  "years_experience": 2
 }

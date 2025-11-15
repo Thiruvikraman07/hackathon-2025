@@ -1,0 +1,23 @@
+contact:
+  name: Thiruvikraman Anand
+  email: anand.thiruvikraman@gmail.com
+  phone: +44 74 7233 1230
+  linkedin: thiruvikraman-anand
+  github: null
+  location: "London, UK"
+education[2,]{degree,institution,field,year,gpa}:
+  MSc in Artificial Intelligence Applications And Innovation,Imperial College London,null,null,null
+  BTech in Computer Science Engineering,"Vellore Institute of Technology, Chennai",null,null,null
+experience[3,]{title,company,duration,location}:
+  Lead GenAI Engineer,Anarix,Sept 2025 – Present,null
+  Machine Learning Engineer And AMC Lead,Anarix,Dec 2023 – Aug 2025,null
+  Data Analyst Intern,NapQueen Sleep,Sep 2023 – Nov 2023,null
+projects[5,]{name,github_link,description}:
+  JIVA 2.0,null,"Advanced AI agent for reporting, reasoning, and intelligent automation using Model Context Protocol and GPT-4.1"
+  Amazon Marketing Cloud 2.0,null,Upgraded capabilities by integrating Large Language Models
+  Review Sentiment Analysis Platform,null,Powered by GPT-4 for product enhancement and marketing optimization
+  Competitor Price Index System,null,Real-time analysis of pricing dynamics
+  AI Bidding System,null,Advanced system for Amazon advertisers using AWS SageMaker
+tools[20]: Python,LLM,PyTorch,Tensorflow,RAG,GPT-4,LangChain,AWS EC2,AWS SageMaker,AWS S3,AWS Lambda,AWS Bedrock,PostgreSQL,Redis,FastAPI,NumPy,Pandas,Docker,Streamlit,Amazon Marketing Cloud
+certifications[7]: Technical Product Innovation Award – Walmart Connect 2025,Honorary Mention – AMD Hackathon 2025,Runner-Up – App Frenzy 2.0 2023,Amazon Marketing Cloud Certification – Amazon,Neural Network and Deep Learning – DeepLearning.AI,Python for Data Science and Machine Learning Bootcamp – Jose Portilla,The Complete Python Bootcamp From Zero to Hero – Jose Portilla
+years_experience: 2
