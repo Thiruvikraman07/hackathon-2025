@@ -1,0 +1,42 @@
+job_title: Senior Backend Engineer
+company_repo: fastapi/fastapi
+salary_range: $140k-$180k
+overview: "Lead backend development for FastAPI, a modern high-performance Python web framework with 90k+ stars. Work on core framework features, performance optimization, and API development while mentoring a distributed team."
+overview_reason: "Repository shows FastAPI is a production-grade framework with extensive testing, typing, and documentation needs"
+technical_requirements:
+  primary_languages[2,]{name,importance,reason}:
+    Python,must-have,"Primary language (98% of codebase) with advanced features like type hints, async/await"
+    JavaScript,nice-to-have,Minor usage in documentation and testing
+  frameworks_libraries[3,]{name,importance,reason}:
+    FastAPI,must-have,Core framework being developed
+    Pydantic,must-have,Extensively used for data validation and settings management
+    pytest,must-have,Extensive testing infrastructure present in codebase
+  tools_platforms[3,]{name,importance,reason}:
+    Git,must-have,Source control for large collaborative project
+    OpenAPI/Swagger,must-have,Core API documentation functionality
+    Docker,must-have,Required for deployment and testing scenarios
+  databases[1,]{name,importance,reason}:
+    SQL Databases,must-have,Framework supports multiple database integrations
+responsibilities[6,]{responsibility,reason}:
+  Design and implement core framework features,Complex framework code shows ongoing feature development
+  Optimize performance-critical code paths,Framework advertises high performance as key feature
+  Review and merge open source contributions,"High number of forks (8,200+) indicates active community"
+  Maintain comprehensive test coverage,Extensive test files present in codebase
+  Create technical documentation,Significant documentation infrastructure in docs_src
+  Lead API design decisions,Complex API patterns visible in route definitions
+qualifications[8,]{qualification,importance,reason}:
+  5+ years Python development,must-have,Advanced Python features used throughout
+  Experience with async Python,must-have,Async patterns used extensively in codebase
+  API design expertise,must-have,Complex API patterns and OpenAPI integration
+  Testing methodology expertise,must-have,Extensive test infrastructure present
+  CI/CD experience,must-have,Project requires robust deployment processes
+  Open source contribution history,must-have,Large open source project management
+  Documentation writing skills,nice-to-have,Extensive documentation needs
+  DevOps experience,nice-to-have,Helpful for deployment and integration scenarios
+experience_requirement:
+  level: senior
+  minimum_years: 5
+  reason: "Complex architecture, framework design, and team leadership requirements"
+additional_requirements[3]: Experience leading a team of 3-5 developers,Strong communication skills for remote work,Open source contribution experience
+what_youll_learn[4]: Modern Python framework architecture and design,High-performance async system design,Open source project management at scale,Advanced API design patterns
+total_files_analyzed: 500

@@ -11,8 +11,8 @@ Fixed Issues:
 
 import sys
 from pathlib import Path
-from typing import List, Optional, Dict
-from pydantic import BaseModel, Field
+from typing import List, Optional, Dict, Union, Any
+from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
 from dotenv import load_dotenv
 
 # Import TOON encoder
@@ -54,17 +54,42 @@ class TechnicalRequirements(BaseModel):
     tools_platforms: List[TechRequirementItem] = Field(description="Tools with reasons (2-3 items)")
     databases: List[TechRequirementItem] = Field(default_factory=list, description="Databases with reasons (0-2 items)")
 
+    @field_validator('primary_languages', 'frameworks_libraries', 'tools_platforms', 'databases', mode='before')
+    @classmethod
+    def convert_strings_to_items(cls, v):
+        """Convert string items to TechRequirementItem objects"""
+        if not isinstance(v, list):
+            return v
+        result = []
+        for item in v:
+            if isinstance(item, str):
+                # Convert string to TechRequirementItem with default values
+                result.append({
+                    'name': item,
+                    'importance': 'must-have',
+                    'reason': 'Required based on repository analysis'
+                })
+            elif isinstance(item, dict):
+                result.append(item)
+            else:
+                result.append(item)
+        return result
+
 
 class ResponsibilityItem(BaseModel):
     """Responsibility with reasoning"""
-    task: str = Field(description="Responsibility description (max 30 words)")
+    model_config = ConfigDict(populate_by_name=True)
+
+    responsibility: str = Field(description="Responsibility description (max 30 words)", alias="task")
     reason: str = Field(description="Why this is needed based on repo (max 40 words)")
 
 
 class QualificationItem(BaseModel):
     """Qualification with reasoning"""
-    skill: str = Field(description="Required skill (max 20 words)")
-    importance: str = Field(description="must-have or nice-to-have")
+    model_config = ConfigDict(populate_by_name=True)
+
+    qualification: str = Field(description="Required skill (max 20 words)", alias="skill")
+    importance: str = Field(default="must-have", description="must-have or nice-to-have")
     reason: str = Field(description="Why this skill is needed (max 40 words)")
 
 
@@ -94,6 +119,19 @@ class JobDescription(BaseModel):
     what_youll_learn: List[str] = Field(description="4-5 learning opportunities (each max 20 words)")
 
     total_files_analyzed: int = Field(description="Number of code files analyzed")
+
+    @field_validator('salary_range', mode='before')
+    @classmethod
+    def convert_salary_dict(cls, v):
+        """Convert dict salary to string format"""
+        if isinstance(v, dict):
+            min_val = v.get('min', '')
+            max_val = v.get('max', '')
+            currency = v.get('currency', 'USD')
+            if min_val and max_val:
+                return f"${min_val:,}-${max_val:,}" if currency == 'USD' else f"{min_val:,}-{max_val:,} {currency}"
+            return None
+        return v
 
 
 # ============================================
@@ -242,13 +280,13 @@ REQUIRED OUTPUT STRUCTURE - YOU MUST INCLUDE ALL FIELDS:
   }},
   
   "responsibilities": [
-    {{"task": "Do X", "reason": "Because code shows Y"}},
-    {{"task": "Do Z", "reason": "Because repo has W"}}
+    {{"responsibility": "Do X", "reason": "Because code shows Y"}},
+    {{"responsibility": "Do Z", "reason": "Because repo has W"}}
   ],
-  
+
   "qualifications": [
-    {{"skill": "X years of Y", "importance": "must-have", "reason": "Code complexity requires this"}},
-    {{"skill": "Experience with Z", "importance": "nice-to-have", "reason": "Would help with W"}}
+    {{"qualification": "X years of Y", "importance": "must-have", "reason": "Code complexity requires this"}},
+    {{"qualification": "Experience with Z", "importance": "nice-to-have", "reason": "Would help with W"}}
   ],
   
   "experience_requirement": {{
@@ -355,7 +393,7 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
         print(f"\n\n📋 RESPONSIBILITIES:")
         print("-"*80)
         for i, resp in enumerate(data.responsibilities, 1):
-            print(f"\n{i}. {resp.task}")
+            print(f"\n{i}. {resp.responsibility}")
             print(f"   💡 {resp.reason}")
 
         print(f"\n\n🎯 QUALIFICATIONS:")
@@ -365,13 +403,13 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
 
         print(f"\nMust Have:")
         for qual in must_have:
-            print(f"   ✓ {qual.skill}")
+            print(f"   ✓ {qual.qualification}")
             print(f"     💡 {qual.reason}")
 
         if nice_to_have:
             print(f"\nNice to Have:")
             for qual in nice_to_have:
-                print(f"   • {qual.skill}")
+                print(f"   • {qual.qualification}")
                 print(f"     💡 {qual.reason}")
 
         print(f"\n\n⏱️  EXPERIENCE REQUIREMENT:")
