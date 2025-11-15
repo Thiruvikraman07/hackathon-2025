@@ -1,0 +1,51 @@
+candidate_name: bel-learning
+job_title: Senior Backend Developer
+resume_analysis:
+  years_of_experience: 2
+  years_reason: Calculated from work history
+  education_match: true
+  education_reason: Education information analyzed
+  skill_matches[0]:
+  relevant_experience[0]:
+  relevant_experience_reason: Based on work history
+  resume_strength_score: 50
+  resume_strength_reason: Based on overall resume quality
+github_analysis:
+  github_username: null
+  has_github: false
+  github_check_reason: GitHub profile checked
+  projects_found: 0
+  projects_found_reason: GitHub profile analyzed
+  relevant_projects[1]:
+    - project_name: multi-agent-path-finding
+      github_url: "https://github.com/multi-agent-path-finding"
+      is_relevant: true
+      relevance_score: 4
+      relevance_reason: Relevant to job requirements
+      technologies_matched[1]: Python
+  quality_assessments[0]:
+  github_contribution_score: 0
+  github_score_reason: Based on GitHub activity
+skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
+  Insufficient years of experience (5 year gap),moderate,Insufficient years of experience (5 year gap),"Gap identified: Insufficient years of experience (5 year gap)",true,Can be acquired through training and practice
+  No FastAPI ecosystem experience,moderate,No FastAPI ecosystem experience,"Gap identified: No FastAPI ecosystem experience",true,Can be acquired through training and practice
+  Missing database expertise,moderate,Missing database expertise,"Gap identified: Missing database expertise",true,Can be acquired through training and practice
+  Incomplete formal education,moderate,Incomplete formal education,"Gap identified: Incomplete formal education",true,Can be acquired through training and practice
+  Limited backend development experience,moderate,Limited backend development experience,"Gap identified: Limited backend development experience",true,Can be acquired through training and practice
+skill_gaps_summary: "The candidate faces several critical gaps that make them unsuitable for a senior position. The most significant is the experience gap (2 years vs required 7+), which cannot be bridged in the short term. There's also a complete absence of FastAPI ecosystem experience and limited backend development expertise, particularly in databases. While some technical gaps could be learned, the combination of missing senior-level experience and core technical requirements makes this candidate not suitable for this role."
+strengths[5]: Strong CI/CD experience,Solid Git version control skills,Linux/Unix systems knowledge,Python programming capability,Infrastructure experience
+strengths_reason: "The candidate shows solid foundational technical skills particularly in infrastructure and development tools. Their experience with CI/CD, Git, and Linux systems demonstrates good DevOps knowledge. While their Python experience is entry-level, it shows technical learning capability."
+final_decision:
+  is_fit: false
+  fit_reason: Reject
+  overall_score: 30
+  overall_score_breakdown: Based on overall evaluation
+  resume_score: 50
+  github_score: 50
+  skill_match_score: 50
+  recommendation: no-hire
+  recommendation_reason: Reject
+  confidence_level: 70
+  confidence_reason: Based on available information
+detailed_feedback: "The candidate shows promise in infrastructure and development tools, with good experience in CI/CD pipelines, Git version control, and Linux systems. Their Python experience, while present, is primarily from research rather than production backend development.\n\nHowever, there are significant gaps that make them unsuitable for this senior position. With only 2 years of experience versus the required 7+, they lack the depth of experience necessary for a senior role. They have no experience with the FastAPI ecosystem (FastAPI, Starlette, Pydantic) which is crucial for this position. Their GitHub profile, while active, doesn't demonstrate relevant backend development projects.\n\nThe combination of insufficient experience and missing core technical requirements suggests this candidate would be better suited for a junior or mid-level backend position where they can develop these missing skills."
+hiring_manager_notes: ""
