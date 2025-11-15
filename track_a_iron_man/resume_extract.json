@@ -1,0 +1,65 @@
+{
+  "projects": [
+    {
+      "name": "JIVA 2.0",
+      "github_link": null,
+      "description": "An advanced AI agent for reporting, reasoning, and intelligent automation built on Model Context Protocol (MCP) and GPT-4.1"
+    },
+    {
+      "name": "JIVA",
+      "github_link": null,
+      "description": "AI agent prototype built on RAG architecture and integrated with AWS Bedrock"
+    },
+    {
+      "name": "AI Bidder System",
+      "github_link": null,
+      "description": "Advanced bidding system for Amazon advertisers"
+    },
+    {
+      "name": "Competitor Price Index system",
+      "github_link": null,
+      "description": "Real-time analysis of pricing dynamics"
+    },
+    {
+      "name": "Review Sentiment Analysis platform",
+      "github_link": null,
+      "description": "Powered by GPT-4"
+    },
+    {
+      "name": "Amazon Marketing Cloud 2.0 upgrade",
+      "github_link": null,
+      "description": "Integration of Large Language Models"
+    },
+    {
+      "name": "Time series forecasting model",
+      "github_link": null,
+      "description": "Inventory management system for NapQueen Sleep"
+    }
+  ],
+  "tools": [
+    "Python",
+    "PyTorch",
+    "TensorFlow",
+    "LangChain",
+    "OpenAI API",
+    "GPT-4",
+    "NumPy",
+    "Pandas",
+    "XGBoost",
+    "Mediapipe",
+    "AWS EC2",
+    "AWS SageMaker",
+    "AWS S3",
+    "AWS Lambda",
+    "AWS Bedrock",
+    "Amazon Marketing Cloud",
+    "PostgreSQL",
+    "Redis",
+    "FastAPI",
+    "Docker",
+    "Streamlit",
+    "Large Language Models",
+    "Model Context Protocol",
+    "Retrieval-Augmented Generation"
+  ]
+}
