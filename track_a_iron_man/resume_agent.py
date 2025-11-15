@@ -30,13 +30,7 @@ if env_path.exists():
 
 # Import Holistic AI Bedrock helper
 sys.path.insert(0, '../core')
-try:
-    from react_agent.holistic_ai_bedrock import get_chat_model
-except ImportError:
-    print("⚠️  Could not import Holistic AI Bedrock helper")
-    from langchain_openai import ChatOpenAI
-    def get_chat_model(model_name):
-        return ChatOpenAI(model="gpt-4")
+from react_agent.holistic_ai_bedrock import get_chat_model
 
 
 # ============================================
