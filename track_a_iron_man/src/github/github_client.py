@@ -1,48 +1,20 @@
 import random
-import requests
 from typing import Any
+
+import requests
 from github import Github, GithubException
 
 
 class GitHubClient:
-    """Client for fetching GitHub repositories and sampling code files.
+    """Client for fetching GitHub public repositories and sampling code files.
 
-    Works with public repositories without requiring authentication.
-
-    Rate limits:
-    - Without token: 60 API requests/hour
-    - With token: 5,000 API requests/hour
-
-    Note: File content is fetched directly from raw.githubusercontent.com,
-    which doesn't count against API rate limits.
+    Uses only public data - no authentication required.
+    Minimizes API calls by fetching file contents directly from raw.githubusercontent.com.
     """
 
-    def __init__(self, access_token: str | None = None):
-        """Initialize GitHub client with optional access token.
-
-        Args:
-            access_token: Optional GitHub personal access token.
-                         Not required for public repositories, but increases rate limits.
-        """
-        self.github = Github(access_token) if access_token else Github()
-        self.use_auth = access_token is not None
-
-    def get_rate_limit_info(self) -> dict[str, Any]:
-        """Get current API rate limit information.
-
-        Returns:
-            Dictionary with rate limit info including remaining requests.
-        """
-        try:
-            rate_limit = self.github.get_rate_limit()
-            return {
-                "limit": rate_limit.rate.limit,
-                "remaining": rate_limit.rate.remaining,
-                "reset_time": rate_limit.rate.reset.isoformat() if rate_limit.rate.reset else None,
-                "using_auth": self.use_auth
-            }
-        except GithubException as e:
-            raise ValueError(f"Failed to fetch rate limit info: {e}")
+    def __init__(self):
+        """Initialize GitHub client for public repositories only."""
+        self.github = Github()  # No authentication - public access only
 
     def get_profile_info(self, username: str) -> dict[str, Any]:
         """Get GitHub user profile information."""
@@ -66,7 +38,9 @@ class GitHubClient:
         except GithubException as e:
             raise ValueError(f"Failed to fetch user profile: {e}")
 
-    def get_public_repositories(self, username: str, language: str | None = None) -> list[dict[str, Any]]:
+    def get_public_repositories(
+        self, username: str, language: str | None = None
+    ) -> list[dict[str, Any]]:
         """Get all public repositories for a user, optionally filtered by language."""
         try:
             user = self.github.get_user(username)
@@ -81,28 +55,29 @@ class GitHubClient:
                 if language and repo.language != language:
                     continue
 
-                public_repos.append({
-                    "name": repo.name,
-                    "full_name": repo.full_name,
-                    "description": repo.description,
-                    "stars": repo.stargazers_count,
-                    "forks": repo.forks_count,
-                    "language": repo.language,
-                    "size": repo.size,
-                    "updated_at": repo.updated_at.isoformat() if repo.updated_at else None,
-                    "url": repo.html_url,
-                    "default_branch": repo.default_branch,
-                })
+                public_repos.append(
+                    {
+                        "name": repo.name,
+                        "full_name": repo.full_name,
+                        "description": repo.description,
+                        "stars": repo.stargazers_count,
+                        "forks": repo.forks_count,
+                        "language": repo.language,
+                        "size": repo.size,
+                        "updated_at": (
+                            repo.updated_at.isoformat() if repo.updated_at else None
+                        ),
+                        "url": repo.html_url,
+                        "default_branch": repo.default_branch,
+                    }
+                )
 
             return public_repos
         except GithubException as e:
             raise ValueError(f"Failed to fetch repositories: {e}")
 
     def sample_files_by_extension(
-        self,
-        repo_full_name: str,
-        extensions: list[str],
-        max_files: int = 10
+        self, repo_full_name: str, extensions: list[str], max_files: int = 10
     ) -> list[dict[str, Any]]:
         """Randomly sample files from a repository by file extensions.
 
@@ -146,14 +121,16 @@ class GitHubClient:
             result = []
             for file in sampled:
                 try:
-                    content = file.decoded_content.decode('utf-8')
-                    result.append({
-                        "path": file.path,
-                        "size": file.size,
-                        "content": content,
-                        "sha": file.sha,
-                        "url": file.html_url,
-                    })
+                    content = file.decoded_content.decode("utf-8")
+                    result.append(
+                        {
+                            "path": file.path,
+                            "size": file.size,
+                            "content": content,
+                            "sha": file.sha,
+                            "url": file.html_url,
+                        }
+                    )
                 except Exception:
                     # Skip files that can't be decoded (binary files, etc.)
                     continue
@@ -175,7 +152,7 @@ class GitHubClient:
         repo_full_name: str,
         extensions: list[str],
         max_files: int = 10,
-        max_file_size: int = 1_000_000  # 1MB max per file
+        max_file_size: int = 1_000_000,  # 1MB max per file
     ) -> list[dict[str, Any]]:
         """Efficiently sample files using git tree API and raw content fetching.
 
@@ -206,11 +183,13 @@ class GitHubClient:
                     if any(item.path.endswith(ext) for ext in extensions):
                         # Check size constraint
                         if item.size and item.size <= max_file_size:
-                            matching_files.append({
-                                "path": item.path,
-                                "size": item.size,
-                                "sha": item.sha,
-                            })
+                            matching_files.append(
+                                {
+                                    "path": item.path,
+                                    "size": item.size,
+                                    "sha": item.sha,
+                                }
+                            )
 
             if not matching_files:
                 return []
@@ -230,13 +209,15 @@ class GitHubClient:
                     if response.status_code == 200:
                         try:
                             content = response.text
-                            result.append({
-                                "path": file_info["path"],
-                                "size": file_info["size"],
-                                "content": content,
-                                "sha": file_info["sha"],
-                                "url": f"https://github.com/{repo_full_name}/blob/{default_branch}/{file_info['path']}",
-                            })
+                            result.append(
+                                {
+                                    "path": file_info["path"],
+                                    "size": file_info["size"],
+                                    "content": content,
+                                    "sha": file_info["sha"],
+                                    "url": f"https://github.com/{repo_full_name}/blob/{default_branch}/{file_info['path']}",
+                                }
+                            )
                         except UnicodeDecodeError:
                             # Skip binary files
                             continue
@@ -253,7 +234,7 @@ class GitHubClient:
         username: str,
         count: int = 2,
         language: str | None = None,
-        min_stars: int = 0
+        min_stars: int = 0,
     ) -> list[dict[str, Any]]:
         """Get random repositories from a user's public repositories.
 
@@ -283,7 +264,7 @@ class GitHubClient:
         self,
         repo_list: list[dict[str, Any]],
         extensions: list[str],
-        files_per_repo: int = 5
+        files_per_repo: int = 5,
     ) -> dict[str, list[dict[str, Any]]]:
         """Get random files from multiple repositories for code quality analysis.
 
@@ -304,9 +285,7 @@ class GitHubClient:
             try:
                 # Use efficient method to avoid rate limits
                 files = self.sample_files_efficiently(
-                    repo_full_name,
-                    extensions,
-                    max_files=files_per_repo
+                    repo_full_name, extensions, max_files=files_per_repo
                 )
                 if files:
                     results[repo_full_name] = files

@@ -1,22 +1,7 @@
-import os
+from github_client import GitHubClient
 
-from .github_client import GitHubClient
-
-# Initialize GitHub client
-# Token is optional for public repos - uncomment the line below to use without token
-# github_client = GitHubClient()  # No token - 60 requests/hour
-github_client = GitHubClient()  # With token - 5000 requests/hour
-
-# Show rate limit info
-print("=" * 60)
-print("API RATE LIMIT INFO")
-print("=" * 60)
-rate_info = github_client.get_rate_limit_info()
-print(f"Using authentication: {rate_info['using_auth']}")
-print(f"Rate limit: {rate_info['limit']} requests/hour")
-print(f"Remaining: {rate_info['remaining']} requests")
-print(f"Resets at: {rate_info['reset_time']}")
-print()
+# Initialize GitHub client (no token required - uses public data only)
+github_client = GitHubClient()
 
 # Get profile info
 print("=" * 60)
@@ -32,12 +17,12 @@ print(f"Followers: {result['followers']}")
 print(f"Following: {result['following']}")
 print()
 
-# Get random repositories for analysis
+# Get 1-2 random repositories for analysis
 print("=" * 60)
 print("RANDOM REPOSITORIES FOR ANALYSIS")
 print("=" * 60)
 random_repos = github_client.get_random_repositories(
-    username="baljinnyamday", count=2, min_stars=0  # Select 2 random repos
+    username="baljinnyamday", count=2, min_stars=0  # Select 1-2 random repos
 )
 
 print(f"Selected {len(random_repos)} random repositories:\n")
@@ -49,23 +34,38 @@ for i, repo in enumerate(random_repos, 1):
     print(f"   URL: {repo['url']}")
     print()
 
-# Get random files from those repositories
+# Get 10-15 random code files from those repositories
 print("=" * 60)
 print("RANDOM FILES FOR CODE QUALITY ANALYSIS")
 print("=" * 60)
 
-# Determine extensions based on the main languages
-extensions = [".py", ".js", ".ts", ".jsx", ".tsx", ".java", ".go", ".rs"]
+# Common code file extensions
+extensions = [
+    ".py",
+    ".js",
+    ".ts",
+    ".jsx",
+    ".tsx",
+    ".java",
+    ".go",
+    ".rs",
+    ".cpp",
+    ".c",
+    ".rb",
+]
 
 files_by_repo = github_client.get_random_files_from_repos(
     repo_list=random_repos,
     extensions=extensions,
-    files_per_repo=5,  # Get 5 files per repo
+    files_per_repo=15,  # Get 10-15 files per repo
 )
 
+# Display the selected code files
+total_files = 0
 for repo_name, files in files_by_repo.items():
     print(f"\n{repo_name}:")
     print(f"  Found {len(files)} files for analysis:\n")
+    total_files += len(files)
     for file in files:
         print(f"  📄 {file['path']}")
         print(f"     Size: {file['size']} bytes")
@@ -78,7 +78,5 @@ for repo_name, files in files_by_repo.items():
         print(f"{'=' * 60}\n")
 
 print("=" * 60)
-print(
-    f"SUMMARY: Analyzed {sum(len(files) for files in files_by_repo.values())} files from {len(files_by_repo)} repositories"
-)
+print(f"SUMMARY: Analyzed {total_files} files from {len(files_by_repo)} repositories")
 print("=" * 60)
