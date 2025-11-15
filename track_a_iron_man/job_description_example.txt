@@ -1,0 +1,86 @@
+Senior AI/ML Engineer - Production Agent Systems
+
+Company: TechVentures AI Inc.
+Location: San Francisco, CA (Hybrid)
+Experience Level: Senior (5+ years)
+Employment Type: Full-time
+
+ABOUT THE ROLE:
+We are seeking a Senior AI/ML Engineer to build production-ready AI agent systems that are reliable, efficient, and robust. You will design and deploy agents that handle real-world complexity including broken tools, prompt attacks, and chaotic inputs.
+
+REQUIRED QUALIFICATIONS:
+
+Technical Skills:
+- 5+ years of professional software engineering experience
+- Strong proficiency in Python and modern ML frameworks (LangChain, LangGraph, LlamaIndex)
+- Experience with LLMs (GPT-4, Claude, Llama) and prompt engineering
+- Production ML system deployment and monitoring
+- RESTful API design and microservices architecture
+- SQL and NoSQL databases (PostgreSQL, MongoDB, Redis)
+- Cloud platforms (AWS, GCP, or Azure)
+
+AI/ML Expertise:
+- Building and deploying AI agents in production environments
+- LLM fine-tuning and prompt optimization
+- RAG (Retrieval Augmented Generation) systems
+- Vector databases (Pinecone, Weaviate, ChromaDB)
+- Model evaluation and benchmarking
+- A/B testing and experimentation frameworks
+
+Software Engineering:
+- Version control with Git
+- CI/CD pipelines (GitHub Actions, Jenkins)
+- Docker and Kubernetes
+- Unit testing, integration testing, and TDD
+- System design and architecture patterns
+- Performance optimization and profiling
+
+PREFERRED QUALIFICATIONS:
+- MS or PhD in Computer Science, Machine Learning, or related field
+- Experience with reinforcement learning (RLHF, PPO, DPO)
+- Knowledge of agent security and red teaming techniques
+- Experience with observability tools (LangSmith, Weights & Biases)
+- Publications or contributions to open-source ML projects
+- Experience with token optimization and cost reduction strategies
+- Familiarity with carbon footprint monitoring for ML systems
+
+RESPONSIBILITIES:
+- Design and implement production-ready AI agent systems
+- Optimize agent performance for latency, cost, and accuracy
+- Build robust error handling and failure recovery mechanisms
+- Implement monitoring and observability for agent behavior
+- Conduct security testing and red teaming of AI systems
+- Collaborate with cross-functional teams on agent integration
+- Maintain documentation and best practices
+- Mentor junior engineers on ML/AI technologies
+
+WHAT WE VALUE:
+- Reliability over features - agents that work consistently
+- Frugal AI principles - optimizing cost and carbon footprint
+- Security-first mindset - defending against prompt attacks
+- Data-driven decision making with metrics and benchmarks
+- Strong communication and collaboration skills
+- Passion for building robust, production-grade systems
+
+NICE TO HAVE:
+- Experience with TypeScript/JavaScript for full-stack development
+- Knowledge of graph databases (Neo4j)
+- Familiarity with streaming and real-time systems
+- Understanding of distributed systems and consensus algorithms
+- Experience with LLM evaluation frameworks (HELM, BIG-bench)
+
+EDUCATION:
+- Bachelor's degree in Computer Science, Engineering, or related field (required)
+- Master's or PhD preferred
+
+BENEFITS:
+- Competitive salary ($180K-$250K) + equity
+- Comprehensive health, dental, and vision insurance
+- 401(k) matching
+- Flexible work arrangements
+- Professional development budget
+- Cutting-edge AI/ML technology stack
+- Collaborative and innovative team culture
+
+TO APPLY:
+Submit your resume highlighting relevant experience with production AI systems, links to GitHub/projects, and a brief cover letter explaining your approach to building reliable AI agents.
