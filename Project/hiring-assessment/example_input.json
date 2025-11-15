@@ -1,0 +1,58 @@
+{
+  "strategic_context_input": {
+    "documents": [
+      {
+        "path": "/path/to/strategic_plan.pdf",
+        "type": "strategic_plan"
+      },
+      {
+        "path": "/path/to/business_objectives.docx",
+        "type": "business_objectives"
+      }
+    ],
+    "additional_context": "Company is undergoing digital transformation with focus on AI/ML capabilities"
+  },
+  "pain_point_input": {
+    "interviews": [
+      {
+        "role": "Engineering Manager",
+        "feedback": "Team struggles with scaling infrastructure and maintaining code quality",
+        "date": "2025-01-10"
+      },
+      {
+        "role": "Product Manager",
+        "feedback": "Long development cycles and difficulty integrating new technologies",
+        "date": "2025-01-12"
+      }
+    ],
+    "surveys": [
+      {
+        "question": "What are the biggest bottlenecks?",
+        "responses": [
+          "Slow CI/CD pipeline",
+          "Technical debt in legacy systems",
+          "Lack of automation"
+        ]
+      }
+    ],
+    "feedback": "Team needs stronger technical leadership and modern development practices"
+  },
+  "artifact_a_input": {
+    "repo_path": "/path/to/code/repository",
+    "docs_path": "/path/to/documentation",
+    "log_sources": [
+      {
+        "type": "jira",
+        "path": "https://company.atlassian.net"
+      },
+      {
+        "type": "git",
+        "path": "/path/to/repo/.git"
+      }
+    ]
+  },
+  "artifact_c_input": {
+    "data_sources": ["slack", "git", "jira"],
+    "time_range": "90d"
+  }
+}
