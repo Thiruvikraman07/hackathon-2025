@@ -295,3 +295,87 @@ class GitHubClient:
                 continue
 
         return results
+
+    def get_file_structure(self, repo_full_name: str) -> list[dict[str, Any]]:
+        """Get complete file/directory structure of repository.
+
+        Args:
+            repo_full_name: Full repository name (e.g., 'username/repo')
+
+        Returns:
+            List of file/directory items with path, type, and size
+        """
+        try:
+            repo = self.github.get_repo(repo_full_name)
+            default_branch = repo.default_branch
+
+            # Get the entire tree in one API call (recursive)
+            tree = repo.get_git_tree(default_branch, recursive=True)
+
+            structure = []
+            for item in tree.tree:
+                structure.append({
+                    "path": item.path,
+                    "type": item.type,  # "blob" (file) or "tree" (directory)
+                    "size": item.size if item.size else 0,
+                })
+
+            return structure
+        except GithubException as e:
+            raise ValueError(f"Failed to get file structure: {e}")
+
+    def fetch_specific_files(
+        self,
+        repo_full_name: str,
+        file_paths: list[str],
+        max_file_size: int = 1_000_000,  # 1MB max per file
+    ) -> list[dict[str, Any]]:
+        """Fetch specific files by their paths.
+
+        Args:
+            repo_full_name: Full repository name (e.g., 'username/repo')
+            file_paths: List of file paths to fetch
+            max_file_size: Maximum file size in bytes to fetch (default: 1MB)
+
+        Returns:
+            List of files with path, content, and size
+        """
+        try:
+            repo = self.github.get_repo(repo_full_name)
+            default_branch = repo.default_branch
+
+            files = []
+            for path in file_paths:
+                try:
+                    # Construct raw content URL
+                    raw_url = f"https://raw.githubusercontent.com/{repo_full_name}/{default_branch}/{path}"
+
+                    response = requests.get(raw_url, timeout=10)
+                    if response.status_code == 200:
+                        # Check file size
+                        content_length = len(response.content)
+                        if content_length > max_file_size:
+                            print(f"Warning: Skipping {path} - file too large ({content_length} bytes)")
+                            continue
+
+                        try:
+                            content = response.text
+                            files.append({
+                                "path": path,
+                                "content": content,
+                                "size": content_length,
+                                "url": f"https://github.com/{repo_full_name}/blob/{default_branch}/{path}",
+                            })
+                        except UnicodeDecodeError:
+                            # Skip binary files
+                            print(f"Warning: Skipping {path} - binary file")
+                            continue
+                    else:
+                        print(f"Warning: Could not fetch {path} - HTTP {response.status_code}")
+                except requests.RequestException as e:
+                    print(f"Warning: Failed to fetch {path}: {e}")
+                    continue
+
+            return files
+        except GithubException as e:
+            raise ValueError(f"Failed to fetch files: {e}")

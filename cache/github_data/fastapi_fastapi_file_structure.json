@@ -1,0 +1,2505 @@
+{
+  "structure": [
+    {
+      "path": "CONTRIBUTING.md",
+      "type": "blob",
+      "size": 127
+    },
+    {
+      "path": "README.md",
+      "type": "blob",
+      "size": 24565
+    },
+    {
+      "path": "SECURITY.md",
+      "type": "blob",
+      "size": 1320
+    },
+    {
+      "path": "docs/de/docs/_llm-test.md",
+      "type": "blob",
+      "size": 12895
+    },
+    {
+      "path": "docs/de/docs/about/index.md",
+      "type": "blob",
+      "size": 81
+    },
+    {
+      "path": "docs/de/docs/advanced/additional-responses.md",
+      "type": "blob",
+      "size": 10196
+    },
+    {
+      "path": "docs/de/docs/advanced/additional-status-codes.md",
+      "type": "blob",
+      "size": 2439
+    },
+    {
+      "path": "docs/de/docs/advanced/advanced-dependencies.md",
+      "type": "blob",
+      "size": 10608
+    },
+    {
+      "path": "docs/de/docs/advanced/async-tests.md",
+      "type": "blob",
+      "size": 4603
+    },
+    {
+      "path": "docs/de/docs/advanced/behind-a-proxy.md",
+      "type": "blob",
+      "size": 18601
+    },
+    {
+      "path": "docs/de/docs/advanced/custom-response.md",
+      "type": "blob",
+      "size": 14644
+    },
+    {
+      "path": "docs/de/docs/advanced/dataclasses.md",
+      "type": "blob",
+      "size": 5052
+    },
+    {
+      "path": "docs/de/docs/advanced/events.md",
+      "type": "blob",
+      "size": 9732
+    },
+    {
+      "path": "docs/de/docs/advanced/generate-clients.md",
+      "type": "blob",
+      "size": 11962
+    },
+    {
+      "path": "docs/de/docs/advanced/index.md",
+      "type": "blob",
+      "size": 955
+    },
+    {
+      "path": "docs/de/docs/advanced/middleware.md",
+      "type": "blob",
+      "size": 5219
+    },
+    {
+      "path": "docs/de/docs/advanced/openapi-callbacks.md",
+      "type": "blob",
+      "size": 9432
+    },
+    {
+      "path": "docs/de/docs/advanced/openapi-webhooks.md",
+      "type": "blob",
+      "size": 3636
+    },
+    {
+      "path": "docs/de/docs/advanced/path-operation-advanced-configuration.md",
+      "type": "blob",
+      "size": 9115
+    },
+    {
+      "path": "docs/de/docs/advanced/response-change-status-code.md",
+      "type": "blob",
+      "size": 2046
+    },
+    {
+      "path": "docs/de/docs/advanced/response-cookies.md",
+      "type": "blob",
+      "size": 2738
+    },
+    {
+      "path": "docs/de/docs/advanced/response-directly.md",
+      "type": "blob",
+      "size": 3827
+    },
+    {
+      "path": "docs/de/docs/advanced/response-headers.md",
+      "type": "blob",
+      "size": 2836
+    },
+    {
+      "path": "docs/de/docs/advanced/security/http-basic-auth.md",
+      "type": "blob",
+      "size": 6316
+    },
+    {
+      "path": "docs/de/docs/advanced/security/index.md",
+      "type": "blob",
+      "size": 857
+    },
+    {
+      "path": "docs/de/docs/advanced/security/oauth2-scopes.md",
+      "type": "blob",
+      "size": 16095
+    },
+    {
+      "path": "docs/de/docs/advanced/settings.md",
+      "type": "blob",
+      "size": 14481
+    },
+    {
+      "path": "docs/de/docs/advanced/sub-applications.md",
+      "type": "blob",
+      "size": 3428
+    },
+    {
+      "path": "docs/de/docs/advanced/templates.md",
+      "type": "blob",
+      "size": 4371
+    },
+    {
+      "path": "docs/de/docs/advanced/testing-dependencies.md",
+      "type": "blob",
+      "size": 3297
+    },
+    {
+      "path": "docs/de/docs/advanced/testing-events.md",
+      "type": "blob",
+      "size": 728
+    },
+    {
+      "path": "docs/de/docs/advanced/testing-websockets.md",
+      "type": "blob",
+      "size": 524
+    },
+    {
+      "path": "docs/de/docs/advanced/using-request-directly.md",
+      "type": "blob",
+      "size": 2730
+    },
+    {
+      "path": "docs/de/docs/advanced/websockets.md",
+      "type": "blob",
+      "size": 6618
+    },
+    {
+      "path": "docs/de/docs/advanced/wsgi.md",
+      "type": "blob",
+      "size": 1461
+    },
+    {
+      "path": "docs/de/docs/alternatives.md",
+      "type": "blob",
+      "size": 28073
+    },
+    {
+      "path": "docs/de/docs/async.md",
+      "type": "blob",
+      "size": 28528
+    },
+    {
+      "path": "docs/de/docs/benchmarks.md",
+      "type": "blob",
+      "size": 4115
+    },
+    {
+      "path": "docs/de/docs/deployment/cloud.md",
+      "type": "blob",
+      "size": 1233
+    },
+    {
+      "path": "docs/de/docs/deployment/concepts.md",
+      "type": "blob",
+      "size": 22049
+    },
+    {
+      "path": "docs/de/docs/deployment/docker.md",
+      "type": "blob",
+      "size": 34433
+    },
+    {
+      "path": "docs/de/docs/deployment/https.md",
+      "type": "blob",
+      "size": 16533
+    },
+    {
+      "path": "docs/de/docs/deployment/index.md",
+      "type": "blob",
+      "size": 1540
+    },
+    {
+      "path": "docs/de/docs/deployment/manually.md",
+      "type": "blob",
+      "size": 7747
+    },
+    {
+      "path": "docs/de/docs/deployment/server-workers.md",
+      "type": "blob",
+      "size": 9001
+    },
+    {
+      "path": "docs/de/docs/deployment/versions.md",
+      "type": "blob",
+      "size": 4195
+    },
+    {
+      "path": "docs/de/docs/environment-variables.md",
+      "type": "blob",
+      "size": 9193
+    },
+    {
+      "path": "docs/de/docs/fastapi-cli.md",
+      "type": "blob",
+      "size": 5168
+    },
+    {
+      "path": "docs/de/docs/features.md",
+      "type": "blob",
+      "size": 11178
+    },
+    {
+      "path": "docs/de/docs/help-fastapi.md",
+      "type": "blob",
+      "size": 16567
+    },
+    {
+      "path": "docs/de/docs/history-design-future.md",
+      "type": "blob",
+      "size": 5042
+    },
+    {
+      "path": "docs/de/docs/how-to/conditional-openapi.md",
+      "type": "blob",
+      "size": 3064
+    },
+    {
+      "path": "docs/de/docs/how-to/configure-swagger-ui.md",
+      "type": "blob",
+      "size": 3607
+    },
+    {
+      "path": "docs/de/docs/how-to/custom-docs-ui-assets.md",
+      "type": "blob",
+      "size": 9700
+    },
+    {
+      "path": "docs/de/docs/how-to/custom-request-and-route.md",
+      "type": "blob",
+      "size": 5836
+    },
+    {
+      "path": "docs/de/docs/how-to/extending-openapi.md",
+      "type": "blob",
+      "size": 4092
+    },
+    {
+      "path": "docs/de/docs/how-to/general.md",
+      "type": "blob",
+      "size": 3367
+    },
+    {
+      "path": "docs/de/docs/how-to/graphql.md",
+      "type": "blob",
+      "size": 3888
+    },
+    {
+      "path": "docs/de/docs/how-to/index.md",
+      "type": "blob",
+      "size": 654
+    },
+    {
+      "path": "docs/de/docs/how-to/migrate-from-pydantic-v1-to-pydantic-v2.md",
+      "type": "blob",
+      "size": 6313
+    },
+    {
+      "path": "docs/de/docs/how-to/separate-openapi-schemas.md",
+      "type": "blob",
+      "size": 5319
+    },
+    {
+      "path": "docs/de/docs/how-to/testing-database.md",
+      "type": "blob",
+      "size": 598
+    },
+    {
+      "path": "docs/de/docs/index.md",
+      "type": "blob",
+      "size": 23989
+    },
+    {
+      "path": "docs/de/docs/learn/index.md",
+      "type": "blob",
+      "size": 232
+    },
+    {
+      "path": "docs/de/docs/project-generation.md",
+      "type": "blob",
+      "size": 2263
+    },
+    {
+      "path": "docs/de/docs/python-types.md",
+      "type": "blob",
+      "size": 20064
+    },
+    {
+      "path": "docs/de/docs/resources/index.md",
+      "type": "blob",
+      "size": 94
+    },
+    {
+      "path": "docs/de/docs/tutorial/background-tasks.md",
+      "type": "blob",
+      "size": 5933
+    },
+    {
+      "path": "docs/de/docs/tutorial/bigger-applications.md",
+      "type": "blob",
+      "size": 22388
+    },
+    {
+      "path": "docs/de/docs/tutorial/body-fields.md",
+      "type": "blob",
+      "size": 2752
+    },
+    {
+      "path": "docs/de/docs/tutorial/body-multiple-params.md",
+      "type": "blob",
+      "size": 5631
+    },
+    {
+      "path": "docs/de/docs/tutorial/body-nested-models.md",
+      "type": "blob",
+      "size": 8479
+    },
+    {
+      "path": "docs/de/docs/tutorial/body-updates.md",
+      "type": "blob",
+      "size": 6072
+    },
+    {
+      "path": "docs/de/docs/tutorial/body.md",
+      "type": "blob",
+      "size": 8431
+    },
+    {
+      "path": "docs/de/docs/tutorial/cookie-param-models.md",
+      "type": "blob",
+      "size": 3873
+    },
+    {
+      "path": "docs/de/docs/tutorial/cookie-params.md",
+      "type": "blob",
+      "size": 1826
+    },
+    {
+      "path": "docs/de/docs/tutorial/cors.md",
+      "type": "blob",
+      "size": 6406
+    },
+    {
+      "path": "docs/de/docs/tutorial/debugging.md",
+      "type": "blob",
+      "size": 2794
+    },
+    {
+      "path": "docs/de/docs/tutorial/dependencies/classes-as-dependencies.md",
+      "type": "blob",
+      "size": 7768
+    },
+    {
+      "path": "docs/de/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "type": "blob",
+      "size": 3611
+    },
+    {
+      "path": "docs/de/docs/tutorial/dependencies/dependencies-with-yield.md",
+      "type": "blob",
+      "size": 15072
+    },
+    {
+      "path": "docs/de/docs/tutorial/dependencies/global-dependencies.md",
+      "type": "blob",
+      "size": 1239
+    },
+    {
+      "path": "docs/de/docs/tutorial/dependencies/index.md",
+      "type": "blob",
+      "size": 11603
+    },
+    {
+      "path": "docs/de/docs/tutorial/dependencies/sub-dependencies.md",
+      "type": "blob",
+      "size": 4588
+    },
+    {
+      "path": "docs/de/docs/tutorial/encoder.md",
+      "type": "blob",
+      "size": 1891
+    },
+    {
+      "path": "docs/de/docs/tutorial/extra-data-types.md",
+      "type": "blob",
+      "size": 3262
+    },
+    {
+      "path": "docs/de/docs/tutorial/extra-models.md",
+      "type": "blob",
+      "size": 8512
+    },
+    {
+      "path": "docs/de/docs/tutorial/first-steps.md",
+      "type": "blob",
+      "size": 12592
+    },
+    {
+      "path": "docs/de/docs/tutorial/handling-errors.md",
+      "type": "blob",
+      "size": 11207
+    },
+    {
+      "path": "docs/de/docs/tutorial/header-param-models.md",
+      "type": "blob",
+      "size": 3204
+    },
+    {
+      "path": "docs/de/docs/tutorial/header-params.md",
+      "type": "blob",
+      "size": 3560
+    },
+    {
+      "path": "docs/de/docs/tutorial/index.md",
+      "type": "blob",
+      "size": 5678
+    },
+    {
+      "path": "docs/de/docs/tutorial/metadata.md",
+      "type": "blob",
+      "size": 7015
+    },
+    {
+      "path": "docs/de/docs/tutorial/middleware.md",
+      "type": "blob",
+      "size": 4988
+    },
+    {
+      "path": "docs/de/docs/tutorial/path-operation-configuration.md",
+      "type": "blob",
+      "size": 4803
+    },
+    {
+      "path": "docs/de/docs/tutorial/path-params-numeric-validations.md",
+      "type": "blob",
+      "size": 7277
+    },
+    {
+      "path": "docs/de/docs/tutorial/path-params.md",
+      "type": "blob",
+      "size": 10904
+    },
+    {
+      "path": "docs/de/docs/tutorial/query-param-models.md",
+      "type": "blob",
+      "size": 2696
+    },
+    {
+      "path": "docs/de/docs/tutorial/query-params-str-validations.md",
+      "type": "blob",
+      "size": 20040
+    },
+    {
+      "path": "docs/de/docs/tutorial/query-params.md",
+      "type": "blob",
+      "size": 5086
+    },
+    {
+      "path": "docs/de/docs/tutorial/request-files.md",
+      "type": "blob",
+      "size": 8886
+    },
+    {
+      "path": "docs/de/docs/tutorial/request-form-models.md",
+      "type": "blob",
+      "size": 2782
+    },
+    {
+      "path": "docs/de/docs/tutorial/request-forms-and-files.md",
+      "type": "blob",
+      "size": 1808
+    },
+    {
+      "path": "docs/de/docs/tutorial/request-forms.md",
+      "type": "blob",
+      "size": 3287
+    },
+    {
+      "path": "docs/de/docs/tutorial/response-model.md",
+      "type": "blob",
+      "size": 18597
+    },
+    {
+      "path": "docs/de/docs/tutorial/response-status-code.md",
+      "type": "blob",
+      "size": 4953
+    },
+    {
+      "path": "docs/de/docs/tutorial/schema-extra-example.md",
+      "type": "blob",
+      "size": 11505
+    },
+    {
+      "path": "docs/de/docs/tutorial/security/first-steps.md",
+      "type": "blob",
+      "size": 10115
+    },
+    {
+      "path": "docs/de/docs/tutorial/security/get-current-user.md",
+      "type": "blob",
+      "size": 4901
+    },
+    {
+      "path": "docs/de/docs/tutorial/security/index.md",
+      "type": "blob",
+      "size": 5317
+    },
+    {
+      "path": "docs/de/docs/tutorial/security/oauth2-jwt.md",
+      "type": "blob",
+      "size": 12986
+    },
+    {
+      "path": "docs/de/docs/tutorial/security/simple-oauth2.md",
+      "type": "blob",
+      "size": 11490
+    },
+    {
+      "path": "docs/de/docs/tutorial/sql-databases.md",
+      "type": "blob",
+      "size": 18192
+    },
+    {
+      "path": "docs/de/docs/tutorial/static-files.md",
+      "type": "blob",
+      "size": 2057
+    },
+    {
+      "path": "docs/de/docs/tutorial/testing.md",
+      "type": "blob",
+      "size": 7759
+    },
+    {
+      "path": "docs/de/docs/virtual-environments.md",
+      "type": "blob",
+      "size": 25553
+    },
+    {
+      "path": "docs/de/llm-prompt.md",
+      "type": "blob",
+      "size": 12093
+    },
+    {
+      "path": "docs/em/docs/advanced/additional-responses.md",
+      "type": "blob",
+      "size": 7941
+    },
+    {
+      "path": "docs/em/docs/advanced/additional-status-codes.md",
+      "type": "blob",
+      "size": 1693
+    },
+    {
+      "path": "docs/em/docs/advanced/advanced-dependencies.md",
+      "type": "blob",
+      "size": 1949
+    },
+    {
+      "path": "docs/em/docs/advanced/async-tests.md",
+      "type": "blob",
+      "size": 2961
+    },
+    {
+      "path": "docs/em/docs/advanced/behind-a-proxy.md",
+      "type": "blob",
+      "size": 10226
+    },
+    {
+      "path": "docs/em/docs/advanced/custom-response.md",
+      "type": "blob",
+      "size": 9634
+    },
+    {
+      "path": "docs/em/docs/advanced/dataclasses.md",
+      "type": "blob",
+      "size": 3490
+    },
+    {
+      "path": "docs/em/docs/advanced/events.md",
+      "type": "blob",
+      "size": 6176
+    },
+    {
+      "path": "docs/em/docs/advanced/generate-clients.md",
+      "type": "blob",
+      "size": 7904
+    },
+    {
+      "path": "docs/em/docs/advanced/index.md",
+      "type": "blob",
+      "size": 926
+    },
+    {
+      "path": "docs/em/docs/advanced/middleware.md",
+      "type": "blob",
+      "size": 3200
+    },
+    {
+      "path": "docs/em/docs/advanced/openapi-callbacks.md",
+      "type": "blob",
+      "size": 6693
+    },
+    {
+      "path": "docs/em/docs/advanced/path-operation-advanced-configuration.md",
+      "type": "blob",
+      "size": 5702
+    },
+    {
+      "path": "docs/em/docs/advanced/response-change-status-code.md",
+      "type": "blob",
+      "size": 1236
+    },
+    {
+      "path": "docs/em/docs/advanced/response-cookies.md",
+      "type": "blob",
+      "size": 1794
+    },
+    {
+      "path": "docs/em/docs/advanced/response-directly.md",
+      "type": "blob",
+      "size": 2578
+    },
+    {
+      "path": "docs/em/docs/advanced/response-headers.md",
+      "type": "blob",
+      "size": 1849
+    },
+    {
+      "path": "docs/em/docs/advanced/security/http-basic-auth.md",
+      "type": "blob",
+      "size": 4091
+    },
+    {
+      "path": "docs/em/docs/advanced/security/index.md",
+      "type": "blob",
+      "size": 513
+    },
+    {
+      "path": "docs/em/docs/advanced/security/oauth2-scopes.md",
+      "type": "blob",
+      "size": 11091
+    },
+    {
+      "path": "docs/em/docs/advanced/settings.md",
+      "type": "blob",
+      "size": 11371
+    },
+    {
+      "path": "docs/em/docs/advanced/sub-applications.md",
+      "type": "blob",
+      "size": 2438
+    },
+    {
+      "path": "docs/em/docs/advanced/templates.md",
+      "type": "blob",
+      "size": 2107
+    },
+    {
+      "path": "docs/em/docs/advanced/testing-dependencies.md",
+      "type": "blob",
+      "size": 1770
+    },
+    {
+      "path": "docs/em/docs/advanced/testing-events.md",
+      "type": "blob",
+      "size": 225
+    },
+    {
+      "path": "docs/em/docs/advanced/testing-websockets.md",
+      "type": "blob",
+      "size": 353
+    },
+    {
+      "path": "docs/em/docs/advanced/using-request-directly.md",
+      "type": "blob",
+      "size": 1804
+    },
+    {
+      "path": "docs/em/docs/advanced/websockets.md",
+      "type": "blob",
+      "size": 4799
+    },
+    {
+      "path": "docs/em/docs/advanced/wsgi.md",
+      "type": "blob",
+      "size": 1071
+    },
+    {
+      "path": "docs/em/docs/alternatives.md",
+      "type": "blob",
+      "size": 19056
+    },
+    {
+      "path": "docs/em/docs/async.md",
+      "type": "blob",
+      "size": 19028
+    },
+    {
+      "path": "docs/em/docs/benchmarks.md",
+      "type": "blob",
+      "size": 2812
+    },
+    {
+      "path": "docs/em/docs/deployment/concepts.md",
+      "type": "blob",
+      "size": 14834
+    },
+    {
+      "path": "docs/em/docs/deployment/docker.md",
+      "type": "blob",
+      "size": 28548
+    },
+    {
+      "path": "docs/em/docs/deployment/https.md",
+      "type": "blob",
+      "size": 9727
+    },
+    {
+      "path": "docs/em/docs/deployment/index.md",
+      "type": "blob",
+      "size": 921
+    },
+    {
+      "path": "docs/em/docs/deployment/manually.md",
+      "type": "blob",
+      "size": 4280
+    },
+    {
+      "path": "docs/em/docs/deployment/server-workers.md",
+      "type": "blob",
+      "size": 8392
+    },
+    {
+      "path": "docs/em/docs/deployment/versions.md",
+      "type": "blob",
+      "size": 2703
+    },
+    {
+      "path": "docs/em/docs/features.md",
+      "type": "blob",
+      "size": 8237
+    },
+    {
+      "path": "docs/em/docs/help-fastapi.md",
+      "type": "blob",
+      "size": 11917
+    },
+    {
+      "path": "docs/em/docs/history-design-future.md",
+      "type": "blob",
+      "size": 3483
+    },
+    {
+      "path": "docs/em/docs/how-to/conditional-openapi.md",
+      "type": "blob",
+      "size": 1977
+    },
+    {
+      "path": "docs/em/docs/how-to/custom-request-and-route.md",
+      "type": "blob",
+      "size": 3540
+    },
+    {
+      "path": "docs/em/docs/how-to/extending-openapi.md",
+      "type": "blob",
+      "size": 2638
+    },
+    {
+      "path": "docs/em/docs/how-to/graphql.md",
+      "type": "blob",
+      "size": 3003
+    },
+    {
+      "path": "docs/em/docs/index.md",
+      "type": "blob",
+      "size": 17536
+    },
+    {
+      "path": "docs/em/docs/project-generation.md",
+      "type": "blob",
+      "size": 4978
+    },
+    {
+      "path": "docs/em/docs/python-types.md",
+      "type": "blob",
+      "size": 13750
+    },
+    {
+      "path": "docs/em/docs/tutorial/background-tasks.md",
+      "type": "blob",
+      "size": 3773
+    },
+    {
+      "path": "docs/em/docs/tutorial/bigger-applications.md",
+      "type": "blob",
+      "size": 15909
+    },
+    {
+      "path": "docs/em/docs/tutorial/body-fields.md",
+      "type": "blob",
+      "size": 1835
+    },
+    {
+      "path": "docs/em/docs/tutorial/body-multiple-params.md",
+      "type": "blob",
+      "size": 4004
+    },
+    {
+      "path": "docs/em/docs/tutorial/body-nested-models.md",
+      "type": "blob",
+      "size": 6090
+    },
+    {
+      "path": "docs/em/docs/tutorial/body-updates.md",
+      "type": "blob",
+      "size": 3260
+    },
+    {
+      "path": "docs/em/docs/tutorial/body.md",
+      "type": "blob",
+      "size": 5347
+    },
+    {
+      "path": "docs/em/docs/tutorial/cookie-params.md",
+      "type": "blob",
+      "size": 828
+    },
+    {
+      "path": "docs/em/docs/tutorial/cors.md",
+      "type": "blob",
+      "size": 4144
+    },
+    {
+      "path": "docs/em/docs/tutorial/debugging.md",
+      "type": "blob",
+      "size": 2156
+    },
+    {
+      "path": "docs/em/docs/tutorial/dependencies/classes-as-dependencies.md",
+      "type": "blob",
+      "size": 4592
+    },
+    {
+      "path": "docs/em/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "type": "blob",
+      "size": 2145
+    },
+    {
+      "path": "docs/em/docs/tutorial/dependencies/dependencies-with-yield.md",
+      "type": "blob",
+      "size": 8647
+    },
+    {
+      "path": "docs/em/docs/tutorial/dependencies/global-dependencies.md",
+      "type": "blob",
+      "size": 806
+    },
+    {
+      "path": "docs/em/docs/tutorial/dependencies/index.md",
+      "type": "blob",
+      "size": 6213
+    },
+    {
+      "path": "docs/em/docs/tutorial/dependencies/sub-dependencies.md",
+      "type": "blob",
+      "size": 2729
+    },
+    {
+      "path": "docs/em/docs/tutorial/encoder.md",
+      "type": "blob",
+      "size": 1329
+    },
+    {
+      "path": "docs/em/docs/tutorial/extra-data-types.md",
+      "type": "blob",
+      "size": 2233
+    },
+    {
+      "path": "docs/em/docs/tutorial/extra-models.md",
+      "type": "blob",
+      "size": 5823
+    },
+    {
+      "path": "docs/em/docs/tutorial/first-steps.md",
+      "type": "blob",
+      "size": 8072
+    },
+    {
+      "path": "docs/em/docs/tutorial/handling-errors.md",
+      "type": "blob",
+      "size": 8297
+    },
+    {
+      "path": "docs/em/docs/tutorial/header-params.md",
+      "type": "blob",
+      "size": 2273
+    },
+    {
+      "path": "docs/em/docs/tutorial/index.md",
+      "type": "blob",
+      "size": 2250
+    },
+    {
+      "path": "docs/em/docs/tutorial/metadata.md",
+      "type": "blob",
+      "size": 4151
+    },
+    {
+      "path": "docs/em/docs/tutorial/middleware.md",
+      "type": "blob",
+      "size": 2430
+    },
+    {
+      "path": "docs/em/docs/tutorial/path-operation-configuration.md",
+      "type": "blob",
+      "size": 3353
+    },
+    {
+      "path": "docs/em/docs/tutorial/path-params-numeric-validations.md",
+      "type": "blob",
+      "size": 3891
+    },
+    {
+      "path": "docs/em/docs/tutorial/path-params.md",
+      "type": "blob",
+      "size": 7639
+    },
+    {
+      "path": "docs/em/docs/tutorial/query-params-str-validations.md",
+      "type": "blob",
+      "size": 7949
+    },
+    {
+      "path": "docs/em/docs/tutorial/query-params.md",
+      "type": "blob",
+      "size": 3641
+    },
+    {
+      "path": "docs/em/docs/tutorial/request-files.md",
+      "type": "blob",
+      "size": 6043
+    },
+    {
+      "path": "docs/em/docs/tutorial/request-forms-and-files.md",
+      "type": "blob",
+      "size": 1117
+    },
+    {
+      "path": "docs/em/docs/tutorial/request-forms.md",
+      "type": "blob",
+      "size": 2166
+    },
+    {
+      "path": "docs/em/docs/tutorial/response-model.md",
+      "type": "blob",
+      "size": 12520
+    },
+    {
+      "path": "docs/em/docs/tutorial/response-status-code.md",
+      "type": "blob",
+      "size": 3392
+    },
+    {
+      "path": "docs/em/docs/tutorial/schema-extra-example.md",
+      "type": "blob",
+      "size": 4753
+    },
+    {
+      "path": "docs/em/docs/tutorial/security/first-steps.md",
+      "type": "blob",
+      "size": 6858
+    },
+    {
+      "path": "docs/em/docs/tutorial/security/get-current-user.md",
+      "type": "blob",
+      "size": 3347
+    },
+    {
+      "path": "docs/em/docs/tutorial/security/index.md",
+      "type": "blob",
+      "size": 3611
+    },
+    {
+      "path": "docs/em/docs/tutorial/security/oauth2-jwt.md",
+      "type": "blob",
+      "size": 8786
+    },
+    {
+      "path": "docs/em/docs/tutorial/security/simple-oauth2.md",
+      "type": "blob",
+      "size": 7934
+    },
+    {
+      "path": "docs/em/docs/tutorial/static-files.md",
+      "type": "blob",
+      "size": 1304
+    },
+    {
+      "path": "docs/em/docs/tutorial/testing.md",
+      "type": "blob",
+      "size": 5010
+    },
+    {
+      "path": "docs/en/docs/_llm-test.md",
+      "type": "blob",
+      "size": 11640
+    },
+    {
+      "path": "docs/en/docs/about/index.md",
+      "type": "blob",
+      "size": 74
+    },
+    {
+      "path": "docs/en/docs/advanced/additional-responses.md",
+      "type": "blob",
+      "size": 9129
+    },
+    {
+      "path": "docs/en/docs/advanced/additional-status-codes.md",
+      "type": "blob",
+      "size": 2033
+    },
+    {
+      "path": "docs/en/docs/advanced/advanced-dependencies.md",
+      "type": "blob",
+      "size": 9333
+    },
+    {
+      "path": "docs/en/docs/advanced/async-tests.md",
+      "type": "blob",
+      "size": 4025
+    },
+    {
+      "path": "docs/en/docs/advanced/behind-a-proxy.md",
+      "type": "blob",
+      "size": 16398
+    },
+    {
+      "path": "docs/en/docs/advanced/custom-response.md",
+      "type": "blob",
+      "size": 12583
+    },
+    {
+      "path": "docs/en/docs/advanced/dataclasses.md",
+      "type": "blob",
+      "size": 4239
+    },
+    {
+      "path": "docs/en/docs/advanced/events.md",
+      "type": "blob",
+      "size": 8082
+    },
+    {
+      "path": "docs/en/docs/advanced/generate-clients.md",
+      "type": "blob",
+      "size": 10333
+    },
+    {
+      "path": "docs/en/docs/advanced/index.md",
+      "type": "blob",
+      "size": 817
+    },
+    {
+      "path": "docs/en/docs/advanced/middleware.md",
+      "type": "blob",
+      "size": 4444
+    },
+    {
+      "path": "docs/en/docs/advanced/openapi-callbacks.md",
+      "type": "blob",
+      "size": 8132
+    },
+    {
+      "path": "docs/en/docs/advanced/openapi-webhooks.md",
+      "type": "blob",
+      "size": 2991
+    },
+    {
+      "path": "docs/en/docs/advanced/path-operation-advanced-configuration.md",
+      "type": "blob",
+      "size": 7957
+    },
+    {
+      "path": "docs/en/docs/advanced/response-change-status-code.md",
+      "type": "blob",
+      "size": 1580
+    },
+    {
+      "path": "docs/en/docs/advanced/response-cookies.md",
+      "type": "blob",
+      "size": 2297
+    },
+    {
+      "path": "docs/en/docs/advanced/response-directly.md",
+      "type": "blob",
+      "size": 3162
+    },
+    {
+      "path": "docs/en/docs/advanced/response-headers.md",
+      "type": "blob",
+      "size": 2348
+    },
+    {
+      "path": "docs/en/docs/advanced/security/http-basic-auth.md",
+      "type": "blob",
+      "size": 5164
+    },
+    {
+      "path": "docs/en/docs/advanced/security/index.md",
+      "type": "blob",
+      "size": 708
+    },
+    {
+      "path": "docs/en/docs/advanced/security/oauth2-scopes.md",
+      "type": "blob",
+      "size": 13831
+    },
+    {
+      "path": "docs/en/docs/advanced/settings.md",
+      "type": "blob",
+      "size": 12499
+    },
+    {
+      "path": "docs/en/docs/advanced/sub-applications.md",
+      "type": "blob",
+      "size": 3082
+    },
+    {
+      "path": "docs/en/docs/advanced/templates.md",
+      "type": "blob",
+      "size": 3576
+    },
+    {
+      "path": "docs/en/docs/advanced/testing-dependencies.md",
+      "type": "blob",
+      "size": 2413
+    },
+    {
+      "path": "docs/en/docs/advanced/testing-events.md",
+      "type": "blob",
+      "size": 616
+    },
+    {
+      "path": "docs/en/docs/advanced/testing-websockets.md",
+      "type": "blob",
+      "size": 454
+    },
+    {
+      "path": "docs/en/docs/advanced/using-request-directly.md",
+      "type": "blob",
+      "size": 2436
+    },
+    {
+      "path": "docs/en/docs/advanced/websockets.md",
+      "type": "blob",
+      "size": 5870
+    },
+    {
+      "path": "docs/en/docs/advanced/wsgi.md",
+      "type": "blob",
+      "size": 1199
+    },
+    {
+      "path": "docs/en/docs/alternatives.md",
+      "type": "blob",
+      "size": 24137
+    },
+    {
+      "path": "docs/en/docs/async.md",
+      "type": "blob",
+      "size": 24592
+    },
+    {
+      "path": "docs/en/docs/benchmarks.md",
+      "type": "blob",
+      "size": 3552
+    },
+    {
+      "path": "docs/en/docs/contributing.md",
+      "type": "blob",
+      "size": 15443
+    },
+    {
+      "path": "docs/en/docs/deployment/cloud.md",
+      "type": "blob",
+      "size": 1122
+    },
+    {
+      "path": "docs/en/docs/deployment/concepts.md",
+      "type": "blob",
+      "size": 19058
+    },
+    {
+      "path": "docs/en/docs/deployment/docker.md",
+      "type": "blob",
+      "size": 30250
+    },
+    {
+      "path": "docs/en/docs/deployment/https.md",
+      "type": "blob",
+      "size": 14666
+    },
+    {
+      "path": "docs/en/docs/deployment/index.md",
+      "type": "blob",
+      "size": 1292
+    },
+    {
+      "path": "docs/en/docs/deployment/manually.md",
+      "type": "blob",
+      "size": 7105
+    },
+    {
+      "path": "docs/en/docs/deployment/server-workers.md",
+      "type": "blob",
+      "size": 8462
+    },
+    {
+      "path": "docs/en/docs/deployment/versions.md",
+      "type": "blob",
+      "size": 3619
+    },
+    {
+      "path": "docs/en/docs/environment-variables.md",
+      "type": "blob",
+      "size": 8311
+    },
+    {
+      "path": "docs/en/docs/external-links.md",
+      "type": "blob",
+      "size": 1208
+    },
+    {
+      "path": "docs/en/docs/fastapi-cli.md",
+      "type": "blob",
+      "size": 4948
+    },
+    {
+      "path": "docs/en/docs/fastapi-people.md",
+      "type": "blob",
+      "size": 10741
+    },
+    {
+      "path": "docs/en/docs/features.md",
+      "type": "blob",
+      "size": 9767
+    },
+    {
+      "path": "docs/en/docs/help-fastapi.md",
+      "type": "blob",
+      "size": 14313
+    },
+    {
+      "path": "docs/en/docs/history-design-future.md",
+      "type": "blob",
+      "size": 4346
+    },
+    {
+      "path": "docs/en/docs/how-to/conditional-openapi.md",
+      "type": "blob",
+      "size": 2479
+    },
+    {
+      "path": "docs/en/docs/how-to/configure-swagger-ui.md",
+      "type": "blob",
+      "size": 2969
+    },
+    {
+      "path": "docs/en/docs/how-to/custom-docs-ui-assets.md",
+      "type": "blob",
+      "size": 7945
+    },
+    {
+      "path": "docs/en/docs/how-to/custom-request-and-route.md",
+      "type": "blob",
+      "size": 4665
+    },
+    {
+      "path": "docs/en/docs/how-to/extending-openapi.md",
+      "type": "blob",
+      "size": 3426
+    },
+    {
+      "path": "docs/en/docs/how-to/general.md",
+      "type": "blob",
+      "size": 2685
+    },
+    {
+      "path": "docs/en/docs/how-to/graphql.md",
+      "type": "blob",
+      "size": 3495
+    },
+    {
+      "path": "docs/en/docs/how-to/index.md",
+      "type": "blob",
+      "size": 612
+    },
+    {
+      "path": "docs/en/docs/how-to/migrate-from-pydantic-v1-to-pydantic-v2.md",
+      "type": "blob",
+      "size": 5525
+    },
+    {
+      "path": "docs/en/docs/how-to/separate-openapi-schemas.md",
+      "type": "blob",
+      "size": 4700
+    },
+    {
+      "path": "docs/en/docs/how-to/testing-database.md",
+      "type": "blob",
+      "size": 540
+    },
+    {
+      "path": "docs/en/docs/index.md",
+      "type": "blob",
+      "size": 21779
+    },
+    {
+      "path": "docs/en/docs/js/custom.js",
+      "type": "blob",
+      "size": 6487
+    },
+    {
+      "path": "docs/en/docs/js/termynal.js",
+      "type": "blob",
+      "size": 9574
+    },
+    {
+      "path": "docs/en/docs/learn/index.md",
+      "type": "blob",
+      "size": 206
+    },
+    {
+      "path": "docs/en/docs/management-tasks.md",
+      "type": "blob",
+      "size": 14584
+    },
+    {
+      "path": "docs/en/docs/management.md",
+      "type": "blob",
+      "size": 1719
+    },
+    {
+      "path": "docs/en/docs/newsletter.md",
+      "type": "blob",
+      "size": 326
+    },
+    {
+      "path": "docs/en/docs/project-generation.md",
+      "type": "blob",
+      "size": 2026
+    },
+    {
+      "path": "docs/en/docs/python-types.md",
+      "type": "blob",
+      "size": 17551
+    },
+    {
+      "path": "docs/en/docs/reference/apirouter.md",
+      "type": "blob",
+      "size": 524
+    },
+    {
+      "path": "docs/en/docs/reference/background.md",
+      "type": "blob",
+      "size": 377
+    },
+    {
+      "path": "docs/en/docs/reference/dependencies.md",
+      "type": "blob",
+      "size": 671
+    },
+    {
+      "path": "docs/en/docs/reference/encoders.md",
+      "type": "blob",
+      "size": 71
+    },
+    {
+      "path": "docs/en/docs/reference/exceptions.md",
+      "type": "blob",
+      "size": 597
+    },
+    {
+      "path": "docs/en/docs/reference/fastapi.md",
+      "type": "blob",
+      "size": 701
+    },
+    {
+      "path": "docs/en/docs/reference/httpconnection.md",
+      "type": "blob",
+      "size": 359
+    },
+    {
+      "path": "docs/en/docs/reference/index.md",
+      "type": "blob",
+      "size": 285
+    },
+    {
+      "path": "docs/en/docs/reference/middleware.md",
+      "type": "blob",
+      "size": 991
+    },
+    {
+      "path": "docs/en/docs/reference/openapi/docs.md",
+      "type": "blob",
+      "size": 360
+    },
+    {
+      "path": "docs/en/docs/reference/openapi/index.md",
+      "type": "blob",
+      "size": 158
+    },
+    {
+      "path": "docs/en/docs/reference/openapi/models.md",
+      "type": "blob",
+      "size": 125
+    },
+    {
+      "path": "docs/en/docs/reference/parameters.md",
+      "type": "blob",
+      "size": 603
+    },
+    {
+      "path": "docs/en/docs/reference/request.md",
+      "type": "blob",
+      "size": 518
+    },
+    {
+      "path": "docs/en/docs/reference/response.md",
+      "type": "blob",
+      "size": 397
+    },
+    {
+      "path": "docs/en/docs/reference/responses.md",
+      "type": "blob",
+      "size": 3828
+    },
+    {
+      "path": "docs/en/docs/reference/security/index.md",
+      "type": "blob",
+      "size": 1669
+    },
+    {
+      "path": "docs/en/docs/reference/staticfiles.md",
+      "type": "blob",
+      "size": 391
+    },
+    {
+      "path": "docs/en/docs/reference/status.md",
+      "type": "blob",
+      "size": 871
+    },
+    {
+      "path": "docs/en/docs/reference/templating.md",
+      "type": "blob",
+      "size": 365
+    },
+    {
+      "path": "docs/en/docs/reference/testclient.md",
+      "type": "blob",
+      "size": 450
+    },
+    {
+      "path": "docs/en/docs/reference/uploadfile.md",
+      "type": "blob",
+      "size": 472
+    },
+    {
+      "path": "docs/en/docs/reference/websockets.md",
+      "type": "blob",
+      "size": 1691
+    },
+    {
+      "path": "docs/en/docs/release-notes.md",
+      "type": "blob",
+      "size": 578249
+    },
+    {
+      "path": "docs/en/docs/resources/index.md",
+      "type": "blob",
+      "size": 92
+    },
+    {
+      "path": "docs/en/docs/tutorial/background-tasks.md",
+      "type": "blob",
+      "size": 4923
+    },
+    {
+      "path": "docs/en/docs/tutorial/bigger-applications.md",
+      "type": "blob",
+      "size": 19598
+    },
+    {
+      "path": "docs/en/docs/tutorial/body-fields.md",
+      "type": "blob",
+      "size": 2388
+    },
+    {
+      "path": "docs/en/docs/tutorial/body-multiple-params.md",
+      "type": "blob",
+      "size": 4994
+    },
+    {
+      "path": "docs/en/docs/tutorial/body-nested-models.md",
+      "type": "blob",
+      "size": 7516
+    },
+    {
+      "path": "docs/en/docs/tutorial/body-updates.md",
+      "type": "blob",
+      "size": 4803
+    },
+    {
+      "path": "docs/en/docs/tutorial/body.md",
+      "type": "blob",
+      "size": 7289
+    },
+    {
+      "path": "docs/en/docs/tutorial/cookie-param-models.md",
+      "type": "blob",
+      "size": 3148
+    },
+    {
+      "path": "docs/en/docs/tutorial/cookie-params.md",
+      "type": "blob",
+      "size": 1602
+    },
+    {
+      "path": "docs/en/docs/tutorial/cors.md",
+      "type": "blob",
+      "size": 5590
+    },
+    {
+      "path": "docs/en/docs/tutorial/debugging.md",
+      "type": "blob",
+      "size": 2499
+    },
+    {
+      "path": "docs/en/docs/tutorial/dependencies/classes-as-dependencies.md",
+      "type": "blob",
+      "size": 6902
+    },
+    {
+      "path": "docs/en/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "type": "blob",
+      "size": 3010
+    },
+    {
+      "path": "docs/en/docs/tutorial/dependencies/dependencies-with-yield.md",
+      "type": "blob",
+      "size": 13225
+    },
+    {
+      "path": "docs/en/docs/tutorial/dependencies/global-dependencies.md",
+      "type": "blob",
+      "size": 1149
+    },
+    {
+      "path": "docs/en/docs/tutorial/dependencies/index.md",
+      "type": "blob",
+      "size": 9835
+    },
+    {
+      "path": "docs/en/docs/tutorial/dependencies/sub-dependencies.md",
+      "type": "blob",
+      "size": 3820
+    },
+    {
+      "path": "docs/en/docs/tutorial/encoder.md",
+      "type": "blob",
+      "size": 1706
+    },
+    {
+      "path": "docs/en/docs/tutorial/extra-data-types.md",
+      "type": "blob",
+      "size": 2771
+    },
+    {
+      "path": "docs/en/docs/tutorial/extra-models.md",
+      "type": "blob",
+      "size": 7329
+    },
+    {
+      "path": "docs/en/docs/tutorial/first-steps.md",
+      "type": "blob",
+      "size": 11226
+    },
+    {
+      "path": "docs/en/docs/tutorial/handling-errors.md",
+      "type": "blob",
+      "size": 9672
+    },
+    {
+      "path": "docs/en/docs/tutorial/header-param-models.md",
+      "type": "blob",
+      "size": 2679
+    },
+    {
+      "path": "docs/en/docs/tutorial/header-params.md",
+      "type": "blob",
+      "size": 3032
+    },
+    {
+      "path": "docs/en/docs/tutorial/index.md",
+      "type": "blob",
+      "size": 5175
+    },
+    {
+      "path": "docs/en/docs/tutorial/metadata.md",
+      "type": "blob",
+      "size": 6020
+    },
+    {
+      "path": "docs/en/docs/tutorial/middleware.md",
+      "type": "blob",
+      "size": 4180
+    },
+    {
+      "path": "docs/en/docs/tutorial/path-operation-configuration.md",
+      "type": "blob",
+      "size": 4169
+    },
+    {
+      "path": "docs/en/docs/tutorial/path-params-numeric-validations.md",
+      "type": "blob",
+      "size": 6251
+    },
+    {
+      "path": "docs/en/docs/tutorial/path-params.md",
+      "type": "blob",
+      "size": 9570
+    },
+    {
+      "path": "docs/en/docs/tutorial/query-param-models.md",
+      "type": "blob",
+      "size": 2224
+    },
+    {
+      "path": "docs/en/docs/tutorial/query-params-str-validations.md",
+      "type": "blob",
+      "size": 17570
+    },
+    {
+      "path": "docs/en/docs/tutorial/query-params.md",
+      "type": "blob",
+      "size": 4622
+    },
+    {
+      "path": "docs/en/docs/tutorial/request-files.md",
+      "type": "blob",
+      "size": 7512
+    },
+    {
+      "path": "docs/en/docs/tutorial/request-form-models.md",
+      "type": "blob",
+      "size": 2234
+    },
+    {
+      "path": "docs/en/docs/tutorial/request-forms-and-files.md",
+      "type": "blob",
+      "size": 1531
+    },
+    {
+      "path": "docs/en/docs/tutorial/request-forms.md",
+      "type": "blob",
+      "size": 2766
+    },
+    {
+      "path": "docs/en/docs/tutorial/response-model.md",
+      "type": "blob",
+      "size": 16422
+    },
+    {
+      "path": "docs/en/docs/tutorial/response-status-code.md",
+      "type": "blob",
+      "size": 4098
+    },
+    {
+      "path": "docs/en/docs/tutorial/schema-extra-example.md",
+      "type": "blob",
+      "size": 9780
+    },
+    {
+      "path": "docs/en/docs/tutorial/security/first-steps.md",
+      "type": "blob",
+      "size": 8617
+    },
+    {
+      "path": "docs/en/docs/tutorial/security/get-current-user.md",
+      "type": "blob",
+      "size": 4117
+    },
+    {
+      "path": "docs/en/docs/tutorial/security/index.md",
+      "type": "blob",
+      "size": 4548
+    },
+    {
+      "path": "docs/en/docs/tutorial/security/oauth2-jwt.md",
+      "type": "blob",
+      "size": 10812
+    },
+    {
+      "path": "docs/en/docs/tutorial/security/simple-oauth2.md",
+      "type": "blob",
+      "size": 9667
+    },
+    {
+      "path": "docs/en/docs/tutorial/sql-databases.md",
+      "type": "blob",
+      "size": 15796
+    },
+    {
+      "path": "docs/en/docs/tutorial/static-files.md",
+      "type": "blob",
+      "size": 1747
+    },
+    {
+      "path": "docs/en/docs/tutorial/testing.md",
+      "type": "blob",
+      "size": 6771
+    },
+    {
+      "path": "docs/en/docs/virtual-environments.md",
+      "type": "blob",
+      "size": 22936
+    },
+    {
+      "path": "docs/es/docs/about/index.md",
+      "type": "blob",
+      "size": 70
+    },
+    {
+      "path": "docs/es/docs/advanced/additional-responses.md",
+      "type": "blob",
+      "size": 9270
+    },
+    {
+      "path": "docs/es/docs/advanced/additional-status-codes.md",
+      "type": "blob",
+      "size": 2103
+    },
+    {
+      "path": "docs/es/docs/advanced/advanced-dependencies.md",
+      "type": "blob",
+      "size": 2567
+    },
+    {
+      "path": "docs/es/docs/advanced/async-tests.md",
+      "type": "blob",
+      "size": 4145
+    },
+    {
+      "path": "docs/es/docs/advanced/behind-a-proxy.md",
+      "type": "blob",
+      "size": 12363
+    },
+    {
+      "path": "docs/es/docs/advanced/custom-response.md",
+      "type": "blob",
+      "size": 12772
+    },
+    {
+      "path": "docs/es/docs/advanced/dataclasses.md",
+      "type": "blob",
+      "size": 4478
+    },
+    {
+      "path": "docs/es/docs/advanced/events.md",
+      "type": "blob",
+      "size": 8422
+    },
+    {
+      "path": "docs/es/docs/advanced/generate-clients.md",
+      "type": "blob",
+      "size": 11205
+    },
+    {
+      "path": "docs/es/docs/advanced/index.md",
+      "type": "blob",
+      "size": 2015
+    },
+    {
+      "path": "docs/es/docs/advanced/middleware.md",
+      "type": "blob",
+      "size": 4408
+    },
+    {
+      "path": "docs/es/docs/advanced/openapi-callbacks.md",
+      "type": "blob",
+      "size": 8202
+    },
+    {
+      "path": "docs/es/docs/advanced/openapi-webhooks.md",
+      "type": "blob",
+      "size": 3096
+    },
+    {
+      "path": "docs/es/docs/advanced/path-operation-advanced-configuration.md",
+      "type": "blob",
+      "size": 8109
+    },
+    {
+      "path": "docs/es/docs/advanced/response-change-status-code.md",
+      "type": "blob",
+      "size": 1628
+    },
+    {
+      "path": "docs/es/docs/advanced/response-cookies.md",
+      "type": "blob",
+      "size": 2425
+    },
+    {
+      "path": "docs/es/docs/advanced/response-directly.md",
+      "type": "blob",
+      "size": 3304
+    },
+    {
+      "path": "docs/es/docs/advanced/response-headers.md",
+      "type": "blob",
+      "size": 2429
+    },
+    {
+      "path": "docs/es/docs/advanced/security/http-basic-auth.md",
+      "type": "blob",
+      "size": 5251
+    },
+    {
+      "path": "docs/es/docs/advanced/security/index.md",
+      "type": "blob",
+      "size": 699
+    },
+    {
+      "path": "docs/es/docs/advanced/security/oauth2-scopes.md",
+      "type": "blob",
+      "size": 14102
+    },
+    {
+      "path": "docs/es/docs/advanced/settings.md",
+      "type": "blob",
+      "size": 12974
+    },
+    {
+      "path": "docs/es/docs/advanced/sub-applications.md",
+      "type": "blob",
+      "size": 3074
+    },
+    {
+      "path": "docs/es/docs/advanced/templates.md",
+      "type": "blob",
+      "size": 3552
+    },
+    {
+      "path": "docs/es/docs/advanced/testing-dependencies.md",
+      "type": "blob",
+      "size": 2481
+    },
+    {
+      "path": "docs/es/docs/advanced/testing-events.md",
+      "type": "blob",
+      "size": 254
+    },
+    {
+      "path": "docs/es/docs/advanced/testing-websockets.md",
+      "type": "blob",
+      "size": 458
+    },
+    {
+      "path": "docs/es/docs/advanced/using-request-directly.md",
+      "type": "blob",
+      "size": 2430
+    },
+    {
+      "path": "docs/es/docs/advanced/websockets.md",
+      "type": "blob",
+      "size": 5702
+    },
+    {
+      "path": "docs/es/docs/advanced/wsgi.md",
+      "type": "blob",
+      "size": 1101
+    },
+    {
+      "path": "docs/es/docs/alternatives.md",
+      "type": "blob",
+      "size": 26047
+    },
+    {
+      "path": "docs/es/docs/async.md",
+      "type": "blob",
+      "size": 25258
+    },
+    {
+      "path": "docs/es/docs/benchmarks.md",
+      "type": "blob",
+      "size": 3827
+    },
+    {
+      "path": "docs/es/docs/deployment/cloud.md",
+      "type": "blob",
+      "size": 962
+    },
+    {
+      "path": "docs/es/docs/deployment/concepts.md",
+      "type": "blob",
+      "size": 19809
+    },
+    {
+      "path": "docs/es/docs/deployment/docker.md",
+      "type": "blob",
+      "size": 31789
+    },
+    {
+      "path": "docs/es/docs/deployment/https.md",
+      "type": "blob",
+      "size": 13265
+    },
+    {
+      "path": "docs/es/docs/deployment/index.md",
+      "type": "blob",
+      "size": 1344
+    },
+    {
+      "path": "docs/es/docs/deployment/manually.md",
+      "type": "blob",
+      "size": 8406
+    },
+    {
+      "path": "docs/es/docs/deployment/server-workers.md",
+      "type": "blob",
+      "size": 9077
+    },
+    {
+      "path": "docs/es/docs/deployment/versions.md",
+      "type": "blob",
+      "size": 3846
+    },
+    {
+      "path": "docs/es/docs/environment-variables.md",
+      "type": "blob",
+      "size": 8475
+    },
+    {
+      "path": "docs/es/docs/fastapi-cli.md",
+      "type": "blob",
+      "size": 5101
+    },
+    {
+      "path": "docs/es/docs/features.md",
+      "type": "blob",
+      "size": 10625
+    },
+    {
+      "path": "docs/es/docs/help-fastapi.md",
+      "type": "blob",
+      "size": 14867
+    },
+    {
+      "path": "docs/es/docs/history-design-future.md",
+      "type": "blob",
+      "size": 4713
+    },
+    {
+      "path": "docs/es/docs/how-to/conditional-openapi.md",
+      "type": "blob",
+      "size": 2567
+    },
+    {
+      "path": "docs/es/docs/how-to/configure-swagger-ui.md",
+      "type": "blob",
+      "size": 3053
+    },
+    {
+      "path": "docs/es/docs/how-to/custom-docs-ui-assets.md",
+      "type": "blob",
+      "size": 8232
+    },
+    {
+      "path": "docs/es/docs/how-to/custom-request-and-route.md",
+      "type": "blob",
+      "size": 4794
+    },
+    {
+      "path": "docs/es/docs/how-to/extending-openapi.md",
+      "type": "blob",
+      "size": 3469
+    },
+    {
+      "path": "docs/es/docs/how-to/general.md",
+      "type": "blob",
+      "size": 2817
+    },
+    {
+      "path": "docs/es/docs/how-to/graphql.md",
+      "type": "blob",
+      "size": 3546
+    },
+    {
+      "path": "docs/es/docs/how-to/index.md",
+      "type": "blob",
+      "size": 624
+    },
+    {
+      "path": "docs/es/docs/how-to/separate-openapi-schemas.md",
+      "type": "blob",
+      "size": 4522
+    },
+    {
+      "path": "docs/es/docs/how-to/testing-database.md",
+      "type": "blob",
+      "size": 554
+    },
+    {
+      "path": "docs/es/docs/index.md",
+      "type": "blob",
+      "size": 22018
+    },
+    {
+      "path": "docs/es/docs/learn/index.md",
+      "type": "blob",
+      "size": 212
+    },
+    {
+      "path": "docs/es/docs/project-generation.md",
+      "type": "blob",
+      "size": 2111
+    },
+    {
+      "path": "docs/es/docs/python-types.md",
+      "type": "blob",
+      "size": 17996
+    },
+    {
+      "path": "docs/es/docs/resources/index.md",
+      "type": "blob",
+      "size": 78
+    },
+    {
+      "path": "docs/es/docs/tutorial/background-tasks.md",
+      "type": "blob",
+      "size": 5049
+    },
+    {
+      "path": "docs/es/docs/tutorial/bigger-applications.md",
+      "type": "blob",
+      "size": 19813
+    },
+    {
+      "path": "docs/es/docs/tutorial/body-fields.md",
+      "type": "blob",
+      "size": 2556
+    },
+    {
+      "path": "docs/es/docs/tutorial/body-multiple-params.md",
+      "type": "blob",
+      "size": 5168
+    },
+    {
+      "path": "docs/es/docs/tutorial/body-nested-models.md",
+      "type": "blob",
+      "size": 7672
+    },
+    {
+      "path": "docs/es/docs/tutorial/body-updates.md",
+      "type": "blob",
+      "size": 4988
+    },
+    {
+      "path": "docs/es/docs/tutorial/body.md",
+      "type": "blob",
+      "size": 7174
+    },
+    {
+      "path": "docs/es/docs/tutorial/cookie-param-models.md",
+      "type": "blob",
+      "size": 3296
+    },
+    {
+      "path": "docs/es/docs/tutorial/cookie-params.md",
+      "type": "blob",
+      "size": 1093
+    },
+    {
+      "path": "docs/es/docs/tutorial/cors.md",
+      "type": "blob",
+      "size": 5626
+    },
+    {
+      "path": "docs/es/docs/tutorial/debugging.md",
+      "type": "blob",
+      "size": 2583
+    },
+    {
+      "path": "docs/es/docs/tutorial/dependencies/classes-as-dependencies.md",
+      "type": "blob",
+      "size": 7061
+    },
+    {
+      "path": "docs/es/docs/tutorial/dependencies/dependencies-in-path-operation-decorators.md",
+      "type": "blob",
+      "size": 2936
+    },
+    {
+      "path": "docs/es/docs/tutorial/dependencies/dependencies-with-yield.md",
+      "type": "blob",
+      "size": 13264
+    },
+    {
+      "path": "docs/es/docs/tutorial/dependencies/global-dependencies.md",
+      "type": "blob",
+      "size": 1111
+    },
+    {
+      "path": "docs/es/docs/tutorial/dependencies/index.md",
+      "type": "blob",
+      "size": 9949
+    },
+    {
+      "path": "docs/es/docs/tutorial/dependencies/sub-dependencies.md",
+      "type": "blob",
+      "size": 3795
+    },
+    {
+      "path": "docs/es/docs/tutorial/encoder.md",
+      "type": "blob",
+      "size": 1735
+    },
+    {
+      "path": "docs/es/docs/tutorial/extra-data-types.md",
+      "type": "blob",
+      "size": 2910
+    },
+    {
+      "path": "docs/es/docs/tutorial/extra-models.md",
+      "type": "blob",
+      "size": 7474
+    },
+    {
+      "path": "docs/es/docs/tutorial/first-steps.md",
+      "type": "blob",
+      "size": 12457
+    },
+    {
+      "path": "docs/es/docs/tutorial/handling-errors.md",
+      "type": "blob",
+      "size": 9840
+    },
+    {
+      "path": "docs/es/docs/tutorial/header-param-models.md",
+      "type": "blob",
+      "size": 1914
+    },
+    {
+      "path": "docs/es/docs/tutorial/header-params.md",
+      "type": "blob",
+      "size": 3163
+    },
+    {
+      "path": "docs/es/docs/tutorial/index.md",
+      "type": "blob",
+      "size": 6415
+    },
+    {
+      "path": "docs/es/docs/tutorial/metadata.md",
+      "type": "blob",
+      "size": 6277
+    },
+    {
+      "path": "docs/es/docs/tutorial/middleware.md",
+      "type": "blob",
+      "size": 3381
+    },
+    {
+      "path": "docs/es/docs/tutorial/path-operation-configuration.md",
+      "type": "blob",
+      "size": 4136
+    },
+    {
+      "path": "docs/es/docs/tutorial/path-params-numeric-validations.md",
+      "type": "blob",
+      "size": 6166
+    },
+    {
+      "path": "docs/es/docs/tutorial/path-params.md",
+      "type": "blob",
+      "size": 9602
+    },
+    {
+      "path": "docs/es/docs/tutorial/query-param-models.md",
+      "type": "blob",
+      "size": 2235
+    },
+    {
+      "path": "docs/es/docs/tutorial/query-params-str-validations.md",
+      "type": "blob",
+      "size": 16891
+    },
+    {
+      "path": "docs/es/docs/tutorial/query-params.md",
+      "type": "blob",
+      "size": 4671
+    },
+    {
+      "path": "docs/es/docs/tutorial/request-files.md",
+      "type": "blob",
+      "size": 7751
+    },
+    {
+      "path": "docs/es/docs/tutorial/request-form-models.md",
+      "type": "blob",
+      "size": 2327
+    },
+    {
+      "path": "docs/es/docs/tutorial/request-forms-and-files.md",
+      "type": "blob",
+      "size": 1506
+    },
+    {
+      "path": "docs/es/docs/tutorial/request-forms.md",
+      "type": "blob",
+      "size": 2958
+    },
+    {
+      "path": "docs/es/docs/tutorial/response-model.md",
+      "type": "blob",
+      "size": 17360
+    },
+    {
+      "path": "docs/es/docs/tutorial/response-status-code.md",
+      "type": "blob",
+      "size": 4376
+    },
+    {
+      "path": "docs/es/docs/tutorial/schema-extra-example.md",
+      "type": "blob",
+      "size": 10028
+    },
+    {
+      "path": "docs/es/docs/tutorial/security/first-steps.md",
+      "type": "blob",
+      "size": 8969
+    },
+    {
+      "path": "docs/es/docs/tutorial/security/get-current-user.md",
+      "type": "blob",
+      "size": 4367
+    },
+    {
+      "path": "docs/es/docs/tutorial/security/index.md",
+      "type": "blob",
+      "size": 4746
+    },
+    {
+      "path": "docs/es/docs/tutorial/security/oauth2-jwt.md",
+      "type": "blob",
+      "size": 11166
+    },
+    {
+      "path": "docs/es/docs/tutorial/security/simple-oauth2.md",
+      "type": "blob",
+      "size": 10102
+    },
+    {
+      "path": "docs/es/docs/tutorial/sql-databases.md",
+      "type": "blob",
+      "size": 16187
+    },
+    {
+      "path": "docs/es/docs/tutorial/static-files.md",
+      "type": "blob",
+      "size": 1819
+    },
+    {
+      "path": "docs/es/docs/tutorial/testing.md",
+      "type": "blob",
+      "size": 7022
+    },
+    {
+      "path": "docs/es/docs/virtual-environments.md",
+      "type": "blob",
+      "size": 22735
+    },
+    {
+      "path": "docs/es/llm-prompt.md",
+      "type": "blob",
+      "size": 5446
+    },
+    {
+      "path": "docs/fa/docs/advanced/sub-applications.md",
+      "type": "blob",
+      "size": 4102
+    },
+    {
+      "path": "docs/fa/docs/async.md",
+      "type": "blob",
+      "size": 33690
+    },
+    {
+      "path": "docs/fa/docs/environment-variables.md",
+      "type": "blob",
+      "size": 11263
+    },
+    {
+      "path": "docs/fa/docs/features.md",
+      "type": "blob",
+      "size": 15371
+    },
+    {
+      "path": "docs/fa/docs/index.md",
+      "type": "blob",
+      "size": 26616
+    },
+    {
+      "path": "docs/fa/docs/learn/index.md",
+      "type": "blob",
+      "size": 349
+    },
+    {
+      "path": "docs/fa/docs/python-types.md",
+      "type": "blob",
+      "size": 23839
+    },
+    {
+      "path": "docs/fa/docs/tutorial/middleware.md",
+      "type": "blob",
+      "size": 4492
+    },
+    {
+      "path": "docs/fa/docs/tutorial/security/index.md",
+      "type": "blob",
+      "size": 7780
+    },
+    {
+      "path": "docs/fr/docs/advanced/additional-responses.md",
+      "type": "blob",
+      "size": 9753
+    },
+    {
+      "path": "docs/fr/docs/advanced/additional-status-codes.md",
+      "type": "blob",
+      "size": 2285
+    },
+    {
+      "path": "docs/fr/docs/advanced/index.md",
+      "type": "blob",
+      "size": 1333
+    },
+    {
+      "path": "docs/fr/docs/advanced/path-operation-advanced-configuration.md",
+      "type": "blob",
+      "size": 8000
+    },
+    {
+      "path": "docs/fr/docs/advanced/response-directly.md",
+      "type": "blob",
+      "size": 3655
+    },
+    {
+      "path": "docs/fr/docs/alternatives.md",
+      "type": "blob",
+      "size": 28200
+    },
+    {
+      "path": "docs/fr/docs/async.md",
+      "type": "blob",
+      "size": 25972
+    },
+    {
+      "path": "docs/fr/docs/benchmarks.md",
+      "type": "blob",
+      "size": 3998
+    },
+    {
+      "path": "docs/fr/docs/deployment/docker.md",
+      "type": "blob",
+      "size": 7689
+    },
+    {
+      "path": "docs/fr/docs/deployment/https.md",
+      "type": "blob",
+      "size": 4238
+    },
+    {
+      "path": "docs/fr/docs/deployment/index.md",
+      "type": "blob",
+      "size": 1497
+    },
+    {
+      "path": "docs/fr/docs/deployment/manually.md",
+      "type": "blob",
+      "size": 5427
+    },
+    {
+      "path": "docs/fr/docs/deployment/versions.md",
+      "type": "blob",
+      "size": 4149
+    },
+    {
+      "path": "docs/fr/docs/features.md",
+      "type": "blob",
+      "size": 11367
+    },
+    {
+      "path": "docs/fr/docs/help-fastapi.md",
+      "type": "blob",
+      "size": 5811
+    },
+    {
+      "path": "docs/fr/docs/history-design-future.md",
+      "type": "blob",
+      "size": 5025
+    },
+    {
+      "path": "docs/fr/docs/index.md",
+      "type": "blob",
+      "size": 22547
+    },
+    {
+      "path": "docs/fr/docs/learn/index.md",
+      "type": "blob",
+      "size": 231
+    },
+    {
+      "path": "docs/fr/docs/project-generation.md",
+      "type": "blob",
+      "size": 6901
+    },
+    {
+      "path": "docs/fr/docs/python-types.md",
+      "type": "blob",
+      "size": 10240
+    },
+    {
+      "path": "docs/fr/docs/tutorial/background-tasks.md",
+      "type": "blob",
+      "size": 5581
+    },
+    {
+      "path": "docs/fr/docs/tutorial/body-multiple-params.md",
+      "type": "blob",
+      "size": 5742
+    },
+    {
+      "path": "docs/fr/docs/tutorial/body.md",
+      "type": "blob",
+      "size": 7828
+    },
+    {
+      "path": "docs/fr/docs/tutorial/debugging.md",
+      "type": "blob",
+      "size": 2978
+    },
+    {
+      "path": "docs/fr/docs/tutorial/first-steps.md",
+      "type": "blob",
+      "size": 10363
+    }
+  ],
+  "total_files": 2272
+}

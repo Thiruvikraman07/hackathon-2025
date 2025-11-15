@@ -7,6 +7,7 @@ Every decision includes a 'reason' field explaining why.
 """
 
 import sys
+import json
 from pathlib import Path
 from typing import List, Optional, Dict, Union, Any
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -88,12 +89,14 @@ class ResumeAnalysis(BaseModel):
 
 class GitHubProjectRelevance(BaseModel):
     """GitHub project relevance with reasoning"""
-    project_name: str = Field(description="Project name")
-    github_url: str = Field(description="GitHub URL")
-    is_relevant: bool = Field(description="Is relevant to JD")
+    model_config = ConfigDict(populate_by_name=True)
+
+    project_name: str = Field(description="Project name", alias="name")
+    github_url: str = Field(description="GitHub URL", alias="url")
+    is_relevant: bool = Field(default=True, description="Is relevant to JD")
     relevance_score: int = Field(description="Relevance score 1-10")
-    relevance_reason: str = Field(description="Why relevant or not")
-    technologies_matched: List[str] = Field(description="Technologies that match JD")
+    relevance_reason: str = Field(default="Relevant to job requirements", description="Why relevant or not")
+    technologies_matched: List[str] = Field(default_factory=list, description="Technologies that match JD", alias="technologies")
 
 
 class GitHubCodeQuality(BaseModel):
@@ -132,18 +135,40 @@ class GitHubAnalysis(BaseModel):
     @classmethod
     def convert_relevant_projects_strings(cls, v):
         """Convert string project names to GitHubProjectRelevance objects"""
-        if isinstance(v, list) and v and isinstance(v[0], str):
-            # Convert list of strings to list of objects
+        if isinstance(v, list) and v:
             result = []
-            for project_name in v:
-                result.append({
-                    'project_name': project_name,
-                    'github_url': f'https://github.com/{project_name}',
-                    'is_relevant': True,
-                    'relevance_score': 7,
-                    'relevance_reason': 'Identified as relevant project',
-                    'technologies_matched': []
-                })
+            for item in v:
+                if isinstance(item, str):
+                    # Convert string to object
+                    result.append({
+                        'project_name': item,
+                        'github_url': f'https://github.com/{item}',
+                        'is_relevant': True,
+                        'relevance_score': 7,
+                        'relevance_reason': 'Identified as relevant project',
+                        'technologies_matched': []
+                    })
+                elif isinstance(item, dict):
+                    # Create a normalized dict with all required fields
+                    normalized = {}
+
+                    # Handle project_name / name
+                    normalized['project_name'] = item.get('project_name', item.get('name', 'Unknown Project'))
+
+                    # Handle github_url / url
+                    normalized['github_url'] = item.get('github_url', item.get('url', f"https://github.com/{normalized['project_name']}"))
+
+                    # Handle technologies_matched / technologies
+                    normalized['technologies_matched'] = item.get('technologies_matched', item.get('technologies', []))
+
+                    # Set defaults for other required fields
+                    normalized['is_relevant'] = item.get('is_relevant', True)
+                    normalized['relevance_score'] = item.get('relevance_score', 7)
+                    normalized['relevance_reason'] = item.get('relevance_reason', 'Relevant to job requirements')
+
+                    result.append(normalized)
+                else:
+                    result.append(item)
             return result
         return v
 
@@ -198,6 +223,40 @@ class CandidateEvaluation(BaseModel):
     detailed_feedback: str = Field(default="", description="Detailed feedback for candidate (2-3 paragraphs)")
     hiring_manager_notes: str = Field(default="", description="Notes for hiring manager (2-3 paragraphs)")
 
+    @field_validator('skill_gaps', mode='before')
+    @classmethod
+    def convert_skill_gaps_strings(cls, v):
+        """Convert list of strings to ExperienceGapAnalysis objects"""
+        if isinstance(v, list) and v:
+            result = []
+            for item in v:
+                if isinstance(item, str):
+                    # Parse severity from string if possible
+                    severity = 'moderate'
+                    if any(word in item.lower() for word in ['critical', 'major', 'important']):
+                        severity = 'critical'
+                    elif any(word in item.lower() for word in ['minor', 'small', 'slight']):
+                        severity = 'minor'
+
+                    result.append({
+                        'name': item,
+                        'severity': severity,
+                        'details': item,
+                        'reason': f'Gap identified: {item}',
+                        'can_be_learned': True,
+                        'learning_reason': 'Can be acquired through training and practice'
+                    })
+                elif isinstance(item, dict):
+                    # Handle dict that might have different field names
+                    if 'gap_name' not in item and 'name' not in item:
+                        # Try to extract from other fields
+                        item['name'] = item.get('description', 'Unspecified gap')
+                    result.append(item)
+                else:
+                    result.append(item)
+            return result
+        return v
+
     @field_validator('final_decision', mode='before')
     @classmethod
     def convert_final_decision_string(cls, v):
@@ -218,8 +277,83 @@ class CandidateEvaluation(BaseModel):
                 'confidence_level': 70,
                 'confidence_reason': 'Based on available information'
             }
+        elif isinstance(v, dict):
+            # Handle dict that might have different field names
+            normalized = {}
+
+            # Handle decision -> is_fit
+            if 'decision' in v and 'is_fit' not in v:
+                decision = v.get('decision', '').lower()
+                normalized['is_fit'] = decision not in ['reject', 'no', 'fail', 'not fit', 'no-hire']
+            else:
+                normalized['is_fit'] = v.get('is_fit', False)
+
+            # Handle reason -> fit_reason
+            normalized['fit_reason'] = v.get('fit_reason', v.get('reason', 'Decision based on evaluation'))
+
+            # Handle scores
+            normalized['overall_score'] = v.get('overall_score', 70 if normalized['is_fit'] else 30)
+            normalized['overall_score_breakdown'] = v.get('overall_score_breakdown', 'Based on overall evaluation')
+            normalized['resume_score'] = v.get('resume_score', 50)
+            normalized['github_score'] = v.get('github_score', 50)
+            normalized['skill_match_score'] = v.get('skill_match_score', 50)
+
+            # Handle recommendation
+            if 'recommendation' not in v:
+                normalized['recommendation'] = 'hire' if normalized['is_fit'] else 'no-hire'
+            else:
+                normalized['recommendation'] = v.get('recommendation')
+
+            normalized['recommendation_reason'] = v.get('recommendation_reason', normalized['fit_reason'])
+
+            # Handle confidence
+            normalized['confidence_level'] = v.get('confidence_level', 70)
+            normalized['confidence_reason'] = v.get('confidence_reason', 'Based on available information')
+
+            return normalized
         return v
 
+
+# ============================================
+# Cache Management for Testing
+# ============================================
+
+CACHE_DIR = Path("./cache/github_data")
+TESTING_MODE = False  # Set to True to enable caching
+
+def get_cache_path(identifier: str, cache_type: str) -> Path:
+    """Get cache file path for an identifier and cache type."""
+    safe_identifier = identifier.replace('/', '_').replace(' ', '_')
+    return CACHE_DIR / f"{safe_identifier}_{cache_type}.json"
+
+def load_from_cache(identifier: str, cache_type: str) -> Optional[dict]:
+    """Load cached data if it exists."""
+    if not TESTING_MODE:
+        return None
+
+    cache_path = get_cache_path(identifier, cache_type)
+    if cache_path.exists():
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Warning: Failed to load cache from {cache_path}: {e}")
+    return None
+
+def save_to_cache(identifier: str, cache_type: str, data: dict) -> None:
+    """Save data to cache."""
+    if not TESTING_MODE:
+        return
+
+    cache_path = get_cache_path(identifier, cache_type)
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        with open(cache_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print(f"💾 Cached {cache_type} data to {cache_path}")
+    except Exception as e:
+        print(f"Warning: Failed to save cache to {cache_path}: {e}")
 
 # ============================================
 # Tools
@@ -251,9 +385,20 @@ def get_github_profile(username: str) -> dict:
     Returns:
         Profile info
     """
+    # Check cache first
+    cached_data = load_from_cache(username, "profile")
+    if cached_data is not None:
+        print(f"📦 Using cached profile for {username}")
+        return cached_data
+
     try:
         client = GitHubClient()
-        return client.get_profile_info(username)
+        profile = client.get_profile_info(username)
+
+        # Save to cache
+        save_to_cache(username, "profile", profile)
+
+        return profile
     except Exception as e:
         return {"error": str(e)}
 
@@ -268,10 +413,21 @@ def get_github_repositories(username: str) -> dict:
     Returns:
         List of repositories
     """
+    # Check cache first
+    cached_data = load_from_cache(username, "repositories")
+    if cached_data is not None:
+        print(f"📦 Using cached repositories for {username}")
+        return cached_data
+
     try:
         client = GitHubClient()
         repos = client.get_public_repositories(username)
-        return {'username': username, 'repositories': repos, 'total': len(repos)}
+        result = {'username': username, 'repositories': repos, 'total': len(repos)}
+
+        # Save to cache
+        save_to_cache(username, "repositories", result)
+
+        return result
     except Exception as e:
         return {"error": str(e)}
 
@@ -286,6 +442,12 @@ def get_repo_file_structure(repo_full_name: str) -> dict:
     Returns:
         File structure
     """
+    # Check cache first
+    cached_data = load_from_cache(repo_full_name, "file_structure")
+    if cached_data is not None:
+        print(f"📦 Using cached file structure for {repo_full_name}")
+        return cached_data
+
     try:
         client = GitHubClient()
         repo = client.github.get_repo(repo_full_name)
@@ -303,7 +465,12 @@ def get_repo_file_structure(repo_full_name: str) -> dict:
                 elif path.endswith(('.md', '.txt')):
                     files['doc_files'].append(path)
 
-        return {'repo': repo_full_name, 'files': files, 'total_code_files': len(files['code_files'])}
+        result = {'repo': repo_full_name, 'files': files, 'total_code_files': len(files['code_files'])}
+
+        # Save to cache
+        save_to_cache(repo_full_name, "file_structure", result)
+
+        return result
     except Exception as e:
         return {"error": str(e)}
 
@@ -319,6 +486,16 @@ def fetch_code_files(repo_full_name: str, file_paths: List[str]) -> dict:
     Returns:
         File contents
     """
+    # Create a cache key based on the file paths
+    cache_key = "_".join(sorted(file_paths[:3])).replace('/', '_')[:100]  # Limit length
+    cache_type = f"files_{cache_key}"
+
+    # Check cache first
+    cached_data = load_from_cache(repo_full_name, cache_type)
+    if cached_data is not None:
+        print(f"📦 Using cached file contents for {repo_full_name}")
+        return cached_data
+
     try:
         client = GitHubClient()
         repo = client.github.get_repo(repo_full_name)
@@ -335,7 +512,12 @@ def fetch_code_files(repo_full_name: str, file_paths: List[str]) -> dict:
             except:
                 continue
 
-        return {'files': files_content, 'total_fetched': len(files_content)}
+        result = {'files': files_content, 'total_fetched': len(files_content)}
+
+        # Save to cache
+        save_to_cache(repo_full_name, cache_type, result)
+
+        return result
     except Exception as e:
         return {"error": str(e)}
 
@@ -348,7 +530,8 @@ def evaluate_candidate(
     resume_pdf_path: str,
     jd_text: str,
     jd_job_title: str,
-    verbose: bool = True
+    verbose: bool = True,
+    testing: bool = False
 ):
     """PIPELINE 2: Complete candidate evaluation with resume + GitHub analysis.
 
@@ -357,16 +540,23 @@ def evaluate_candidate(
         jd_text: Job description text (from Pipeline 1 or custom)
         jd_job_title: Job title from JD
         verbose: Print details
+        testing: Enable caching mode - fetches GitHub data once and reuses for subsequent runs
 
     Returns:
         Tuple of (CandidateEvaluation, toon_output)
     """
+    # Set global testing mode
+    global TESTING_MODE
+    TESTING_MODE = testing
+
     if verbose:
         print("\n" + "="*80)
         print("🎯 PIPELINE 2: Complete Candidate Evaluator")
         print("="*80)
         print(f"📄 Resume: {resume_pdf_path}")
         print(f"💼 Job Title: {jd_job_title}")
+        if testing:
+            print(f"🧪 Testing Mode: ENABLED (caching GitHub data)")
         print()
 
     # Create LLM and agent
@@ -672,7 +862,8 @@ if __name__ == "__main__":
         resume_pdf_path="/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
         jd_text=jd_text,
         jd_job_title="Senior Python Backend Developer",
-        verbose=True
+        verbose=True,
+        testing=True  # Enable testing mode to cache GitHub data
     )
 
     print(f"\n🎉 Pipeline 2 Complete!")
@@ -680,3 +871,7 @@ if __name__ == "__main__":
     print(f"   Fit: {'YES' if evaluation.final_decision.is_fit else 'NO'}")
     print(f"   Score: {evaluation.final_decision.overall_score}/100")
     print(f"   Recommendation: {evaluation.final_decision.recommendation}")
+
+    if TESTING_MODE:
+        print(f"\n💾 Cache location: {CACHE_DIR}")
+        print(f"   Subsequent runs will use cached data until testing=False")

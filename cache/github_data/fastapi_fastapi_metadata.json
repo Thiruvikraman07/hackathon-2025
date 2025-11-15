@@ -1,0 +1,19 @@
+{
+  "name": "fastapi",
+  "full_name": "fastapi/fastapi",
+  "description": "FastAPI framework, high performance, easy to learn, fast to code, ready for production",
+  "stars": 91953,
+  "forks": 8228,
+  "language": "Python",
+  "size": 28858,
+  "updated_at": "2025-11-15T20:47:00+00:00",
+  "url": "https://github.com/fastapi/fastapi",
+  "default_branch": "master",
+  "languages": {
+    "Python": 3418310,
+    "JavaScript": 1066,
+    "Shell": 513,
+    "HTML": 235,
+    "CSS": 25
+  }
+}

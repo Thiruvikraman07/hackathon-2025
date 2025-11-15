@@ -1,42 +1,46 @@
-job_title: Senior Backend Engineer
+job_title: Senior Backend Engineer - FastAPI Core Team
 company_repo: fastapi/fastapi
-salary_range: $140k-$180k
-overview: "Lead backend development for FastAPI, a modern high-performance Python web framework with 90k+ stars. Work on core framework features, performance optimization, and API development while mentoring a distributed team."
-overview_reason: "Repository shows FastAPI is a production-grade framework with extensive testing, typing, and documentation needs"
+salary_range: "$130,000 - $180,000 USD annually"
+overview: "Join the core team behind FastAPI, one of the fastest-growing Python web frameworks with over 91,000 GitHub stars. Help shape the future of modern API development while working on a high-performance async framework used by millions of developers worldwide."
+overview_reason: "Repository metrics show massive adoption (91,953 stars, 8,228 forks) and active development, indicating a critical need for senior engineering talent."
 technical_requirements:
-  primary_languages[2,]{name,importance,reason}:
-    Python,must-have,"Primary language (98% of codebase) with advanced features like type hints, async/await"
-    JavaScript,nice-to-have,Minor usage in documentation and testing
-  frameworks_libraries[3,]{name,importance,reason}:
-    FastAPI,must-have,Core framework being developed
-    Pydantic,must-have,Extensively used for data validation and settings management
-    pytest,must-have,Extensive testing infrastructure present in codebase
-  tools_platforms[3,]{name,importance,reason}:
-    Git,must-have,Source control for large collaborative project
-    OpenAPI/Swagger,must-have,Core API documentation functionality
-    Docker,must-have,Required for deployment and testing scenarios
-  databases[1,]{name,importance,reason}:
-    SQL Databases,must-have,Framework supports multiple database integrations
+  primary_languages[1,]{name,importance,reason}:
+    Python,must-have,Required based on repository analysis
+  frameworks_libraries[5,]{name,importance,reason}:
+    FastAPI,must-have,Required based on repository analysis
+    Starlette,must-have,Required based on repository analysis
+    Pydantic,must-have,Required based on repository analysis
+    SQLAlchemy,must-have,Required based on repository analysis
+    asyncio,must-have,Required based on repository analysis
+  tools_platforms[4,]{name,importance,reason}:
+    Git,must-have,Required based on repository analysis
+    Docker,must-have,Required based on repository analysis
+    CI/CD,must-have,Required based on repository analysis
+    OpenAPI/Swagger,must-have,Required based on repository analysis
+  databases[3,]{name,importance,reason}:
+    SQL databases,must-have,Required based on repository analysis
+    NoSQL databases,must-have,Required based on repository analysis
+    Async database drivers,must-have,Required based on repository analysis
 responsibilities[6,]{responsibility,reason}:
-  Design and implement core framework features,Complex framework code shows ongoing feature development
-  Optimize performance-critical code paths,Framework advertises high performance as key feature
-  Review and merge open source contributions,"High number of forks (8,200+) indicates active community"
-  Maintain comprehensive test coverage,Extensive test files present in codebase
-  Create technical documentation,Significant documentation infrastructure in docs_src
-  Lead API design decisions,Complex API patterns visible in route definitions
+  Lead the development and maintenance of FastAPI's core functionality and performance optimizations,Core framework development requires senior-level expertise
+  Design and implement new framework features while ensuring backward compatibility,Framework evolution needs careful architectural planning
+  Review and merge community contributions while maintaining code quality standards,Large open source project requires careful code review
+  Improve framework documentation and developer experience,Critical for framework adoption and usability
+  Collaborate with the open source community to resolve issues and implement feature requests,Active community engagement is essential for project growth
+  Optimize framework performance and maintain high test coverage,Ensures framework reliability and performance
 qualifications[8,]{qualification,importance,reason}:
-  5+ years Python development,must-have,Advanced Python features used throughout
-  Experience with async Python,must-have,Async patterns used extensively in codebase
-  API design expertise,must-have,Complex API patterns and OpenAPI integration
-  Testing methodology expertise,must-have,Extensive test infrastructure present
-  CI/CD experience,must-have,Project requires robust deployment processes
-  Open source contribution history,must-have,Large open source project management
-  Documentation writing skills,nice-to-have,Extensive documentation needs
-  DevOps experience,nice-to-have,Helpful for deployment and integration scenarios
+  5+ years of professional Python development experience,must-have,Complex framework development requires extensive Python expertise
+  Deep understanding of asynchronous programming and Python's asyncio,must-have,FastAPI is built on async foundations
+  Extensive experience with API development and REST principles,must-have,Core to FastAPI's purpose and functionality
+  Strong knowledge of type systems and modern Python type hints,must-have,FastAPI heavily utilizes Python's type system
+  Experience with OpenAPI (Swagger) specifications and API documentation,must-have,Essential for FastAPI's automatic API documentation
+  Proven track record of contributing to open source projects,must-have,Role involves significant open source work
+  Excellent understanding of software design patterns and architecture,must-have,Framework design requires strong architectural skills
+  Strong technical writing skills for documentation and specifications,must-have,Documentation is crucial for framework adoption
 experience_requirement:
-  level: senior
+  level: Senior
   minimum_years: 5
-  reason: "Complex architecture, framework design, and team leadership requirements"
-additional_requirements[3]: Experience leading a team of 3-5 developers,Strong communication skills for remote work,Open source contribution experience
-what_youll_learn[4]: Modern Python framework architecture and design,High-performance async system design,Open source project management at scale,Advanced API design patterns
-total_files_analyzed: 500
+  reason: "Framework complexity requires deep Python expertise and extensive API development experience, evidenced by codebase's sophisticated async patterns and type system usage"
+additional_requirements[4]: Strong understanding of web security principles and OAuth2,Experience with performance optimization and profiling,Familiarity with multiple deployment environments,Excellent communication skills for community interaction
+what_youll_learn[5]: Work with cutting-edge technologies and frameworks,Collaborate with a talented engineering team,Contribute to open source projects,Develop skills in modern software architecture,Gain experience in production-scale systems
+total_files_analyzed: 10
