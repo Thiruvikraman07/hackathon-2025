@@ -386,14 +386,8 @@ ADDITIONAL USER REQUIREMENTS (include these in additional_requirements field):
 {chr(10).join(f"- {req}" for req in additional_requirements)}
 """
 
-    # IMPROVED PROMPT - More explicit about structure and completeness
-    prompt = f"""Generate a COMPLETE Job Description by analyzing the company repository.
-
-INPUTS:
-- Repository: {company_repo}
-- Job Title: {job_title}
-- Salary: {salary_range or 'Not specified'}
-{additional_reqs_text}
+    # USE THE MORE EXPLICIT PROMPT AS DEFAULT (previously was fallback)
+    prompt = f"""CRITICAL: Generate COMPLETE JobDescription for {job_title} at {company_repo}.
 
 INSTRUCTIONS:
 1. Use fetch_repo_metadata to get repo info, stars, languages
@@ -402,90 +396,18 @@ INSTRUCTIONS:
    - 1 README file (README.md or similar)
    - 2 most relevant code files (main entry points, core logic files based on the job title)
 4. Use fetch_code_files to get ONLY those 3 selected files (pass exact paths as a list)
-5. Analyze the fetched files and generate ALL required fields (see structure below)
+5. Analyze the fetched files and generate ALL required fields
 
-REQUIRED OUTPUT STRUCTURE - YOU MUST INCLUDE ALL FIELDS:
-
-{{
-  "job_title": "{job_title}",
-  "company_repo": "{company_repo}",
-  "salary_range": "{salary_range or None}",
-  
-  "overview": "2-3 sentences about the role",
-  "overview_reason": "Why this overview fits (be concise)",
-  
-  "technical_requirements": {{
-    "primary_languages": [
-      {{"name": "X", "importance": "must-have", "reason": "Brief reason from code"}}
-    ],
-    "frameworks_libraries": [
-      {{"name": "Y", "importance": "must-have", "reason": "Brief reason"}}
-    ],
-    "tools_platforms": [
-      {{"name": "Z", "importance": "must-have", "reason": "Brief reason"}}
-    ],
-    "databases": []
-  }},
-  
-  "responsibilities": [
-    {{"responsibility": "Do X", "reason": "Because code shows Y"}},
-    {{"responsibility": "Do Z", "reason": "Because repo has W"}}
-  ],
-
-  "qualifications": [
-    {{"qualification": "X years of Y", "importance": "must-have", "reason": "Code complexity requires this"}},
-    {{"qualification": "Experience with Z", "importance": "nice-to-have", "reason": "Would help with W"}}
-  ],
-  
-  "experience_requirement": {{
-    "level": "senior",
-    "minimum_years": 5,
-    "reason": "Code complexity and architecture requires this"
-  }},
-  
-  "additional_requirements": {additional_requirements or []},
-  
-  "what_youll_learn": [
-    "Learning opportunity 1",
-    "Learning opportunity 2"
-  ],
-
-  "total_files_analyzed": 3
-}}
-
-CRITICAL RULES:
-1. KEEP REASONS CONCISE (under 50 words each)
-2. Include 5-6 responsibilities
-3. Include 6-8 qualifications
-4. Include 4-5 learning opportunities
-5. Base everything on actual code analysis
-6. YOU MUST GENERATE ALL FIELDS - the response is incomplete without them
-
-Generate the complete job description now."""
-
-    # Invoke agent
-    if verbose:
-        print("🤖 Analyzing repository and generating JD with reasoning...\n")
-
-    try:
-        result = agent.invoke({
-            "messages": [HumanMessage(content=prompt)]
-        })
-
-        # Get structured output
-        data = result['structured_response']
-
-    except ValueError as e:
-        if "Failed to validate structured output" in str(e):
-            print("⚠️  First attempt incomplete. Trying with more explicit prompt...\n")
-            
-            # Retry with even more explicit prompt
-            retry_prompt = f"""CRITICAL: Generate COMPLETE JobDescription for {job_title} at {company_repo}.
+INPUTS:
+- Repository: {company_repo}
+- Job Title: {job_title}
+- Salary: {salary_range or 'Not specified'}
+{additional_reqs_text}
 
 You MUST include ALL these fields or the validation will fail:
 - job_title, company_repo, salary_range, overview, overview_reason
 - technical_requirements (with primary_languages, frameworks_libraries, tools_platforms, databases)
-- responsibilities (list of 5-6 items)
+- responsibilities (list of 5-6 items) ⚠️ REQUIRED
 - qualifications (list of 6-8 items) ⚠️ REQUIRED
 - experience_requirement (with level, minimum_years, reason) ⚠️ REQUIRED
 - additional_requirements, what_youll_learn (list of 4-5 items) ⚠️ REQUIRED
@@ -493,14 +415,26 @@ You MUST include ALL these fields or the validation will fail:
 
 The response is INCOMPLETE without qualifications, experience_requirement, what_youll_learn, and total_files_analyzed.
 
+CRITICAL RULES:
+1. KEEP REASONS CONCISE (under 50 words each)
+2. Include 5-6 responsibilities
+3. Include 6-8 qualifications
+4. Include 4-5 learning opportunities
+5. Base everything on actual code analysis
+6. Set total_files_analyzed to 3 (the number of files you analyzed)
+
 Use the tools to analyze the repo, then generate ALL fields. Keep reasons concise."""
-            
-            result = agent.invoke({
-                "messages": [HumanMessage(content=retry_prompt)]
-            })
-            data = result['structured_response']
-        else:
-            raise
+
+    # Invoke agent
+    if verbose:
+        print("🤖 Analyzing repository and generating JD with reasoning...\n")
+
+    result = agent.invoke({
+        "messages": [HumanMessage(content=prompt)]
+    })
+
+    # Get structured output
+    data = result['structured_response']
 
     # Convert to TOON
     output_toon = toon_encode(data.model_dump())
