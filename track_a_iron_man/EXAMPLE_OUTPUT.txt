@@ -1,0 +1,118 @@
+EXAMPLE: Final Decision Output with Complete Reasoning
+=======================================================
+
+❌ NO HIRE - NO-HIRE
+Final Score: 45/100
+(65 × 0.3) + (38 × 0.7) = 45
+
+Interview: NO
+Confidence: 89%
+
+💡 Why Not Hire:
+The candidate does not meet the requirements for this Senior Python Backend 
+Developer role. Critical gaps identified: Incomplete bachelor's degree, 
+Insufficient years of experience (2 vs required 5+), No FastAPI experience. 
+Experience gap: 3 years below requirement. Seniority level (junior) does not 
+match requirement (Senior).
+
+📋 COMPLETE DECISION REASONING:
+--------------------------------------------------------------------------------
+NO-HIRE DECISION: Candidate scores 45/100 overall, below hiring threshold.
+Pipeline 2 (GitHub analysis): 65/100 - While showing promise, candidate lacks 
+required years of experience and technical expertise for senior role.
+Pipeline 3 (Resume-JD match): 38/100 - The candidate does not meet requirements 
+for this Senior Python Backend Developer role.
+
+DETAILED ANALYSIS:
+
+1. EDUCATION (65/100):
+   Degree: Bachelor of Computer Science (in progress)
+   Match: ✗
+   Reason: Candidate is still pursuing Bachelor's degree, expected graduation Dec 2025
+   Score Reason: Strong CS program at Czech Technical University, though degree 
+   still in progress (expected Dec 2025). Computer Science is standard and relevant 
+   for software development roles.
+
+2. EXPERIENCE (45/100):
+   Required: 5+ years (Senior)
+   Candidate: 2 years (junior)
+   Match: ✗
+   Reason: Candidate has ~2 years experience vs required 5+ years
+   Score Reason: Shows good progression from internships to full-time roles but 
+   lacks senior-level experience
+   ⚠️ GAP: 3 years below requirement
+
+3. TECHNICAL SKILLS (50/100):
+   Total Required: 15
+   Matched: 7
+   Missing: 8
+   Must-Have Match: 3/8 (38%)
+   Reason: Strong foundation in software development but lacks critical requirements. 
+   Missing FastAPI experience and expert-level Python skills.
+
+4. GITHUB: Not available
+   Reason: GitHub profile checked - no public profile found
+
+CRITICAL GAPS IDENTIFIED:
+   1. Incomplete bachelor's degree
+   2. Insufficient years of experience (2 vs required 5+)
+   3. No FastAPI experience
+   4. No Starlette experience
+   5. Python skills not at expert level
+
+Gaps Summary: The candidate shows promise but has significant gaps in both years 
+of experience and specific technical expertise required for a senior role. The 
+incomplete education and limited Python/FastAPI experience are major concerns.
+
+📊 Detailed Scores:
+   Education: 65/100
+   Experience: 45/100
+   Technical Skills: 50/100
+   GitHub Contributions: 0/100
+
+💪 Top Strengths (5):
+   • Strong academic performance (3.8 GPA)
+   • Computer Science education foundation
+   • Progressive career growth
+   • Experience at reputable tech companies
+   • Clear career progression
+
+🔴 Critical Gaps (5):
+   • Incomplete bachelor's degree
+   • Insufficient years of experience (2 vs required 5+)
+   • No FastAPI experience
+   • No Starlette experience
+   • Python skills not at expert level
+
+📋 Hiring Manager Recommendation:
+NOT RECOMMENDED FOR HIRE at this time. Candidate may be better suited for 
+Junior Developer.
+
+💡 Suggestions for Candidate:
+Gain 3+ more years of relevant experience. Develop skills in missing technologies 
+(see critical gaps). Build a GitHub profile with relevant projects to demonstrate 
+technical skills. Complete formal education degree if still in progress.
+
+🔄 Alternative Roles:
+   • Junior Developer
+   • Associate Engineer
+   • Entry-level positions
+
+💾 Output Files:
+   • fastapi_fastapi_jd.toon
+   • Bilguudei_Baljinnyam_evaluation.toon
+   • Bilguudei_Baljinnyam_match.toon
+   • Bilguudei_Baljinnyam_final_decision.toon
+
+=======================================================
+KEY FEATURES:
+✅ Clear HIRE/NO-HIRE decision
+✅ Weighted score calculation shown
+✅ Complete reasoning for EVERY score
+✅ Pipeline 2 and Pipeline 3 reasons included
+✅ Detailed breakdown by category (education, experience, skills, GitHub)
+✅ All gaps identified with severity
+✅ Actionable suggestions for rejected candidates
+✅ Alternative role recommendations
+✅ Hiring manager gets clear recommendation
+✅ Confidence level with explanation
