@@ -1,0 +1,90 @@
+{
+  "executionId": "2ec39f82-5f05-4750-aee9-54bfb275788e",
+  "pipeline": "pipeline2_candidate_evaluator",
+  "repository": {
+    "type": "local",
+    "path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": null,
+    "additionalRequirements": []
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T14:09:41.527716",
+      "endTime": "2025-11-16T14:09:41.536403",
+      "durationMs": 8.661031723022461,
+      "input": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "agent_reasoning",
+      "name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "startTime": "2025-11-16T14:09:41.536528",
+      "endTime": "2025-11-16T14:10:23.667149",
+      "durationMs": 42130.60808181763,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 7635
+      },
+      "output": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": "Failed to validate structured output: 1 validation error for CandidateEvaluation\ngithub_analysis\n  Input should be a valid dictionary or instance of GitHubAnalysis [type=model_type, input_value='No GitHub analysis available', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/model_type\nContent: {\"job_title\": \"Python Backend Developer\", \"resume_analysis\": {\"quality_of_work_experience\": 7, \"years_reason\": \"While still a student, has relevant professional experience through internships and current role at Jetbrains. Experience includes software engineering, research, and cloud infrastructure work, though total experience is less than the required 5+ years.\", \"education_match\": true, \"education_reason\": \"Bachelor's in Computer Science from Czech Technical University (in progress). While the JD doesn't specify education requirements, CS degree provides relevant theoretical foundation for backend development.\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in Research Intern role at Center for Machine Perception with PyTorch\", \"proficiency_score\": 7, \"reason\": \"Demonstrated Python usage in research context, though not extensive backend development evidence\"}, {\"skill_name\": \"FastAPI\", \"has_skill\": false, \"evidence\": \"No direct mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of FastAPI experience\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills and used across multiple roles\", \"proficiency_score\": 8, \"reason\": \"Demonstrated Git usage across multiple professional roles\"}, {\"skill_name\": \"CI/CD\", \"has_skill\": true, \"evidence\": \"Experience with Jenkins pipelines at Deutsche B\u00f6rse\", \"proficiency_score\": 7, \"reason\": \"Implemented and maintained CI/CD pipelines using Jenkins\"}, {\"skill_name\": \"REST APIs\", \"has_skill\": true, \"evidence\": \"Worked on web applications and ERP systems\", \"proficiency_score\": 6, \"reason\": \"Indirect evidence through web development work\"}], \"resume_strength_score\": 65, \"resume_strength_reason\": \"Strong technical foundation and software engineering experience, but lacks specific experience with FastAPI and related Python backend technologies. Good infrastructure and CI/CD experience, but missing some key required technologies.\"}, \"github_analysis\": \"No GitHub analysis available\", \"skill_gaps\": [\"FastAPI Framework experience\", \"Starlette framework knowledge\", \"Pydantic data validation\", \"asyncio and async Python development\", \"Docker containerization\", \"OpenAPI/Swagger documentation\"], \"skill_gaps_summary\": \"The candidate shows strong general software engineering skills but lacks specific experience with FastAPI and its ecosystem (Starlette, Pydantic). While they have Python experience, there's no evidence of async Python development. Additionally, modern deployment tools like Docker are missing from their skill set. These gaps are significant for a Python Backend Developer role focused on FastAPI.\", \"strengths\": [\"Strong software engineering fundamentals\", \"Experience with Python development\", \"Solid CI/CD knowledge\", \"Version control (Git) expertise\", \"Academic computer science background\"], \"strengths_reason\": \"These strengths highlight the candidate's solid foundation in software engineering principles and tools. Their Python experience, though not specifically in backend development, shows familiarity with the language. The CI/CD and Git expertise demonstrates understanding of modern development workflows. Their computer science education provides theoretical knowledge beneficial for complex backend systems.\"}",
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T14:09:41.527567",
+    "endTime": "2025-11-16T14:10:23.667799",
+    "totalDurationMs": 42140.231999999996,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 0
+  },
+  "langsmith": {
+    "runId": "019a8d00-0aa0-7247-960d-57663899bf62",
+    "url": null,
+    "project": "Synapse-Pipeline2"
+  },
+  "output": {
+    "filePath": null,
+    "sizeBytes": null
+  }
+}

@@ -633,59 +633,192 @@ def evaluate_candidate(
             )
 
         # Prompt
-        prompt = f"""Evaluate candidate completely against Job Description.
+#         prompt = f"""Evaluate candidate completely against Job Description.
+
+# JOB DESCRIPTION:
+# {jd_text}
+
+# JOB TITLE: {jd_job_title}
+
+# RESUME PDF: {resume_pdf_path}
+
+# EVALUATION PROCESS (ALL WITH REASONS):
+
+# STEP 1: RESUME ANALYSIS
+# - Use extract_resume to get full resume text
+# - Extract: name, years of experience, education, skills, work history
+# - For EACH field, provide a 'reason' explaining your analysis
+
+# resume_analysis:
+#   years_of_experience: INTEGER
+#   years_reason: STRING - How you calculated this
+
+#   education_match: BOOLEAN
+#   education_reason: STRING - Why education matches or not
+
+#   skill_matches: LIST of objects
+#     Each: {{skill_name: STRING, has_skill: BOOLEAN, evidence: STRING,
+#            proficiency_score: 1-10, reason: STRING}}
+#     Match EVERY skill from JD
+
+#   relevant_experience: LIST of relevant work experiences
+#   relevant_experience_reason: STRING - Why these are relevant
+
+#   resume_strength_score: INTEGER 1-100
+#   resume_strength_reason: STRING - Why this score
+
+# STEP 2: GITHUB ANALYSIS
+# - Check if resume has GitHub username or project links
+# - If GitHub username found:
+#   - Use get_github_profile
+#   - Use get_github_repositories
+#   - Filter repos by relevance to JD (by title and description)
+#   - For TOP 2-3 relevant repos:
+#     - Use get_repo_file_structure
+#     - Select 2-3 most relevant code files
+#     - Use fetch_code_files
+#     - Analyze code quality
+
+# github_analysis:
+#   github_username: STRING or None
+#   has_github: BOOLEAN
+#   github_check_reason: STRING - How GitHub was found/not found
+
+#   projects_found: INTEGER
+#   projects_found_reason: STRING - How projects were discovered
+
+#   relevant_projects: LIST of objects
+#     Each: {{project_name, github_url, is_relevant: BOOLEAN,
+#            relevance_score: 1-10, relevance_reason: STRING,
+#            technologies_matched: LIST}}
+
+#   quality_assessments: LIST (only for relevant projects)
+#     Each: {{project_name, code_quality_score: 1-10, code_quality_reason: STRING,
+#            technical_depth_score: 1-10, technical_depth_reason: STRING,
+#            best_practices_score: 1-10, best_practices_reason: STRING,
+#            files_analyzed: LIST, key_strengths: LIST, key_weaknesses: LIST}}
+
+#   github_contribution_score: INTEGER 1-100
+#   github_score_reason: STRING - Why this score
+
+# STEP 3: GAP ANALYSIS
+# - Identify ALL gaps between candidate and JD requirements
+# - For EACH gap:
+
+# skill_gaps: LIST of objects
+#   Each: {{gap_name: STRING, severity: "critical"|"moderate"|"minor",
+#          description: STRING, reason: STRING,
+#          can_be_learned: BOOLEAN, learning_reason: STRING}}
+
+# skill_gaps_summary: STRING - Overall summary of gaps
+
+# STEP 4: STRENGTHS
+# strengths: LIST of top 5 strengths
+# strengths_reason: STRING - Why these are the top strengths
+
+# STEP 5: FINAL DECISION (MOST IMPORTANT)
+# final_decision:
+#   is_fit: BOOLEAN - True if candidate is fit, False if not
+#   fit_reason: STRING - COMPREHENSIVE reason for decision (must reference resume + GitHub + gaps)
+
+#   overall_score: INTEGER 1-100
+#   overall_score_breakdown: STRING - Explain calculation (resume + GitHub + skills)
+
+#   resume_score: INTEGER 1-100
+#   github_score: INTEGER 1-100
+#   skill_match_score: INTEGER 1-100
+
+#   recommendation: STRING - "strong-hire"|"hire"|"maybe"|"no-hire"
+#   recommendation_reason: STRING - Why this level
+
+#   confidence_level: INTEGER 1-100
+#   confidence_reason: STRING - Why this confidence
+
+# detailed_feedback: STRING - 2-3 paragraphs for candidate
+
+# hiring_manager_notes: STRING - 2-3 paragraphs for hiring manager
+
+# CRITICAL RULES:
+# 1. EVERY decision needs a 'reason' field
+# 2. If candidate is NOT FIT, explain EXACTLY WHY in fit_reason
+# 3. List ALL gaps, even minor ones
+# 4. Be objective - don't inflate or deflate scores
+# 5. Base GitHub analysis on ACTUAL CODE, not just descriptions
+# 6. Analyze max 2-3 projects, 2-3 files per project
+# 7. If no GitHub, explain impact on decision
+
+# Return complete evaluation with all reasoning."""
+        
+        prompt = prompt2 = f"""
+
+Perform COMPLETE Resume-JD matching analysis WITHOUT GitHub dependency.
 
 JOB DESCRIPTION:
 {jd_text}
 
-JOB TITLE: {jd_job_title}
+RESUME PDF PATH: {resume_pdf_path}
 
-RESUME PDF: {resume_pdf_path}
+Do NOT infer or consider:
+•   Gender, ethnicity, age, nationality, socioeconomic background
+•   Personal details (name, address, graduation dates, photos, clubs unless job relevant)
+•   Résumé formatting quality, writing fluency, or English style
+•   Prestige of school, employer, location, or brand names
+•   Employment gaps unless they create a clear skill gap based on Job description
+Focus ONLY on job relevant evidence: skills, experience, certifications, project work.
+Education weighting rule:
+•   Education is a qualification check and has light weight unless the Job description explicitly requires a specific credential.
+•   Degree prestige or institution ranking must not influence scoring.
+•   Give credit for alternative learning pathways (bootcamps, certifications, self taught) when relevant.
+GitHub / portfolio bias mitigation:
+•   Lack of GitHub must NOT reduce the candidate’s score unless the Job description explicitly requires public code.
+•   Only evaluate GitHub if it is provided voluntarily.
+Every score requires a factual, evidence based reason.
+No assumptions about candidate motivation, personality, or future behavior.
 
-EVALUATION PROCESS (ALL WITH REASONS):
 
-STEP 1: RESUME ANALYSIS
-- Use extract_resume to get full resume text
-- Extract: name, years of experience, education, skills, work history
-- For EACH field, provide a 'reason' explaining your analysis
+STEP 1: Resume analysis
+  quality_of_work_experience: 1-10
+  years_reason: STRING  
 
-resume_analysis:
-  years_of_experience: INTEGER
-  years_reason: STRING - How you calculated this
 
   education_match: BOOLEAN
-  education_reason: STRING - Why education matches or not
+  education_reason: STRING  
+If the education does not match do not weight it as high, prefer experience
 
-  skill_matches: LIST of objects
+For all the skill available. Get skills from paragraphs too 
+
+   skill_matches: LIST of objects
     Each: {{skill_name: STRING, has_skill: BOOLEAN, evidence: STRING,
            proficiency_score: 1-10, reason: STRING}}
     Match EVERY skill from JD
+      reason: STRING  # Must reference actual resume text only
 
-  relevant_experience: LIST of relevant work experiences
-  relevant_experience_reason: STRING - Why these are relevant
+  relevant_experience: LIST
+  relevant_experience_reason: STRING  # Why these experiences map to JD requirements
 
   resume_strength_score: INTEGER 1-100
-  resume_strength_reason: STRING - Why this score
+  resume_strength_reason: STRING  # Must reflect job-aligned evidence only
 
-STEP 2: GITHUB ANALYSIS
-- Check if resume has GitHub username or project links
-- If GitHub username found:
-  - Use get_github_profile
-  - Use get_github_repositories
-  - Filter repos by relevance to JD (by title and description)
-  - For TOP 2-3 relevant repos:
-    - Use get_repo_file_structure
-    - Select 2-3 most relevant code files
-    - Use fetch_code_files
-    - Analyze code quality
+ STEP 2: GITHUB ANALYSIS (if applicable)
+Check if résumé contains GitHub username or project links.
+IMPORTANT – BIAS RULE:
+If no GitHub appears, set has_github = false and give no penalty unless the JD explicitly requires public repositories.
+If GitHub is found:
+•   Use get_github_profile
+•   Use get_github_repositories
+•   Filter repos by relevance to JD
+•   For top 2–3 relevant repos:
+o   Analyze 2–3 code files
+o   Evaluate code quality based on clarity, correctness, structure, and adherence to best practices
+o   Do NOT judge based on language choice, popularity, stars, or aesthetics
 
 github_analysis:
   github_username: STRING or None
   has_github: BOOLEAN
-  github_check_reason: STRING - How GitHub was found/not found
+  github_check_reason: STRING  # How GitHub was detected
 
   projects_found: INTEGER
-  projects_found_reason: STRING - How projects were discovered
+  projects_found_reason: STRING
 
   relevant_projects: LIST of objects
     Each: {{project_name, github_url, is_relevant: BOOLEAN,
@@ -701,23 +834,21 @@ github_analysis:
   github_contribution_score: INTEGER 1-100
   github_score_reason: STRING - Why this score
 
-STEP 3: GAP ANALYSIS
-- Identify ALL gaps between candidate and JD requirements
-- For EACH gap:
-
+Step 3: Skill gaps 
 skill_gaps: LIST of objects
   Each: {{gap_name: STRING, severity: "critical"|"moderate"|"minor",
          description: STRING, reason: STRING,
          can_be_learned: BOOLEAN, learning_reason: STRING}}
+    learning_reason: STRING
 
 skill_gaps_summary: STRING - Overall summary of gaps
 
-STEP 4: STRENGTHS
+Step4: Strengths 
 strengths: LIST of top 5 strengths
-strengths_reason: STRING - Why these are the top strengths
+strengths_reason: STRING  # Must tie to resume or GitHub evidence only
 
-STEP 5: FINAL DECISION (MOST IMPORTANT)
-final_decision:
+Step 5: final decision
+ final_decision:
   is_fit: BOOLEAN - True if candidate is fit, False if not
   fit_reason: STRING - COMPREHENSIVE reason for decision (must reference resume + GitHub + gaps)
 
@@ -738,17 +869,9 @@ detailed_feedback: STRING - 2-3 paragraphs for candidate
 
 hiring_manager_notes: STRING - 2-3 paragraphs for hiring manager
 
-CRITICAL RULES:
-1. EVERY decision needs a 'reason' field
-2. If candidate is NOT FIT, explain EXACTLY WHY in fit_reason
-3. List ALL gaps, even minor ones
-4. Be objective - don't inflate or deflate scores
-5. Base GitHub analysis on ACTUAL CODE, not just descriptions
-6. Analyze max 2-3 projects, 2-3 files per project
-7. If no GitHub, explain impact on decision
+Follow th eoutput structure carefully, as if not you will be penalized for giving an error.
 
-Return complete evaluation with all reasoning."""
-
+"""
         # STEP 2: Agent Evaluation with LangSmith tracing
         try:
             from langsmith import uuid7

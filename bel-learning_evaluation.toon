@@ -1,54 +1,27 @@
 candidate_name: bel-learning
-job_title: Senior Backend Python Developer
+job_title: Backend Developer
 resume_analysis:
   years_of_experience: 2
-  years_reason: Calculated from work history
-  education_match: false
-  education_reason: Education information analyzed
-  skill_matches[3,]{skill_name,has_skill,evidence,proficiency_score,reason}:
-    Python,true,"",6,Based on resume analysis
-    Git,true,"",7,Based on resume analysis
-    CI/CD,true,"",6,Based on resume analysis
-  relevant_experience[0]:
+  years_reason: Calculated from work history - started at Hippo Cards in April 2022 to present (JetBrains)
+  education_match: true
+  education_reason: Bachelor in Computer Science from Czech Technical University (expected 2025) provides relevant technical foundation
+  skill_matches[7,]{skill_name,has_skill,evidence,proficiency_score,reason}:
+    Python,true,Used Python at Center for Machine Perception for ML/DL work,6,"Shows Python usage but primarily in ML context, not backend development"
+    FastAPI/Django,false,No mention of either framework in resume,0,No evidence of web framework experience
+    REST API,false,No explicit REST API development mentioned,0,No backend API development experience shown
+    PostgreSQL,false,No database experience mentioned,0,No evidence of database work
+    Docker,false,Not mentioned in resume,0,No containerization experience shown
+    Git,true,"Listed in technical skills, used in projects",7,Regular usage across multiple roles and projects
+    Unit Testing,true,Implemented Jacoco test coverage at Deutsche Börse,5,Has testing experience but mainly in Java context
+  relevant_experience[3]: Deutsche Börse - Software Integrator (7 months),Center for Machine Perception - Research Intern (8 months),JetBrains - Software Engineer (Current)
   relevant_experience_reason: Based on work history
-  resume_strength_score: 50
-  resume_strength_reason: Based on overall resume quality
-github_analysis:
-  github_username: null
-  has_github: false
-  github_check_reason: GitHub profile checked
-  projects_found: 6
-  projects_found_reason: GitHub profile analyzed
-  relevant_projects[1]:
-    - project_name: multi-agent-path-finding
-      github_url: "https://github.com/multi-agent-path-finding"
-      is_relevant: true
-      relevance_score: 4
-      relevance_reason: Relevant to job requirements
-      technologies_matched[1]: Python
-  quality_assessments[0]:
-  github_contribution_score: 0
-  github_score_reason: Based on GitHub activity
-skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
-  FastAPI and related frameworks,moderate,FastAPI and related frameworks,"Gap identified: FastAPI and related frameworks",true,Can be acquired through training and practice
-  Database expertise,moderate,Database expertise,"Gap identified: Database expertise",true,Can be acquired through training and practice
-  API design experience,moderate,API design experience,"Gap identified: API design experience",true,Can be acquired through training and practice
-  Docker containerization,moderate,Docker containerization,"Gap identified: Docker containerization",true,Can be acquired through training and practice
-  Senior-level experience,moderate,Senior-level experience,"Gap identified: Senior-level experience",true,Can be acquired through training and practice
-skill_gaps_summary: "The candidate lacks experience with key backend technologies required for the role, particularly FastAPI and related frameworks. There's no evidence of database expertise or API design experience. Additionally, with only 2 years of experience, they don't meet the senior-level requirement of 5+ years."
-strengths[5]: Software engineering fundamentals,Python programming,Version control (Git),CI/CD experience,Active learning mindset
-strengths_reason: "These strengths are highlighted based on the candidate's work experience at JetBrains and Deutsche Börse, demonstrated Python projects on GitHub, and consistent use of Git and CI/CD tools across roles."
-final_decision:
-  is_fit: false
-  fit_reason: Reject for Senior Position - Consider for Junior/Mid-Level Role
-  overall_score: 30
-  overall_score_breakdown: Based on overall evaluation
-  resume_score: 50
-  github_score: 50
-  skill_match_score: 50
-  recommendation: no-hire
-  recommendation_reason: Reject for Senior Position - Consider for Junior/Mid-Level Role
-  confidence_level: 70
-  confidence_reason: Based on available information
-detailed_feedback: "The candidate shows promise in software engineering fundamentals and has some Python experience, particularly in algorithm development. Their work at JetBrains and Deutsche Börse demonstrates ability to work with complex systems and CI/CD pipelines.\n\nHowever, there are significant gaps in backend development expertise. The candidate lacks experience with FastAPI and related frameworks, has no demonstrated API design experience, and shows no evidence of working with databases. Their GitHub projects, while showing Python proficiency, focus more on algorithms than web development.\n\nThe candidate's experience level (2 years) is well below the senior requirement (5+ years), and they are still pursuing their Bachelor's degree. While they show potential, they would be better suited for a junior or mid-level position."
-hiring_manager_notes: "This candidate does not meet the requirements for a Senior Backend Python Developer position. While they demonstrate good software engineering fundamentals and learning potential, they lack the necessary experience with backend technologies and frameworks specified in the job description.\n\nThe 2 years of experience and ongoing education suggest they are early in their career journey. Their background in IDE development (JetBrains) and infrastructure (Deutsche Börse) shows capability, but doesn't align closely with backend API development needs.\n\nRecommendation: Consider for junior/mid-level positions instead, or suggest reapplying after gaining more backend development experience with relevant technologies."
+  resume_strength_score: 45
+  resume_strength_reason: "While showing strong technical aptitude, experience is not aligned with backend development requirements. Strong in general software engineering but lacks specific backend technologies"
+github_analysis: null
+skill_gaps[0]:
+skill_gaps_summary: ""
+strengths[0]:
+strengths_reason: ""
+final_decision: null
+detailed_feedback: ""
+hiring_manager_notes: ""

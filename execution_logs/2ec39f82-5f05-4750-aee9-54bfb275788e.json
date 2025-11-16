@@ -1,0 +1,78 @@
+{
+  "execution_id": "2ec39f82-5f05-4750-aee9-54bfb275788e",
+  "pipeline_name": "pipeline2_candidate_evaluator",
+  "repository_type": "local",
+  "repository_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+  "job_title": "Senior Python Backend Developer",
+  "salary_range": null,
+  "additional_requirements": [],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 14:09:41.527716",
+      "end_time": "2025-11-16 14:09:41.536403",
+      "duration_ms": 8.661031723022461,
+      "input_data": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "start_time": "2025-11-16 14:09:41.536528",
+      "end_time": "2025-11-16 14:10:23.667149",
+      "duration_ms": 42130.60808181763,
+      "input_data": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 7635
+      },
+      "output_data": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decision_point": null,
+      "tool_used": null,
+      "error": "Failed to validate structured output: 1 validation error for CandidateEvaluation\ngithub_analysis\n  Input should be a valid dictionary or instance of GitHubAnalysis [type=model_type, input_value='No GitHub analysis available', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/model_type\nContent: {\"job_title\": \"Python Backend Developer\", \"resume_analysis\": {\"quality_of_work_experience\": 7, \"years_reason\": \"While still a student, has relevant professional experience through internships and current role at Jetbrains. Experience includes software engineering, research, and cloud infrastructure work, though total experience is less than the required 5+ years.\", \"education_match\": true, \"education_reason\": \"Bachelor's in Computer Science from Czech Technical University (in progress). While the JD doesn't specify education requirements, CS degree provides relevant theoretical foundation for backend development.\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in Research Intern role at Center for Machine Perception with PyTorch\", \"proficiency_score\": 7, \"reason\": \"Demonstrated Python usage in research context, though not extensive backend development evidence\"}, {\"skill_name\": \"FastAPI\", \"has_skill\": false, \"evidence\": \"No direct mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of FastAPI experience\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills and used across multiple roles\", \"proficiency_score\": 8, \"reason\": \"Demonstrated Git usage across multiple professional roles\"}, {\"skill_name\": \"CI/CD\", \"has_skill\": true, \"evidence\": \"Experience with Jenkins pipelines at Deutsche B\u00f6rse\", \"proficiency_score\": 7, \"reason\": \"Implemented and maintained CI/CD pipelines using Jenkins\"}, {\"skill_name\": \"REST APIs\", \"has_skill\": true, \"evidence\": \"Worked on web applications and ERP systems\", \"proficiency_score\": 6, \"reason\": \"Indirect evidence through web development work\"}], \"resume_strength_score\": 65, \"resume_strength_reason\": \"Strong technical foundation and software engineering experience, but lacks specific experience with FastAPI and related Python backend technologies. Good infrastructure and CI/CD experience, but missing some key required technologies.\"}, \"github_analysis\": \"No GitHub analysis available\", \"skill_gaps\": [\"FastAPI Framework experience\", \"Starlette framework knowledge\", \"Pydantic data validation\", \"asyncio and async Python development\", \"Docker containerization\", \"OpenAPI/Swagger documentation\"], \"skill_gaps_summary\": \"The candidate shows strong general software engineering skills but lacks specific experience with FastAPI and its ecosystem (Starlette, Pydantic). While they have Python experience, there's no evidence of async Python development. Additionally, modern deployment tools like Docker are missing from their skill set. These gaps are significant for a Python Backend Developer role focused on FastAPI.\", \"strengths\": [\"Strong software engineering fundamentals\", \"Experience with Python development\", \"Solid CI/CD knowledge\", \"Version control (Git) expertise\", \"Academic computer science background\"], \"strengths_reason\": \"These strengths highlight the candidate's solid foundation in software engineering principles and tools. Their Python experience, though not specifically in backend development, shows familiarity with the language. The CI/CD and Git expertise demonstrates understanding of modern development workflows. Their computer science education provides theoretical knowledge beneficial for complex backend systems.\"}",
+      "error_traceback": "Traceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 415, in invoke\n    return self.schema.model_validate(json_data)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/pydantic/main.py\", line 716, in model_validate\n    return cls.__pydantic_validator__.validate_python(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        obj,\n        ^^^^\n    ...<5 lines>...\n        by_name=by_name,\n        ^^^^^^^^^^^^^^^^\n    )\n    ^\npydantic_core._pydantic_core.ValidationError: 1 validation error for CandidateEvaluation\ngithub_analysis\n  Input should be a valid dictionary or instance of GitHubAnalysis [type=model_type, input_value='No GitHub analysis available', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/model_type\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/observability/step_tracker.py\", line 240, in track_step\n    yield step\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/pipeline2_candidate_evaluator.py\", line 900, in evaluate_candidate\n    result = agent.invoke(\n        {\"messages\": [HumanMessage(content=prompt)]},\n        {\"run_id\": run_id, \"project_name\": langsmith_project, \"tags\": [\"candidate-evaluation\", \"resume-analysis\"]}\n    )\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 3094, in invoke\n    for chunk in self.stream(\n                 ~~~~~~~~~~~^\n        input,\n        ^^^^^^\n    ...<10 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 2679, in stream\n    for _ in runner.tick(\n             ~~~~~~~~~~~^\n        [t for t in loop.tasks.values() if not t.writes],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n        schedule_task=loop.accept_push,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py\", line 167, in tick\n    run_with_retry(\n    ~~~~~~~~~~~~~~^\n        t,\n        ^^\n    ...<10 lines>...\n        },\n        ^^\n    )\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py\", line 42, in run_with_retry\n    return task.proc.invoke(task.input, config)\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 656, in invoke\n    input = context.run(step.invoke, input, config, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 393, in invoke\n    ret = context.run(self.func, *args, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/prebuilt/chat_agent_executor.py\", line 746, in generate_structured_response\n    response = model_with_structured_output.invoke(messages, config)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 419, in invoke\n    raise ValueError(f\"Failed to validate structured output: {e}\\nContent: {content}\")\nValueError: Failed to validate structured output: 1 validation error for CandidateEvaluation\ngithub_analysis\n  Input should be a valid dictionary or instance of GitHubAnalysis [type=model_type, input_value='No GitHub analysis available', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/model_type\nContent: {\"job_title\": \"Python Backend Developer\", \"resume_analysis\": {\"quality_of_work_experience\": 7, \"years_reason\": \"While still a student, has relevant professional experience through internships and current role at Jetbrains. Experience includes software engineering, research, and cloud infrastructure work, though total experience is less than the required 5+ years.\", \"education_match\": true, \"education_reason\": \"Bachelor's in Computer Science from Czech Technical University (in progress). While the JD doesn't specify education requirements, CS degree provides relevant theoretical foundation for backend development.\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in Research Intern role at Center for Machine Perception with PyTorch\", \"proficiency_score\": 7, \"reason\": \"Demonstrated Python usage in research context, though not extensive backend development evidence\"}, {\"skill_name\": \"FastAPI\", \"has_skill\": false, \"evidence\": \"No direct mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of FastAPI experience\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills and used across multiple roles\", \"proficiency_score\": 8, \"reason\": \"Demonstrated Git usage across multiple professional roles\"}, {\"skill_name\": \"CI/CD\", \"has_skill\": true, \"evidence\": \"Experience with Jenkins pipelines at Deutsche B\u00f6rse\", \"proficiency_score\": 7, \"reason\": \"Implemented and maintained CI/CD pipelines using Jenkins\"}, {\"skill_name\": \"REST APIs\", \"has_skill\": true, \"evidence\": \"Worked on web applications and ERP systems\", \"proficiency_score\": 6, \"reason\": \"Indirect evidence through web development work\"}], \"resume_strength_score\": 65, \"resume_strength_reason\": \"Strong technical foundation and software engineering experience, but lacks specific experience with FastAPI and related Python backend technologies. Good infrastructure and CI/CD experience, but missing some key required technologies.\"}, \"github_analysis\": \"No GitHub analysis available\", \"skill_gaps\": [\"FastAPI Framework experience\", \"Starlette framework knowledge\", \"Pydantic data validation\", \"asyncio and async Python development\", \"Docker containerization\", \"OpenAPI/Swagger documentation\"], \"skill_gaps_summary\": \"The candidate shows strong general software engineering skills but lacks specific experience with FastAPI and its ecosystem (Starlette, Pydantic). While they have Python experience, there's no evidence of async Python development. Additionally, modern deployment tools like Docker are missing from their skill set. These gaps are significant for a Python Backend Developer role focused on FastAPI.\", \"strengths\": [\"Strong software engineering fundamentals\", \"Experience with Python development\", \"Solid CI/CD knowledge\", \"Version control (Git) expertise\", \"Academic computer science background\"], \"strengths_reason\": \"These strengths highlight the candidate's solid foundation in software engineering principles and tools. Their Python experience, though not specifically in backend development, shows familiarity with the language. The CI/CD and Git expertise demonstrates understanding of modern development workflows. Their computer science education provides theoretical knowledge beneficial for complex backend systems.\"}\nDuring task with name 'generate_structured_response' and id '9f8e90ff-2ce1-eea7-0677-5b521db5a544'\n",
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 14:09:41.527567",
+  "end_time": "2025-11-16 14:10:23.667799",
+  "total_duration_ms": 42140.231999999996,
+  "overall_status": "success",
+  "success": true,
+  "langsmith_run_id": "019a8d00-0aa0-7247-960d-57663899bf62",
+  "langsmith_url": null,
+  "langsmith_project": "Synapse-Pipeline2",
+  "total_tokens": 0,
+  "total_cost_usd": 0.0,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}

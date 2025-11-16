@@ -6,7 +6,6 @@ from typing import Optional
 def combine_frontend_logs(
     jd_log_file: str,
     eval_log_file: str,
-    match_log_file: str,
     output_file: str,
     verbose: bool = False
 ) -> dict:
@@ -58,10 +57,9 @@ def combine_frontend_logs(
     # Load all three log files
     jd_data = load_json(jd_log_file, "Pipeline 1 (JD Generation)")
     eval_data = load_json(eval_log_file, "Pipeline 2 (Candidate Evaluation)")
-    match_data = load_json(match_log_file, "Pipeline 3 (Resume-JD Match)")
     
     # Check if all files loaded successfully
-    if None in [jd_data, eval_data, match_data]:
+    if None in [jd_data, eval_data]:
         raise ValueError("Failed to load one or more log files")
     
     # Combine the data
@@ -70,14 +68,12 @@ def combine_frontend_logs(
             "combined_at": str(Path(output_file).stem),
             "source_files": {
                 "jd_generation": jd_log_file,
-                "candidate_evaluation": eval_log_file,
-                "resume_jd_match": match_log_file
+                "candidate_evaluation": eval_log_file
             }
         },
         "pipelines": {
             "jd_generation": jd_data,
-            "candidate_evaluation": eval_data,
-            "resume_jd_match": match_data
+            "candidate_evaluation": eval_data
         }
     }
     
@@ -90,7 +86,7 @@ def combine_frontend_logs(
     
     if verbose:
         print(f"   ✓ Combined logs saved successfully!")
-        print(f"   📊 Total pipelines: 3")
+        print(f"   📊 Total pipelines: 2")
     
     return combined_data
 
@@ -98,9 +94,8 @@ def combine_frontend_logs(
 # Example usage
 if __name__ == "__main__":
     combine_frontend_logs(
-        jd_log_file="execution_logs/5ffb9c43-da75-46c5-b90f-1065ee1d4547_frontend.json",
-        eval_log_file="execution_logs/c493b4d9-7b78-4a83-bf82-99d570d50e0b_frontend.json",
-        match_log_file="execution_logs/c54601a4-ca8a-470c-b00c-e3d60ee43332_frontend.json",
+        jd_log_file="execution_logs/bd3cac1f-e1a1-4f50-8ebc-93bf2090597f_frontend.json",
+        eval_log_file="execution_logs/cf269032-db97-4c89-b342-6a0695239770_frontend.json",
         output_file="execution_logs/combined_output.json",
         verbose=True
     )

@@ -13,16 +13,16 @@ education_match:
   certifications[0]:
   certifications_reason: No certifications listed
   education_score: 85
-  education_score_reason: "Strong CS degree with relevant coursework, but still completing education"
+  education_score_reason: "Strong CS degree from reputable university with relevant coursework, but still completing degree"
 experience_match:
   required_years: 5
   candidate_years: 2
   years_match: false
-  years_match_reason: "Candidate has approximately 2 years of experience, below required 5+ years"
+  years_match_reason: Candidate has approximately 2 years of experience vs required 5+ years
   relevant_roles[2]: Software Engineer at Jetbrains,Software Integrator at Deutsche Börse
-  relevant_roles_reason: These roles involve software development and infrastructure work
-  industry_match: false
-  industry_match_reason: No direct experience with web framework development or FastAPI
+  relevant_roles_reason: These roles involve software development and system integration
+  industry_match: true
+  industry_match_reason: Experience in software development companies and financial sector
   seniority_level: junior
   seniority_match: false
   seniority_reason: Seniority level analyzed
@@ -30,19 +30,21 @@ experience_match:
   career_progression_score: 50
   career_progression_reason: Based on work history
   experience_score: 60
-  experience_score_reason: Based on experience analysis
+  experience_score_reason: "While showing promising progression, falls short of required 5+ years experience"
 technical_skills:
   programming_languages[1,]{skill_name,required_level,has_skill,candidate_level,years_of_experience,evidence,match_quality,match_reason,importance,gap_severity}:
-    Python,intermediate,false,beginner,0,Not mentioned,missing,Skill match analysis,must-have,null
-  frameworks_libraries[0]:
-  tools_platforms[0]:
+    Python,expert,true,intermediate,1,Not mentioned,partial,Skill match analysis,must-have,moderate
+  frameworks_libraries[1,]{skill_name,required_level,has_skill,candidate_level,years_of_experience,evidence,match_quality,match_reason,importance,gap_severity}:
+    FastAPI,expert,false,none,0,Not mentioned,missing,Skill match analysis,must-have,critical
+  tools_platforms[1,]{skill_name,required_level,has_skill,candidate_level,years_of_experience,evidence,match_quality,match_reason,importance,gap_severity}:
+    Git,advanced,true,intermediate,2,Not mentioned,good,Skill match analysis,must-have,minor
   databases[0]:
   other_technical[0]:
-  total_skills_required: 0
-  skills_matched: 0
-  skills_missing: 0
-  must_have_matched: 0
-  must_have_total: 0
+  total_skills_required: 15
+  skills_matched: 6
+  skills_missing: 9
+  must_have_matched: 4
+  must_have_total: 12
   must_have_percentage: 0
   technical_skills_score: 50
   technical_skills_reason: Technical skills analyzed
@@ -59,17 +61,16 @@ soft_skills:
   other_qualifications_reason: ""
   soft_skills_score: 50
   soft_skills_reason: Soft skills analyzed
-gaps[5,]{gap_category,gap_name,gap_description,severity,severity_reason,impact_on_hiring,can_be_filled,time_to_fill,fill_strategy}:
+gaps[4,]{gap_category,gap_name,gap_description,severity,severity_reason,impact_on_hiring,can_be_filled,time_to_fill,fill_strategy}:
   experience,Insufficient years of experience (2 vs required 5+),Insufficient years of experience (2 vs required 5+),critical,Identified as critical gap,"This gap impacts hiring decision: Insufficient years of experience (2 vs required 5+)",true,12-24 months,Training and on-the-job experience
-  experience,No FastAPI experience,No FastAPI experience,moderate,Identified as moderate gap,"This gap impacts hiring decision: No FastAPI experience",true,6-12 months,Training and on-the-job experience
+  technical,Missing FastAPI expertise,Missing FastAPI expertise,critical,Identified as critical gap,"This gap impacts hiring decision: Missing FastAPI expertise",true,12-24 months,Training and on-the-job experience
   technical,Python skills not at expert level,Python skills not at expert level,critical,Identified as critical gap,"This gap impacts hiring decision: Python skills not at expert level",true,12-24 months,Training and on-the-job experience
-  experience,No senior-level experience,No senior-level experience,critical,Identified as critical gap,"This gap impacts hiring decision: No senior-level experience",true,12-24 months,Training and on-the-job experience
-  education,Still completing education,Still completing education,moderate,Identified as moderate gap,"This gap impacts hiring decision: Still completing education",true,6-12 months,Training and on-the-job experience
-gaps_summary: "The candidate has significant gaps in experience level and technical skills required for this senior position. The main concerns are insufficient years of experience, lack of FastAPI expertise, and Python skills not yet at expert level. Additionally, they are still completing their education."
-strengths[5]: Strong computer science educational background,Experience at reputable tech companies,Clear career progression,Solid Git version control experience,Research experience showing technical depth
-strengths_reason: "The candidate shows promising potential with a strong CS education and experience at well-known companies. Their career progression from internships to full-time roles demonstrates growth, and research experience suggests ability to handle complex technical challenges."
-weaknesses[4]: Limited professional experience,Missing key technical requirement (FastAPI),Not yet graduated,No senior-level experience
-weaknesses_reason: "The candidate's weaknesses primarily stem from being early in their career, with limited years of experience and lack of specific technical requirements for a senior role. Still being in school also indicates they're not yet ready for a senior position."
+  experience,Overall seniority level too junior for position,Overall seniority level too junior for position,critical,Identified as critical gap,"This gap impacts hiring decision: Overall seniority level too junior for position",true,12-24 months,Training and on-the-job experience
+gaps_summary: "The candidate shows promise but has significant gaps in both experience level and technical expertise. The main concerns are the lack of required years of experience (3 years short), missing expertise in key frameworks like FastAPI, and intermediate rather than expert level in core technologies."
+strengths[5]: Strong educational background in Computer Science,Experience at reputable tech companies,Good career progression trajectory,Solid foundation in Git version control,Diverse experience across different types of organizations
+strengths_reason: Strengths identified based on analysis
+weaknesses[0]:
+weaknesses_reason: Weaknesses identified based on analysis
 final_decision:
   is_match: false
   match_reason: Match analysis completed

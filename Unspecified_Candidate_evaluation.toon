@@ -1,0 +1,36 @@
+candidate_name: Unspecified Candidate
+job_title: Python Backend Developer
+resume_analysis:
+  years_of_experience: 0
+  years_reason: "Candidate has less than the required 7+ years experience. Current experience includes roles at Jetbrains (2024-Present), Center for Machine Perception (2024), Deutsche Börse (2023-2024), and Hippo Cards (2022). Total experience is approximately 2-3 years."
+  education_match: true
+  education_reason: "Bachelor of Computer Science from Czech Technical University (expected 2025). While the JD doesn't specify education requirements, CS degree is relevant for the technical role."
+  skill_matches[2,]{skill_name,has_skill,evidence,proficiency_score,reason}:
+    Python,true,Used Python at Center for Machine Perception for Deep Learning and Computer Vision work,7,Demonstrated Python usage in research context with advanced frameworks (PyTorch)
+    Git,true,Listed in technical skills and used across multiple roles,8,Demonstrated Git usage across multiple professional roles including Jetbrains and Hippo Cards
+  relevant_experience[0]:
+  relevant_experience_reason: Based on work history
+  resume_strength_score: 45
+  resume_strength_reason: "While candidate shows strong general software engineering skills and Python experience, they lack specific experience with FastAPI, async programming, and web frameworks required for the role."
+github_analysis:
+  github_username: null
+  has_github: false
+  github_check_reason: GitHub profile checked
+  projects_found: 0
+  projects_found_reason: GitHub profile analyzed
+  relevant_projects[0]:
+  quality_assessments[0]:
+  github_contribution_score: 0
+  github_score_reason: Based on GitHub activity
+skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
+  "FastAPI and related frameworks (Starlette, Pydantic, Uvicorn)",moderate,"FastAPI and related frameworks (Starlette, Pydantic, Uvicorn)","Gap identified: FastAPI and related frameworks (Starlette, Pydantic, Uvicorn)",true,Can be acquired through training and practice
+  Async programming experience,moderate,Async programming experience,"Gap identified: Async programming experience",true,Can be acquired through training and practice
+  Web development frameworks,moderate,Web development frameworks,"Gap identified: Web development frameworks",true,Can be acquired through training and practice
+  Database experience (SQL/NoSQL),moderate,Database experience (SQL/NoSQL),"Gap identified: Database experience (SQL/NoSQL)",true,Can be acquired through training and practice
+  Docker containerization,moderate,Docker containerization,"Gap identified: Docker containerization",true,Can be acquired through training and practice
+skill_gaps_summary: "The candidate lacks experience in several critical areas required for the role, particularly in web development frameworks and async programming. While they have strong Python fundamentals, the absence of FastAPI and related technologies represents a significant gap. The lack of database and containerization experience also indicates a learning curve would be needed."
+strengths[5]: Strong Python programming skills,Experience with software development at reputable companies,Solid computer science education background,Version control (Git) proficiency,Research experience in advanced Python applications
+strengths_reason: "These strengths highlight the candidate's core software engineering capabilities, academic foundation, and practical experience with Python development, though primarily in non-web contexts."
+final_decision: null
+detailed_feedback: "The candidate demonstrates strong foundational software engineering skills and Python programming abilities, particularly in research and IDE development contexts. Their experience at reputable companies like JetBrains and their computer science education provide a solid technical foundation.\n\nHowever, there are significant gaps in their experience relative to the role requirements. The candidate lacks experience with FastAPI and related web frameworks, which are core requirements for the position. Additionally, there's no evidence of experience with async programming, databases, or containerization technologies.\n\nWhile the candidate's Python skills and software engineering background suggest they could learn these technologies, the learning curve and lack of direct relevant experience present risks for immediate contribution to the role."
+hiring_manager_notes: ""

@@ -1,54 +1,37 @@
 candidate_name: Unknown
-job_title: Python Backend Developer
+job_title: Senior Python Backend Engineer
 resume_analysis:
-  years_of_experience: 2
-  years_reason: Calculated from work history starting from April 2022 to present
+  years_of_experience: 0
+  years_reason: "Candidate shows ~2 years of relevant experience across roles at Jetbrains, Deutsche Börse, and Hippo Cards, but falls short of the 5+ years requirement."
   education_match: true
-  education_reason: Currently pursuing Bachelor's in Computer Science from Czech Technical University
+  education_reason: "Bachelor in Computer Science from Czech Technical University (in progress). While not having completed degree, the technical education aligns with role requirements."
   skill_matches[3,]{skill_name,has_skill,evidence,proficiency_score,reason}:
-    Python,true,"",6,Based on resume analysis
-    FastAPI,false,"",0,Based on resume analysis
-    Git,true,"",7,Based on resume analysis
-  relevant_experience[2]: Software Engineer at JetBrains,Deutsche Börse Software Integrator
+    Python,true,Used Python at Center for Machine Perception for deep learning and computer vision work,7,Demonstrated Python usage in research context but limited evidence of backend development
+    FastAPI,false,No direct mention in resume,0,No evidence of FastAPI experience
+    Git,true,Listed in technical skills and used across multiple roles,8,Demonstrated Git usage across multiple professional roles
+  relevant_experience[0]:
   relevant_experience_reason: Based on work history
   resume_strength_score: 45
-  resume_strength_reason: Based on overall resume quality
+  resume_strength_reason: "Strong technical foundation and software engineering experience, but lacks specific experience with FastAPI ecosystem and required Python backend technologies. Experience level (2 years) is below the required 5+ years."
 github_analysis:
-  github_username: bel-learning
-  has_github: true
+  github_username: bel
+  has_github: false
   github_check_reason: GitHub profile checked
-  projects_found: 6
-  projects_found_reason: Found 6 public repositories through GitHub API
-  relevant_projects[1]:
-    - project_name: multi-agent-path-finding
-      github_url: "https://github.com/multi-agent-path-finding"
-      is_relevant: true
-      relevance_score: 4
-      relevance_reason: Relevant to job requirements
-      technologies_matched[0]:
+  projects_found: 0
+  projects_found_reason: GitHub profile analyzed
+  relevant_projects[0]:
   quality_assessments[0]:
   github_contribution_score: 0
   github_score_reason: Based on GitHub activity
 skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
-  No FastAPI or modern Python web framework experience,moderate,No FastAPI or modern Python web framework experience,"Gap identified: No FastAPI or modern Python web framework experience",true,Can be acquired through training and practice
-  Missing experience with async Python (asyncio),moderate,Missing experience with async Python (asyncio),"Gap identified: Missing experience with async Python (asyncio)",true,Can be acquired through training and practice
-  No demonstrated API development experience,moderate,No demonstrated API development experience,"Gap identified: No demonstrated API development experience",true,Can be acquired through training and practice
-  Lack of Docker containerization experience,moderate,Lack of Docker containerization experience,"Gap identified: Lack of Docker containerization experience",true,Can be acquired through training and practice
-  No experience with SQL/NoSQL databases,moderate,No experience with SQL/NoSQL databases,"Gap identified: No experience with SQL/NoSQL databases",true,Can be acquired through training and practice
-skill_gaps_summary: "While the candidate has Python experience, they lack specific expertise in modern Python web development technologies and frameworks required for the role. The absence of FastAPI, async Python, and database experience represents significant gaps for a backend developer position."
-strengths[5]: Strong academic background in Computer Science,Experience with Python programming,Demonstrated version control (Git) proficiency,Software engineering experience at reputable companies,Active GitHub presence with multiple projects
-strengths_reason: The candidate shows a solid foundation in computer science through their education and has practical experience with Python and Git. Their work experience at companies like JetBrains and Deutsche Börse demonstrates professional software development capabilities. The active GitHub profile shows practical coding experience and initiative.
-final_decision:
-  is_fit: true
-  fit_reason: MAYBE - Consider for junior role if willing to invest in training
-  overall_score: 70
-  overall_score_breakdown: Based on overall evaluation
-  resume_score: 50
-  github_score: 50
-  skill_match_score: 50
-  recommendation: hire
-  recommendation_reason: MAYBE - Consider for junior role if willing to invest in training
-  confidence_level: 70
-  confidence_reason: Based on available information
-detailed_feedback: "The candidate shows promise with their computer science education and general software engineering experience. Their Python knowledge, while present, appears focused on machine learning rather than web development. The GitHub profile demonstrates coding ability and project completion, but the projects don't align closely with backend web development requirements.\n\nThe lack of experience with FastAPI, async Python, and database technologies presents a significant learning curve for this role. While the candidate could potentially learn these technologies, they would require substantial training and ramp-up time to become productive in the position.\n\nTheir experience at JetBrains and Deutsche Börse suggests they can work in professional development environments, but the technical stack mismatch means they would essentially be starting from scratch with many of the core technologies used in this role."
-hiring_manager_notes: "Consider that while the candidate shows strong general software engineering capabilities, they would need significant training in our tech stack. Their background suggests they can learn quickly, but expect 3-6 months before full productivity.\n\nIf you're open to training someone with good fundamentals but no direct experience, they could be worth considering. However, if you need someone who can hit the ground running with FastAPI and async Python, this candidate may not be the best fit.\n\nRecommendation: Consider for junior role if willing to invest in training, but may want to continue searching if seeking an experienced backend developer."
+  "FastAPI and related ecosystem (Starlette, Pydantic, Uvicorn)",moderate,"FastAPI and related ecosystem (Starlette, Pydantic, Uvicorn)","Gap identified: FastAPI and related ecosystem (Starlette, Pydantic, Uvicorn)",true,Can be acquired through training and practice
+  Web API development experience,moderate,Web API development experience,"Gap identified: Web API development experience",true,Can be acquired through training and practice
+  Database technologies (SQL/NoSQL),moderate,Database technologies (SQL/NoSQL),"Gap identified: Database technologies (SQL/NoSQL)",true,Can be acquired through training and practice
+  Years of experience (has 2 vs required 5+),moderate,Years of experience (has 2 vs required 5+),"Gap identified: Years of experience (has 2 vs required 5+)",true,Can be acquired through training and practice
+  Backend development specific experience,moderate,Backend development specific experience,"Gap identified: Backend development specific experience",true,Can be acquired through training and practice
+skill_gaps_summary: "The candidate shows significant gaps in backend-specific technologies and experience. While they have Python skills, they lack experience with modern web frameworks, API development, and database technologies. The experience level is also well below the senior role requirement."
+strengths[5]: Strong foundation in Python programming,Experience with large codebases at JetBrains,Technical education background in Computer Science,Demonstrated Git proficiency,Research experience in machine learning/computer vision
+strengths_reason: "These strengths highlight the candidate's technical capabilities in Python development, version control, and ability to work with complex systems, though they don't fully align with the senior backend role requirements."
+final_decision: null
+detailed_feedback: "The candidate demonstrates strong fundamental technical skills and software engineering experience, particularly in Python programming and version control. Their experience at JetBrains shows ability to work with large codebases, and their research background indicates strong analytical capabilities.\n\nHowever, there are significant gaps in backend-specific technologies and experience level. The candidate lacks experience with FastAPI and its ecosystem, has no demonstrated API development experience, and shows no evidence of working with database technologies. The 2 years of experience falls well short of the 5+ years required for a senior role.\n\nWhile the candidate shows potential for growth, their current skill set and experience level don't align well with the requirements of a senior backend engineer position."
+hiring_manager_notes: "This candidate would be better suited for a mid-level or junior backend role where they can develop the necessary backend-specific skills. Their strong Python foundation and experience with large codebases at JetBrains suggest good potential, but they need more focused experience in backend development.\n\nConsider keeping their profile for future mid-level positions, or discuss the possibility of a more junior role if available. The candidate would need significant training and mentoring in backend technologies, API development, and database systems to meet the senior role requirements.\n\nIf proceeding with this candidate, recommend technical assessment focusing on API design and backend architecture to better gauge their capabilities in these areas."

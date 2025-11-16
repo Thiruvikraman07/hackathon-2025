@@ -47,11 +47,9 @@ import json
 from pathlib import Path
 from typing import Optional
 
-
 def combine_frontend_logs(
     jd_log_file: str,
     eval_log_file: str,
-    match_log_file: str,
     output_file: str,
     verbose: bool = False
 ) -> dict:
@@ -103,10 +101,9 @@ def combine_frontend_logs(
     # Load all three log files
     jd_data = load_json(jd_log_file, "Pipeline 1 (JD Generation)")
     eval_data = load_json(eval_log_file, "Pipeline 2 (Candidate Evaluation)")
-    match_data = load_json(match_log_file, "Pipeline 3 (Resume-JD Match)")
     
     # Check if all files loaded successfully
-    if None in [jd_data, eval_data, match_data]:
+    if None in [jd_data, eval_data]:
         raise ValueError("Failed to load one or more log files")
     
     # Combine the data
@@ -115,14 +112,12 @@ def combine_frontend_logs(
             "combined_at": str(Path(output_file).stem),
             "source_files": {
                 "jd_generation": jd_log_file,
-                "candidate_evaluation": eval_log_file,
-                "resume_jd_match": match_log_file
+                "candidate_evaluation": eval_log_file
             }
         },
         "pipelines": {
             "jd_generation": jd_data,
-            "candidate_evaluation": eval_data,
-            "resume_jd_match": match_data
+            "candidate_evaluation": eval_data
         }
     }
     
@@ -135,9 +130,10 @@ def combine_frontend_logs(
     
     if verbose:
         print(f"   ✓ Combined logs saved successfully!")
-        print(f"   📊 Total pipelines: 3")
+        print(f"   📊 Total pipelines: 2")
     
     return combined_data
+
 
 
 # ============================================
@@ -551,129 +547,41 @@ def combined_pipeline(
         testing=testing
     )
 
-    # ============================================
-    # STEP 3: Direct Resume-JD Matching
-    # ============================================
-    if verbose:
-        print("\n" + "="*80)
-        print("STEP 3: Direct Resume-JD Matching (No GitHub Dependency)")
-        print("="*80)
+    # # ============================================
+    # # STEP 3: Direct Resume-JD Matching
+    # # ============================================
+    # if verbose:
+    #     print("\n" + "="*80)
+    #     print("STEP 3: Direct Resume-JD Matching (No GitHub Dependency)")
+    #     print("="*80)
 
-    # Save JD to temp TOON file for Pipeline 3
-    temp_jd_file = f"temp_{company_repo.replace('/', '_')}_jd.toon"
-    with open(temp_jd_file, 'w') as f:
-        f.write(jd_toon)
+    # # Save JD to temp TOON file for Pipeline 3
+    # temp_jd_file = f"temp_{company_repo.replace('/', '_')}_jd.toon"
+    # with open(temp_jd_file, 'w') as f:
+    #     f.write(jd_toon)
 
-    match_result, match_toon, match_execution, frontend_log_file_match_resume_to_jd = match_resume_to_jd(
-        resume_pdf_path=resume_pdf_path,
-        jd_input=temp_jd_file,
-        jd_source="toon",
-        verbose=verbose
-    )
+    # match_result, match_toon, match_execution, frontend_log_file_match_resume_to_jd = match_resume_to_jd(
+    #     resume_pdf_path=resume_pdf_path,
+    #     jd_input=temp_jd_file,
+    #     jd_source="toon",
+    #     verbose=verbose
+    # )
 
     # Clean up temp file
-    Path(temp_jd_file).unlink(missing_ok=True)
+    # Path(temp_jd_file).unlink(missing_ok=True)
 
-    # ============================================
-    # STEP 4: Make Final Combined Decision
-    # ============================================
-    final_decision = make_final_decision(
-        jd=jd,
-        pipeline2_eval=evaluation,
-        pipeline3_match=match_result,
-        verbose=verbose
-    )
+    # # ============================================
+    # # STEP 4: Make Final Combined Decision
+    # # ============================================
+    # final_decision = make_final_decision(
+    #     jd=jd,
+    #     pipeline2_eval=evaluation,
+    #     pipeline3_match=match_result,
+    #     verbose=verbose
+    # )
 
-    # Convert final decision to TOON
-    final_toon = toon_encode(final_decision.model_dump())
 
-    # ============================================
-    # FINAL SUMMARY
-    # ============================================
-    if verbose:
-        print("\n" + "="*80)
-        print("🎉 COMBINED PIPELINE COMPLETE - FINAL DECISION")
-        print("="*80)
-
-        print(f"\n👤 Candidate: {final_decision.candidate_name}")
-        print(f"💼 Position: {final_decision.job_title}")
-        print(f"🏢 Company: {final_decision.company_repo}")
-
-        # Final Decision
-        decision_icon = "✅ HIRE" if final_decision.is_hire else "❌ NO HIRE"
-        print(f"\n{'='*80}")
-        print(f"{decision_icon} - {final_decision.decision_category.upper()}")
-        print(f"{'='*80}")
-
-        print(f"\n🎯 Final Score: {final_decision.final_score}/100")
-        print(f"   {final_decision.score_calculation}")
-
-        print(f"\nInterview: {'YES' if final_decision.proceed_to_interview else 'NO'}")
-        print(f"Confidence: {final_decision.confidence_level}%")
-
-        print(f"\n💡 Why {'Hire' if final_decision.is_hire else 'Not Hire'}:")
-        print(f"   {final_decision.why_hire_or_not}")
-
-        print(f"\n📋 COMPLETE DECISION REASONING:")
-        print("-"*80)
-        # Print the detailed decision_reason which includes all scores and reasoning
-        for line in final_decision.decision_reason.split('\n'):
-            print(f"   {line}")
-
-        # Score breakdown
-        print(f"\n📊 Detailed Scores:")
-        print(f"   Education: {final_decision.education_score}/100")
-        print(f"   Experience: {final_decision.experience_score}/100")
-        print(f"   Technical Skills: {final_decision.technical_skills_score}/100")
-        print(f"   GitHub Contributions: {final_decision.github_contribution_score}/100")
-
-        # Strengths
-        print(f"\n💪 Top Strengths ({len(final_decision.top_strengths)}):")
-        for strength in final_decision.top_strengths:
-            print(f"   • {strength}")
-
-        # Critical Gaps
-        if final_decision.critical_gaps:
-            print(f"\n🔴 Critical Gaps ({len(final_decision.critical_gaps)}):")
-            for gap in final_decision.critical_gaps:
-                print(f"   • {gap}")
-
-        # Recommendations
-        print(f"\n📋 Hiring Manager Recommendation:")
-        print(f"   {final_decision.hiring_recommendation}")
-
-        # Suggestions for candidate if not hired
-        if not final_decision.is_hire and final_decision.suggestions_for_candidate:
-            print(f"\n💡 Suggestions for Candidate:")
-            print(f"   {final_decision.suggestions_for_candidate}")
-
-        if final_decision.alternative_roles:
-            print(f"\n🔄 Alternative Roles:")
-            for role in final_decision.alternative_roles:
-                print(f"   • {role}")
-
-        # Files saved
-        jd_file = f"{company_repo.replace('/', '_')}_jd.toon"
-        eval_file = f"{evaluation.candidate_name.replace(' ', '_')}_evaluation.toon"
-        match_file = f"{match_result.candidate_name.replace(' ', '_')}_match.toon"
-        final_file = f"{final_decision.candidate_name.replace(' ', '_')}_final_decision.toon"
-
-        print(f"\n💾 Output Files:")
-        print(f"   • Job Description: {jd_file}")
-        print(f"   • P2 Evaluation (GitHub): {eval_file}")
-        print(f"   • P3 Match (Resume-JD): {match_file}")
-        print(f"   • Final Decision: {final_file}")
-
-        if testing:
-            print(f"\n🧪 Cache: ./cache/github_data/")
-            print(f"   Subsequent runs will use cached data")
-
-    # Save final decision TOON
-    final_output_file = f"{final_decision.candidate_name.replace(' ', '_')}_final_decision.toon"
-    with open(final_output_file, 'w') as f:
-        f.write(final_toon)
-
-    return jd, jd_toon, evaluation, eval_toon, match_result, match_toon, final_decision, final_toon, frontend_log_file_match_resume_to_jd, frontend_log_file_generate_jd, frontend_log_file_evaluate_candidate
+    return jd, jd_toon, evaluation, eval_toon, frontend_log_file_generate_jd, frontend_log_file_evaluate_candidate
 
 
 def format_jd_for_evaluation(jd: JobDescription) -> str:
@@ -769,45 +677,13 @@ if __name__ == "__main__":
         testing=True  # Enable caching for all pipelines
     )
 
-    jd, jd_toon, evaluation, eval_toon, match_result, match_toon, final_decision, final_toon, frontend_log_file_match_resume_to_jd, frontend_log_file_generate_jd, frontend_log_file_evaluate_candidate = results
+    jd, jd_toon, evaluation, eval_toon, frontend_log_file_generate_jd, frontend_log_file_evaluate_candidate = results
 
-    output_file = f"{str(uuid.uuid4())}_combined_frontend_logs.json"
+    output_file = f"execution_logs/{str(uuid.uuid4())}_combined_frontend_logs.json"
 
-    combine_frontend_logs(jd_log_file=frontend_log_file_generate_jd,
-        eval_log_file=frontend_log_file_evaluate_candidate,
-        match_log_file=frontend_log_file_match_resume_to_jd,
-        output_file=output_file,
+    combine_frontend_logs(
+        jd_log_file=str(frontend_log_file_generate_jd),
+        eval_log_file=str(frontend_log_file_evaluate_candidate),
+        output_file=str(output_file),
         verbose=True)
 
-    print("\n" + "="*80)
-    print("🏁 ALL PIPELINES COMPLETE")
-    print("="*80)
-
-    print(f"\n📋 Job Description Generated:")
-    print(f"   Title: {jd.job_title}")
-    print(f"   Repo: {jd.company_repo}")
-    print(f"   Experience: {jd.experience_requirement.level} ({jd.experience_requirement.minimum_years}+ years)")
-
-    print(f"\n🔍 Pipelines Executed:")
-    print(f"   ✓ Pipeline 1: JD Generation")
-    print(f"   ✓ Pipeline 2: GitHub Evaluation (Score: {final_decision.pipeline2_score}/100)")
-    print(f"   ✓ Pipeline 3: Resume-JD Match (Score: {final_decision.pipeline3_score}/100)")
-
-    print(f"\n🎯 FINAL DECISION:")
-    decision_symbol = "✅ HIRE" if final_decision.is_hire else "❌ NO HIRE"
-    print(f"   {decision_symbol} - {final_decision.decision_category.upper()}")
-    print(f"   Final Score: {final_decision.final_score}/100")
-    print(f"   Confidence: {final_decision.confidence_level}%")
-
-    print(f"\n💡 Why {'Hire' if final_decision.is_hire else 'Not Hire'}:")
-    print(f"   {final_decision.why_hire_or_not}")
-
-    if not final_decision.is_hire and final_decision.suggestions_for_candidate:
-        print(f"\n📌 Suggestions for Improvement:")
-        print(f"   {final_decision.suggestions_for_candidate}")
-
-    print(f"\n📁 Output Files Generated:")
-    print(f"   • {jd.company_repo.replace('/', '_')}_jd.toon")
-    print(f"   • {evaluation.candidate_name.replace(' ', '_')}_evaluation.toon")
-    print(f"   • {match_result.candidate_name.replace(' ', '_')}_match.toon")
-    print(f"   • {final_decision.candidate_name.replace(' ', '_')}_final_decision.toon")
