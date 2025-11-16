@@ -666,7 +666,7 @@ if __name__ == "__main__":
     results = combined_pipeline(
         company_repo="fastapi/fastapi",
         job_title="Senior Python Backend Developer",
-        resume_pdf_path="/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        resume_pdf_path="track_a_iron_man/Nathan_Mani__CV2025.pdf",
         salary_range="$140k-$180k",
         additional_requirements=[
             "Experience with microservices architecture",
@@ -674,7 +674,7 @@ if __name__ == "__main__":
             "Open source contribution experience"
         ],
         verbose=True,
-        testing=True  # Enable caching for all pipelines
+        testing=False  # Enable caching for all pipelines
     )
 
     jd, jd_toon, evaluation, eval_toon, frontend_log_file_generate_jd, frontend_log_file_evaluate_candidate = results

@@ -129,7 +129,7 @@ class GitHubAnalysis(BaseModel):
     has_github: bool = Field(default=False, description="Does candidate have GitHub")
     github_check_reason: str = Field(default="GitHub profile checked", description="How GitHub was identified")
 
-    projects_found: int = Field(default=0, description="Total projects found")
+    projects_found: Optional[int] = Field(default=0, description="Total projects found")
     projects_found_reason: str = Field(default="GitHub profile analyzed", description="How projects were found")
 
     relevant_projects: List[GitHubProjectRelevance] = Field(default_factory=list, description="Relevant projects")

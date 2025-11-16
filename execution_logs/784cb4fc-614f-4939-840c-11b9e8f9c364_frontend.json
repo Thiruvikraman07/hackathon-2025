@@ -1,0 +1,119 @@
+{
+  "executionId": "784cb4fc-614f-4939-840c-11b9e8f9c364",
+  "pipeline": "pipeline1_jd_generator",
+  "repository": {
+    "type": "github",
+    "path": "fastapi/fastapi"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": "$140k-$180k",
+    "additionalRequirements": [
+      "Experience with microservices architecture",
+      "Strong communication skills for remote work",
+      "Open source contribution experience"
+    ]
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "detection",
+      "name": "Detect Repository Type",
+      "status": "success",
+      "startTime": "2025-11-16T14:38:45.032855",
+      "endTime": "2025-11-16T14:38:45.033100",
+      "durationMs": 0.06985664367675781,
+      "input": {
+        "company_repo": "fastapi/fastapi"
+      },
+      "output": {
+        "repository_type": "GitHub",
+        "is_local": false,
+        "detection_method": "pattern_match"
+      },
+      "reason": "Determine if input is a GitHub repository or local file path",
+      "decisionPoint": "Repository detected as GitHub using pattern_match",
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T14:38:45.033135",
+      "endTime": "2025-11-16T14:38:45.254650",
+      "durationMs": 221.5123176574707,
+      "input": {
+        "model": "claude-3-5-sonnet",
+        "repository_type": "GitHub"
+      },
+      "output": {
+        "tools_loaded": [
+          "fetch_repo_metadata",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 3,
+        "response_format": "JobDescription"
+      },
+      "reason": "Create agent with appropriate tools based on repository type",
+      "decisionPoint": "Loaded 3 tools for GitHub repository",
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_3",
+      "type": "agent_reasoning",
+      "name": "Agent Repository Analysis & JD Generation",
+      "status": "failed",
+      "startTime": "2025-11-16T14:38:45.254714",
+      "endTime": "2025-11-16T14:39:24.628473",
+      "durationMs": 39373.756885528564,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "salary_range": "$140k-$180k",
+        "prompt_length": 1901
+      },
+      "output": {},
+      "reason": "Agent analyzes repository using tools and generates complete job description",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": "Error calling Holistic AI Bedrock API: 504 Server Error: Gateway Timeout for url: https://ctwa92wg1b.execute-api.us-east-1.amazonaws.com/prod/invoke",
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "failed",
+    "success": false,
+    "startTime": "2025-11-16T14:38:45.032815",
+    "endTime": "2025-11-16T14:39:24.628535",
+    "totalDurationMs": 39595.72,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 0
+  },
+  "langsmith": {
+    "runId": "ebeebb21-554a-4b3b-a70b-3cec1354d25a",
+    "url": null,
+    "project": "Synapse"
+  },
+  "output": {
+    "filePath": null,
+    "sizeBytes": null
+  }
+}

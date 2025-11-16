@@ -1,0 +1,90 @@
+{
+  "executionId": "41feb303-2870-49ac-84cc-f8e398bfa90f",
+  "pipeline": "pipeline2_candidate_evaluator",
+  "repository": {
+    "type": "local",
+    "path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": null,
+    "additionalRequirements": []
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T14:34:04.151176",
+      "endTime": "2025-11-16T14:34:04.160511",
+      "durationMs": 9.315252304077148,
+      "input": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "agent_reasoning",
+      "name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "startTime": "2025-11-16T14:34:04.160685",
+      "endTime": "2025-11-16T14:34:44.485314",
+      "durationMs": 40324.568033218384,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 7494
+      },
+      "output": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": "Failed to validate structured output: 1 validation error for CandidateEvaluation\ngithub_analysis.projects_found\n  Input should be a valid integer [type=int_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.12/v/int_type\nContent: {\"job_title\": \"Senior Python Backend Engineer\", \"resume_analysis\": {\"quality_of_work_experience\": 6, \"years_reason\": \"Candidate has less than the required 5+ years experience. Current experience includes roles at Jetbrains (2024-Present), Center for Machine Perception (Jan-Aug 2024), Deutsche B\u00f6rse (June 2023-Jan 2024), and Hippo Cards (April-June 2022), totaling approximately 2 years.\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University (expected 2025). While the JD doesn't explicitly require a CS degree, the education provides relevant foundational knowledge in computer science concepts.\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in research role at Center for Machine Perception with PyTorch\", \"proficiency_score\": 6, \"reason\": \"Shows Python experience but mainly in ML context rather than backend development\"}, {\"skill_name\": \"FastAPI\", \"has_skill\": false, \"evidence\": \"No explicit mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of FastAPI experience\"}, {\"skill_name\": \"Starlette\", \"has_skill\": false, \"evidence\": \"No mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of Starlette experience\"}, {\"skill_name\": \"Pydantic\", \"has_skill\": false, \"evidence\": \"No mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of Pydantic experience\"}, {\"skill_name\": \"asyncio\", \"has_skill\": false, \"evidence\": \"No mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of asyncio experience\"}, {\"skill_name\": \"uvicorn\", \"has_skill\": false, \"evidence\": \"No mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of uvicorn experience\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills and used across multiple roles\", \"proficiency_score\": 7, \"reason\": \"Demonstrated Git usage across multiple professional roles\"}, {\"skill_name\": \"Docker\", \"has_skill\": false, \"evidence\": \"No explicit mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of Docker experience\"}, {\"skill_name\": \"SQL databases\", \"has_skill\": false, \"evidence\": \"No explicit mention in resume\", \"proficiency_score\": 0, \"reason\": \"No clear evidence of SQL database experience\"}, {\"skill_name\": \"NoSQL databases\", \"has_skill\": false, \"evidence\": \"No mention in resume\", \"proficiency_score\": 0, \"reason\": \"No evidence of NoSQL database experience\"}], \"relevant_experience\": [\"Software Engineer at Jetbrains - Experience with large codebase and software design patterns\", \"Deutsche B\u00f6rse - Cloud infrastructure and backend development experience\", \"Research experience with Python at Center for Machine Perception\"], \"relevant_experience_reason\": \"While the candidate shows software engineering experience, it's not specifically focused on Python backend development or web frameworks. The experience is more oriented towards IDE development, cloud infrastructure, and research.\", \"resume_strength_score\": 45, \"resume_strength_reason\": \"While the candidate shows strong general software engineering capabilities, there are significant gaps in the specific technical stack required (FastAPI, Starlette, Pydantic, asyncio). The experience level is also below the required 5+ years.\"}, \"github_analysis\": {\"has_github\": true, \"github_check_reason\": \"GitHub mentioned in resume header and project section links to github.com/bel-learning\", \"projects_found\": null, \"projects_found_reason\": \"While GitHub is mentioned, detailed analysis was not requested as per instructions\"}, \"strengths\": [\"Strong computer science foundation with relevant degree\", \"Experience with large-scale software development at JetBrains\", \"Python programming experience in research context\", \"Cloud infrastructure experience at Deutsche B\u00f6rse\", \"Demonstrated version control proficiency with Git\"]}",
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T14:34:04.151057",
+    "endTime": "2025-11-16T14:34:44.485890",
+    "totalDurationMs": 40334.833000000006,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 0
+  },
+  "langsmith": {
+    "runId": "019a8d16-5c00-71d4-9493-45f346840101",
+    "url": null,
+    "project": "Synapse-Pipeline2"
+  },
+  "output": {
+    "filePath": null,
+    "sizeBytes": null
+  }
+}

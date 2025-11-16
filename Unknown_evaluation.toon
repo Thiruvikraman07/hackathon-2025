@@ -1,37 +1,38 @@
 candidate_name: Unknown
-job_title: Senior Python Backend Engineer
+job_title: Python FastAPI Developer
 resume_analysis:
   years_of_experience: 0
-  years_reason: "Candidate shows ~2 years of relevant experience across roles at Jetbrains, Deutsche Börse, and Hippo Cards, but falls short of the 5+ years requirement."
+  years_reason: Candidate has less than the required 5+ years experience. Shows ~2 years of relevant experience including placement at Nomura and various technical projects.
   education_match: true
-  education_reason: "Bachelor in Computer Science from Czech Technical University (in progress). While not having completed degree, the technical education aligns with role requirements."
+  education_reason: "Has BSc in Computer Science and Management, pursuing Masters in AI. While JD doesn't explicitly require specific education, the technical background is relevant."
   skill_matches[3,]{skill_name,has_skill,evidence,proficiency_score,reason}:
-    Python,true,Used Python at Center for Machine Perception for deep learning and computer vision work,7,Demonstrated Python usage in research context but limited evidence of backend development
-    FastAPI,false,No direct mention in resume,0,No evidence of FastAPI experience
-    Git,true,Listed in technical skills and used across multiple roles,8,Demonstrated Git usage across multiple professional roles
+    Python,true,"Python Neural Network Project, Listed as intermediate skill with Django",7,Demonstrated through neural network project implementation and listed as intermediate skill
+    FastAPI,false,No direct mention,0,Not mentioned in resume
+    SQL databases,true,Database Design listed in Technical Skills,5,Listed as skill but no specific implementation evidence
   relevant_experience[0]:
   relevant_experience_reason: Based on work history
   resume_strength_score: 45
-  resume_strength_reason: "Strong technical foundation and software engineering experience, but lacks specific experience with FastAPI ecosystem and required Python backend technologies. Experience level (2 years) is below the required 5+ years."
+  resume_strength_reason: "While showing strong academic background and some Python expertise, lacks specific experience with FastAPI ecosystem and falls short of required years of experience. Shows good foundation in Python and software development but missing several must-have technical requirements."
 github_analysis:
-  github_username: bel
+  github_username: null
   has_github: false
-  github_check_reason: GitHub profile checked
+  github_check_reason: No GitHub profile mentioned in resume
   projects_found: 0
-  projects_found_reason: GitHub profile analyzed
+  projects_found_reason: N/A
   relevant_projects[0]:
   quality_assessments[0]:
   github_contribution_score: 0
   github_score_reason: Based on GitHub activity
-skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
-  "FastAPI and related ecosystem (Starlette, Pydantic, Uvicorn)",moderate,"FastAPI and related ecosystem (Starlette, Pydantic, Uvicorn)","Gap identified: FastAPI and related ecosystem (Starlette, Pydantic, Uvicorn)",true,Can be acquired through training and practice
-  Web API development experience,moderate,Web API development experience,"Gap identified: Web API development experience",true,Can be acquired through training and practice
-  Database technologies (SQL/NoSQL),moderate,Database technologies (SQL/NoSQL),"Gap identified: Database technologies (SQL/NoSQL)",true,Can be acquired through training and practice
-  Years of experience (has 2 vs required 5+),moderate,Years of experience (has 2 vs required 5+),"Gap identified: Years of experience (has 2 vs required 5+)",true,Can be acquired through training and practice
-  Backend development specific experience,moderate,Backend development specific experience,"Gap identified: Backend development specific experience",true,Can be acquired through training and practice
-skill_gaps_summary: "The candidate shows significant gaps in backend-specific technologies and experience. While they have Python skills, they lack experience with modern web frameworks, API development, and database technologies. The experience level is also well below the senior role requirement."
-strengths[5]: Strong foundation in Python programming,Experience with large codebases at JetBrains,Technical education background in Computer Science,Demonstrated Git proficiency,Research experience in machine learning/computer vision
-strengths_reason: "These strengths highlight the candidate's technical capabilities in Python development, version control, and ability to work with complex systems, though they don't fully align with the senior backend role requirements."
+skill_gaps[6,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
+  FastAPI framework experience,moderate,FastAPI framework experience,"Gap identified: FastAPI framework experience",true,Can be acquired through training and practice
+  Starlette and Pydantic knowledge,moderate,Starlette and Pydantic knowledge,"Gap identified: Starlette and Pydantic knowledge",true,Can be acquired through training and practice
+  Docker containerization,moderate,Docker containerization,"Gap identified: Docker containerization",true,Can be acquired through training and practice
+  OpenAPI/Swagger documentation,moderate,OpenAPI/Swagger documentation,"Gap identified: OpenAPI/Swagger documentation",true,Can be acquired through training and practice
+  NoSQL database experience,moderate,NoSQL database experience,"Gap identified: NoSQL database experience",true,Can be acquired through training and practice
+  Insufficient years of experience,moderate,Insufficient years of experience,"Gap identified: Insufficient years of experience",true,Can be acquired through training and practice
+skill_gaps_summary: "The candidate lacks several critical technical requirements for the role, particularly around the FastAPI ecosystem and modern web development tools. The experience level falls short of the required 5+ years, and there's no demonstrated expertise in key technologies like FastAPI, Docker, and API documentation tools."
+strengths[5]: Strong academic background in Computer Science,Python programming experience,Database design knowledge,Project management experience,API integration experience
+strengths_reason: "These strengths highlight the candidate's technical foundation in Python development, academic qualifications, and practical experience with APIs and project management, which are relevant to the role despite lacking specific FastAPI experience."
 final_decision: null
-detailed_feedback: "The candidate demonstrates strong fundamental technical skills and software engineering experience, particularly in Python programming and version control. Their experience at JetBrains shows ability to work with large codebases, and their research background indicates strong analytical capabilities.\n\nHowever, there are significant gaps in backend-specific technologies and experience level. The candidate lacks experience with FastAPI and its ecosystem, has no demonstrated API development experience, and shows no evidence of working with database technologies. The 2 years of experience falls well short of the 5+ years required for a senior role.\n\nWhile the candidate shows potential for growth, their current skill set and experience level don't align well with the requirements of a senior backend engineer position."
-hiring_manager_notes: "This candidate would be better suited for a mid-level or junior backend role where they can develop the necessary backend-specific skills. Their strong Python foundation and experience with large codebases at JetBrains suggest good potential, but they need more focused experience in backend development.\n\nConsider keeping their profile for future mid-level positions, or discuss the possibility of a more junior role if available. The candidate would need significant training and mentoring in backend technologies, API development, and database systems to meet the senior role requirements.\n\nIf proceeding with this candidate, recommend technical assessment focusing on API design and backend architecture to better gauge their capabilities in these areas."
+detailed_feedback: "The candidate shows promise with a strong academic background and basic Python development skills, but falls significantly short of the technical requirements for this role. While they have some experience with Python and database design, they lack specific expertise in FastAPI and its related technologies, which are core requirements for this position.\n\nTheir experience with API integration at Nomura and project management at King's Labs demonstrates some relevant transferable skills, but the absence of hands-on experience with FastAPI, Starlette, Pydantic, and modern containerization tools presents a significant gap. The candidate's total relevant experience (~2 years) is also less than the required 5+ years.\n\nThe lack of a visible GitHub profile or portfolio of relevant projects makes it difficult to assess their practical coding abilities and contribution to open-source projects, which would have been valuable for this role."
+hiring_manager_notes: ""

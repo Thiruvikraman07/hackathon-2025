@@ -1,0 +1,106 @@
+{
+  "execution_id": "784cb4fc-614f-4939-840c-11b9e8f9c364",
+  "pipeline_name": "pipeline1_jd_generator",
+  "repository_type": "github",
+  "repository_path": "fastapi/fastapi",
+  "job_title": "Senior Python Backend Developer",
+  "salary_range": "$140k-$180k",
+  "additional_requirements": [
+    "Experience with microservices architecture",
+    "Strong communication skills for remote work",
+    "Open source contribution experience"
+  ],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "detection",
+      "step_name": "Detect Repository Type",
+      "status": "success",
+      "start_time": "2025-11-16 14:38:45.032855",
+      "end_time": "2025-11-16 14:38:45.033100",
+      "duration_ms": 0.06985664367675781,
+      "input_data": {
+        "company_repo": "fastapi/fastapi"
+      },
+      "output_data": {
+        "repository_type": "GitHub",
+        "is_local": false,
+        "detection_method": "pattern_match"
+      },
+      "reason": "Determine if input is a GitHub repository or local file path",
+      "decision_point": "Repository detected as GitHub using pattern_match",
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 14:38:45.033135",
+      "end_time": "2025-11-16 14:38:45.254650",
+      "duration_ms": 221.5123176574707,
+      "input_data": {
+        "model": "claude-3-5-sonnet",
+        "repository_type": "GitHub"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "fetch_repo_metadata",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 3,
+        "response_format": "JobDescription"
+      },
+      "reason": "Create agent with appropriate tools based on repository type",
+      "decision_point": "Loaded 3 tools for GitHub repository",
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_3",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Repository Analysis & JD Generation",
+      "status": "failed",
+      "start_time": "2025-11-16 14:38:45.254714",
+      "end_time": "2025-11-16 14:39:24.628473",
+      "duration_ms": 39373.756885528564,
+      "input_data": {
+        "job_title": "Senior Python Backend Developer",
+        "salary_range": "$140k-$180k",
+        "prompt_length": 1901
+      },
+      "output_data": {},
+      "reason": "Agent analyzes repository using tools and generates complete job description",
+      "decision_point": null,
+      "tool_used": null,
+      "error": "Error calling Holistic AI Bedrock API: 504 Server Error: Gateway Timeout for url: https://ctwa92wg1b.execute-api.us-east-1.amazonaws.com/prod/invoke",
+      "error_traceback": "Traceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 197, in _generate\n    response.raise_for_status()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/requests/models.py\", line 1026, in raise_for_status\n    raise HTTPError(http_error_msg, response=self)\nrequests.exceptions.HTTPError: 504 Server Error: Gateway Timeout for url: https://ctwa92wg1b.execute-api.us-east-1.amazonaws.com/prod/invoke\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/observability/step_tracker.py\", line 240, in track_step\n    yield step\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/pipeline1_jd_generator.py\", line 773, in generate_jd\n    result = agent.invoke(\n        {\"messages\": [HumanMessage(content=prompt)]},\n        {\"run_id\": run_id, \"project_name\": langsmith_project, \"tags\": [\"jd-generation\", execution.repository_type]}\n    )\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 3094, in invoke\n    for chunk in self.stream(\n                 ~~~~~~~~~~~^\n        input,\n        ^^^^^^\n    ...<10 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 2679, in stream\n    for _ in runner.tick(\n             ~~~~~~~~~~~^\n        [t for t in loop.tasks.values() if not t.writes],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n        schedule_task=loop.accept_push,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py\", line 167, in tick\n    run_with_retry(\n    ~~~~~~~~~~~~~~^\n        t,\n        ^^\n    ...<10 lines>...\n        },\n        ^^\n    )\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py\", line 42, in run_with_retry\n    return task.proc.invoke(task.input, config)\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 656, in invoke\n    input = context.run(step.invoke, input, config, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 393, in invoke\n    ret = context.run(self.func, *args, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/prebuilt/chat_agent_executor.py\", line 659, in call_model\n    response = cast(AIMessage, static_model.invoke(model_input, config))  # type: ignore[union-attr]\n                               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langchain_core/runnables/base.py\", line 3246, in invoke\n    input_ = context.run(step.invoke, input_, config)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py\", line 395, in invoke\n    self.generate_prompt(\n    ~~~~~~~~~~~~~~~~~~~~^\n        [self._convert_input(input)],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<6 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    ).generations[0][0],\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py\", line 1025, in generate_prompt\n    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py\", line 842, in generate\n    self._generate_with_cache(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~^\n        m,\n        ^^\n    ...<2 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    )\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langchain_core/language_models/chat_models.py\", line 1091, in _generate_with_cache\n    result = self._generate(\n        messages, stop=stop, run_manager=run_manager, **kwargs\n    )\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 272, in _generate\n    raise ValueError(error_msg)\nValueError: Error calling Holistic AI Bedrock API: 504 Server Error: Gateway Timeout for url: https://ctwa92wg1b.execute-api.us-east-1.amazonaws.com/prod/invoke\nDuring task with name 'agent' and id '7c94a4ed-bfff-fab3-2348-33748cfce2a4'\n",
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 14:38:45.032815",
+  "end_time": "2025-11-16 14:39:24.628535",
+  "total_duration_ms": 39595.72,
+  "overall_status": "failed",
+  "success": false,
+  "langsmith_run_id": "ebeebb21-554a-4b3b-a70b-3cec1354d25a",
+  "langsmith_url": null,
+  "langsmith_project": "Synapse",
+  "total_tokens": 0,
+  "total_cost_usd": 0.0,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}
