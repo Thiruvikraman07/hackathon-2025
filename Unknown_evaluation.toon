@@ -1,54 +1,54 @@
 candidate_name: Unknown
-job_title: Senior Python Backend Developer
+job_title: Python Backend Developer
 resume_analysis:
   years_of_experience: 2
-  years_reason: Calculated from work history
+  years_reason: Calculated from work history starting from April 2022 to present
   education_match: true
-  education_reason: Education information analyzed
+  education_reason: Currently pursuing Bachelor's in Computer Science from Czech Technical University
   skill_matches[3,]{skill_name,has_skill,evidence,proficiency_score,reason}:
     Python,true,"",6,Based on resume analysis
     FastAPI,false,"",0,Based on resume analysis
     Git,true,"",7,Based on resume analysis
-  relevant_experience[2]: Research Intern - Python/ML,Software Integrator - Infrastructure
+  relevant_experience[2]: Software Engineer at JetBrains,Deutsche Börse Software Integrator
   relevant_experience_reason: Based on work history
-  resume_strength_score: 35
+  resume_strength_score: 45
   resume_strength_reason: Based on overall resume quality
 github_analysis:
   github_username: bel-learning
-  has_github: false
+  has_github: true
   github_check_reason: GitHub profile checked
   projects_found: 6
-  projects_found_reason: GitHub profile analyzed
+  projects_found_reason: Found 6 public repositories through GitHub API
   relevant_projects[1]:
     - project_name: multi-agent-path-finding
       github_url: "https://github.com/multi-agent-path-finding"
       is_relevant: true
-      relevance_score: 2
+      relevance_score: 4
       relevance_reason: Relevant to job requirements
-      technologies_matched[1]: Python
+      technologies_matched[0]:
   quality_assessments[0]:
   github_contribution_score: 0
   github_score_reason: Based on GitHub activity
 skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
-  Insufficient years of experience (2 vs required 7+),moderate,Insufficient years of experience (2 vs required 7+),"Gap identified: Insufficient years of experience (2 vs required 7+)",true,Can be acquired through training and practice
-  No FastAPI ecosystem experience,moderate,No FastAPI ecosystem experience,"Gap identified: No FastAPI ecosystem experience",true,Can be acquired through training and practice
-  No backend API development experience,moderate,No backend API development experience,"Gap identified: No backend API development experience",true,Can be acquired through training and practice
-  Missing Docker containerization knowledge,moderate,Missing Docker containerization knowledge,"Gap identified: Missing Docker containerization knowledge",true,Can be acquired through training and practice
-  No async Python experience,moderate,No async Python experience,"Gap identified: No async Python experience",true,Can be acquired through training and practice
-skill_gaps_summary: "The candidate has significant gaps in both experience level and specific technical skills required for the role. The 5-year experience gap is insurmountable in the short term. The complete lack of FastAPI ecosystem experience and backend API development would require extensive training. While technical skills could be learned, the senior-level position requires immediate framework maintenance capabilities that aren't present."
-strengths[5]: Strong academic background,Python programming experience,Git version control proficiency,Research experience,Infrastructure automation exposure
-strengths_reason: "The candidate shows strong technical fundamentals through their academic work and research experience. They have demonstrated Python programming abilities, though mainly in ML contexts, and solid version control practices. Their infrastructure automation experience shows technical versatility."
+  No FastAPI or modern Python web framework experience,moderate,No FastAPI or modern Python web framework experience,"Gap identified: No FastAPI or modern Python web framework experience",true,Can be acquired through training and practice
+  Missing experience with async Python (asyncio),moderate,Missing experience with async Python (asyncio),"Gap identified: Missing experience with async Python (asyncio)",true,Can be acquired through training and practice
+  No demonstrated API development experience,moderate,No demonstrated API development experience,"Gap identified: No demonstrated API development experience",true,Can be acquired through training and practice
+  Lack of Docker containerization experience,moderate,Lack of Docker containerization experience,"Gap identified: Lack of Docker containerization experience",true,Can be acquired through training and practice
+  No experience with SQL/NoSQL databases,moderate,No experience with SQL/NoSQL databases,"Gap identified: No experience with SQL/NoSQL databases",true,Can be acquired through training and practice
+skill_gaps_summary: "While the candidate has Python experience, they lack specific expertise in modern Python web development technologies and frameworks required for the role. The absence of FastAPI, async Python, and database experience represents significant gaps for a backend developer position."
+strengths[5]: Strong academic background in Computer Science,Experience with Python programming,Demonstrated version control (Git) proficiency,Software engineering experience at reputable companies,Active GitHub presence with multiple projects
+strengths_reason: The candidate shows a solid foundation in computer science through their education and has practical experience with Python and Git. Their work experience at companies like JetBrains and Deutsche Börse demonstrates professional software development capabilities. The active GitHub profile shows practical coding experience and initiative.
 final_decision:
-  is_fit: false
-  fit_reason: Reject - Experience level and skill gaps too significant for senior role
-  overall_score: 30
+  is_fit: true
+  fit_reason: MAYBE - Consider for junior role if willing to invest in training
+  overall_score: 70
   overall_score_breakdown: Based on overall evaluation
   resume_score: 50
   github_score: 50
   skill_match_score: 50
-  recommendation: no-hire
-  recommendation_reason: Reject - Experience level and skill gaps too significant for senior role
+  recommendation: hire
+  recommendation_reason: MAYBE - Consider for junior role if willing to invest in training
   confidence_level: 70
   confidence_reason: Based on available information
-detailed_feedback: "The candidate shows promising technical foundations with their computer science education and research experience. Their Python skills, while present, are primarily focused on machine learning rather than backend development. The 2 years of total experience, mostly in different domains, falls significantly short of the 7+ years required for this senior role.\n\nTheir GitHub profile shows limited public activity and no relevant backend API projects. While they demonstrate good practices with Git version control, there's no evidence of experience with the FastAPI ecosystem or any of its core components (Starlette, Pydantic, asyncio).\n\nThe infrastructure automation experience from Deutsche Börse suggests technical adaptability, but the lack of specific backend development experience and Docker knowledge represents significant skill gaps for this position."
-hiring_manager_notes: "This candidate is too junior for the current senior backend developer position. While they show strong technical potential and learning ability, they lack both the years of experience and specific technical expertise required for framework maintenance and senior-level responsibilities.\n\nRecommend keeping their profile on file for future junior backend developer positions. Their strong computer science foundation and demonstrated ability to work with complex systems (ML research, infrastructure automation) suggests good potential for growth in backend development with proper mentoring.\n\nIf proceeding with other candidates, suggest providing constructive feedback focusing on the experience gap and encouraging them to gain hands-on experience with FastAPI and backend API development through personal projects or junior roles."
+detailed_feedback: "The candidate shows promise with their computer science education and general software engineering experience. Their Python knowledge, while present, appears focused on machine learning rather than web development. The GitHub profile demonstrates coding ability and project completion, but the projects don't align closely with backend web development requirements.\n\nThe lack of experience with FastAPI, async Python, and database technologies presents a significant learning curve for this role. While the candidate could potentially learn these technologies, they would require substantial training and ramp-up time to become productive in the position.\n\nTheir experience at JetBrains and Deutsche Börse suggests they can work in professional development environments, but the technical stack mismatch means they would essentially be starting from scratch with many of the core technologies used in this role."
+hiring_manager_notes: "Consider that while the candidate shows strong general software engineering capabilities, they would need significant training in our tech stack. Their background suggests they can learn quickly, but expect 3-6 months before full productivity.\n\nIf you're open to training someone with good fundamentals but no direct experience, they could be worth considering. However, if you need someone who can hit the ground running with FastAPI and async Python, this candidate may not be the best fit.\n\nRecommendation: Consider for junior role if willing to invest in training, but may want to continue searching if seeking an experienced backend developer."
