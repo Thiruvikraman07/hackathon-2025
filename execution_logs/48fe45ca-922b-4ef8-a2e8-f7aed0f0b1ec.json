@@ -1,0 +1,74 @@
+{
+  "execution_id": "48fe45ca-922b-4ef8-a2e8-f7aed0f0b1ec",
+  "pipeline_name": "pipeline3_resume_jd_matcher",
+  "repository_type": "local",
+  "repository_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+  "job_title": "Senior Backend Engineer",
+  "salary_range": null,
+  "additional_requirements": [],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 11:26:45.795363",
+      "end_time": "2025-11-16 11:26:45.999325",
+      "duration_ms": 203.94420623779297,
+      "input_data": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "extract_resume_text"
+        ],
+        "tool_count": 1,
+        "response_format": "ResumeJDMatch"
+      },
+      "reason": "Create agent with resume extraction tool",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Resume-JD Matching",
+      "status": "failed",
+      "start_time": "2025-11-16 11:26:45.999383",
+      "end_time": "2025-11-16 11:27:23.923741",
+      "duration_ms": 37924.35312271118,
+      "input_data": {
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "jd_source": "toon",
+        "prompt_length": 12009
+      },
+      "output_data": {},
+      "reason": "Agent matches resume against job description requirements",
+      "decision_point": null,
+      "tool_used": null,
+      "error": "Failed to validate structured output: 2 validation errors for ResumeJDMatch\ntechnical_skills.frameworks_libraries.0.match_reason\n  Field required [type=missing, input_value={'skill_name': 'FastAPI',...tch_quality': 'missing'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ntechnical_skills.frameworks_libraries.1.match_reason\n  Field required [type=missing, input_value={'skill_name': 'asyncio',...tch_quality': 'missing'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"Bilguudei Baljinnyam\", \"job_title\": \"Senior Backend Engineer\", \"education_match\": {\"required_degree\": \"Not explicitly specified\", \"candidate_degree\": \"Bachelor of Computer Science\", \"degree_match\": true, \"degree_match_reason\": \"Computer Science degree is highly relevant for backend engineering role\", \"required_field\": \"Computer Science or related\", \"candidate_field\": \"Computer Science\", \"field_match\": true, \"field_match_reason\": \"Direct match with relevant coursework including Operating Systems, Compilers\", \"education_score\": 85, \"education_score_reason\": \"Strong CS degree with relevant coursework, but still completing studies (expected Dec 2025)\"}, \"experience_match\": {\"required_years\": 5, \"candidate_years\": 2, \"years_match\": false, \"years_match_reason\": \"Candidate has approximately 2 years of professional experience, below required 5+ years\", \"relevant_roles\": [\"Software Engineer at Jetbrains\", \"Software Integrator at Deutsche B\u00f6rse\"], \"relevant_roles_reason\": \"These roles involve software development and system integration\", \"industry_match\": true, \"industry_match_reason\": \"Experience in software development companies and financial sector\", \"seniority_level\": \"junior/mid-level\", \"seniority_match\": false, \"experience_score\": 60, \"experience_score_reason\": \"While showing good progression, falls short of required years and senior-level experience\"}, \"technical_skills\": {\"programming_languages\": [{\"skill_name\": \"Python\", \"required_level\": \"expert\", \"has_skill\": true, \"candidate_level\": \"intermediate\", \"years_of_experience\": 1, \"evidence\": \"Used in Research Intern role at Center for Machine Perception\", \"match_quality\": \"partial\", \"match_reason\": \"Has Python experience but not at required expert level\"}], \"frameworks_libraries\": [{\"skill_name\": \"FastAPI\", \"required_level\": \"expert\", \"has_skill\": false, \"candidate_level\": \"none\", \"evidence\": \"Not mentioned in resume\", \"match_quality\": \"missing\"}, {\"skill_name\": \"asyncio\", \"required_level\": \"advanced\", \"has_skill\": false, \"candidate_level\": \"none\", \"evidence\": \"Not mentioned in resume\", \"match_quality\": \"missing\"}]}, \"gaps\": [\"Insufficient years of experience (2 vs required 5+)\", \"Missing FastAPI expertise\", \"Missing asyncio experience\", \"Python skills not at expert level\"], \"gaps_summary\": \"The candidate shows promise but has significant gaps for a senior role. The main concerns are insufficient years of experience, missing key technical skills (FastAPI, asyncio), and Python expertise not at the required level. These gaps would make it challenging to perform effectively in a senior backend engineering position.\", \"strengths\": [\"Strong educational background in Computer Science\", \"Experience at reputable tech companies\", \"Demonstrated career progression\", \"Some Python experience\", \"Experience in both software development and research\"], \"strengths_reason\": \"The candidate shows a solid foundation with a CS degree and has gained diverse experience across different types of organizations. Their progression from internships to full-time roles shows growth potential.\"}",
+      "error_traceback": "Traceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 415, in invoke\n    return self.schema.model_validate(json_data)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/pydantic/main.py\", line 716, in model_validate\n    return cls.__pydantic_validator__.validate_python(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        obj,\n        ^^^^\n    ...<5 lines>...\n        by_name=by_name,\n        ^^^^^^^^^^^^^^^^\n    )\n    ^\npydantic_core._pydantic_core.ValidationError: 2 validation errors for ResumeJDMatch\ntechnical_skills.frameworks_libraries.0.match_reason\n  Field required [type=missing, input_value={'skill_name': 'FastAPI',...tch_quality': 'missing'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ntechnical_skills.frameworks_libraries.1.match_reason\n  Field required [type=missing, input_value={'skill_name': 'asyncio',...tch_quality': 'missing'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/observability/step_tracker.py\", line 240, in track_step\n    yield step\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/pipeline3_resume_jd_matcher.py\", line 721, in match_resume_to_jd\n    result = agent.invoke(\n        {\"messages\": [HumanMessage(content=prompt)]},\n        {\"run_id\": run_id, \"project_name\": langsmith_project, \"tags\": [\"resume-jd-matching\", \"no-github\"]}\n    )\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 3094, in invoke\n    for chunk in self.stream(\n                 ~~~~~~~~~~~^\n        input,\n        ^^^^^^\n    ...<10 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 2679, in stream\n    for _ in runner.tick(\n             ~~~~~~~~~~~^\n        [t for t in loop.tasks.values() if not t.writes],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n        schedule_task=loop.accept_push,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py\", line 167, in tick\n    run_with_retry(\n    ~~~~~~~~~~~~~~^\n        t,\n        ^^\n    ...<10 lines>...\n        },\n        ^^\n    )\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py\", line 42, in run_with_retry\n    return task.proc.invoke(task.input, config)\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 656, in invoke\n    input = context.run(step.invoke, input, config, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 393, in invoke\n    ret = context.run(self.func, *args, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/prebuilt/chat_agent_executor.py\", line 746, in generate_structured_response\n    response = model_with_structured_output.invoke(messages, config)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 419, in invoke\n    raise ValueError(f\"Failed to validate structured output: {e}\\nContent: {content}\")\nValueError: Failed to validate structured output: 2 validation errors for ResumeJDMatch\ntechnical_skills.frameworks_libraries.0.match_reason\n  Field required [type=missing, input_value={'skill_name': 'FastAPI',...tch_quality': 'missing'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ntechnical_skills.frameworks_libraries.1.match_reason\n  Field required [type=missing, input_value={'skill_name': 'asyncio',...tch_quality': 'missing'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"Bilguudei Baljinnyam\", \"job_title\": \"Senior Backend Engineer\", \"education_match\": {\"required_degree\": \"Not explicitly specified\", \"candidate_degree\": \"Bachelor of Computer Science\", \"degree_match\": true, \"degree_match_reason\": \"Computer Science degree is highly relevant for backend engineering role\", \"required_field\": \"Computer Science or related\", \"candidate_field\": \"Computer Science\", \"field_match\": true, \"field_match_reason\": \"Direct match with relevant coursework including Operating Systems, Compilers\", \"education_score\": 85, \"education_score_reason\": \"Strong CS degree with relevant coursework, but still completing studies (expected Dec 2025)\"}, \"experience_match\": {\"required_years\": 5, \"candidate_years\": 2, \"years_match\": false, \"years_match_reason\": \"Candidate has approximately 2 years of professional experience, below required 5+ years\", \"relevant_roles\": [\"Software Engineer at Jetbrains\", \"Software Integrator at Deutsche B\u00f6rse\"], \"relevant_roles_reason\": \"These roles involve software development and system integration\", \"industry_match\": true, \"industry_match_reason\": \"Experience in software development companies and financial sector\", \"seniority_level\": \"junior/mid-level\", \"seniority_match\": false, \"experience_score\": 60, \"experience_score_reason\": \"While showing good progression, falls short of required years and senior-level experience\"}, \"technical_skills\": {\"programming_languages\": [{\"skill_name\": \"Python\", \"required_level\": \"expert\", \"has_skill\": true, \"candidate_level\": \"intermediate\", \"years_of_experience\": 1, \"evidence\": \"Used in Research Intern role at Center for Machine Perception\", \"match_quality\": \"partial\", \"match_reason\": \"Has Python experience but not at required expert level\"}], \"frameworks_libraries\": [{\"skill_name\": \"FastAPI\", \"required_level\": \"expert\", \"has_skill\": false, \"candidate_level\": \"none\", \"evidence\": \"Not mentioned in resume\", \"match_quality\": \"missing\"}, {\"skill_name\": \"asyncio\", \"required_level\": \"advanced\", \"has_skill\": false, \"candidate_level\": \"none\", \"evidence\": \"Not mentioned in resume\", \"match_quality\": \"missing\"}]}, \"gaps\": [\"Insufficient years of experience (2 vs required 5+)\", \"Missing FastAPI expertise\", \"Missing asyncio experience\", \"Python skills not at expert level\"], \"gaps_summary\": \"The candidate shows promise but has significant gaps for a senior role. The main concerns are insufficient years of experience, missing key technical skills (FastAPI, asyncio), and Python expertise not at the required level. These gaps would make it challenging to perform effectively in a senior backend engineering position.\", \"strengths\": [\"Strong educational background in Computer Science\", \"Experience at reputable tech companies\", \"Demonstrated career progression\", \"Some Python experience\", \"Experience in both software development and research\"], \"strengths_reason\": \"The candidate shows a solid foundation with a CS degree and has gained diverse experience across different types of organizations. Their progression from internships to full-time roles shows growth potential.\"}\nDuring task with name 'generate_structured_response' and id '8f941837-d56a-de08-1824-9aca8a9a20b4'\n",
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 11:26:45.794282",
+  "end_time": "2025-11-16 11:27:23.924482",
+  "total_duration_ms": 38130.200000000004,
+  "overall_status": "success",
+  "success": true,
+  "langsmith_run_id": "019a8c6a-e0ef-706b-b2bc-e337a3d36c35",
+  "langsmith_url": null,
+  "langsmith_project": "Synapse-Pipeline3",
+  "total_tokens": 0,
+  "total_cost_usd": 0.0,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}

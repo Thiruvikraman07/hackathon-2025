@@ -1,0 +1,90 @@
+{
+  "executionId": "ce69d51c-a012-472e-af70-f88c114a68d8",
+  "pipeline": "pipeline2_candidate_evaluator",
+  "repository": {
+    "type": "local",
+    "path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": null,
+    "additionalRequirements": []
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T11:37:46.010370",
+      "endTime": "2025-11-16T11:37:46.226396",
+      "durationMs": 216.01319313049316,
+      "input": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "agent_reasoning",
+      "name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "startTime": "2025-11-16T11:37:46.226449",
+      "endTime": "2025-11-16T11:38:34.937584",
+      "durationMs": 48711.1279964447,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 4141
+      },
+      "output": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": "Failed to validate structured output: 2 validation errors for CandidateEvaluation\ngithub_analysis\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nfinal_decision\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"Bel\", \"job_title\": \"Backend Developer\", \"resume_analysis\": {\"years_of_experience\": 2, \"years_reason\": \"Based on work history from April 2022 to Present (2025), approximately 2 years of professional experience\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University shows strong technical foundation, though still completing degree (expected Dec 2025)\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in research internship at Center for Machine Perception\", \"proficiency_score\": 6, \"reason\": \"Shows Python usage in research context but limited production experience\"}, {\"skill_name\": \"FastAPI/Django\", \"has_skill\": false, \"evidence\": \"No mention of FastAPI or Django experience\", \"proficiency_score\": 0, \"reason\": \"No evidence of web framework experience\"}, {\"skill_name\": \"REST API\", \"has_skill\": false, \"evidence\": \"No explicit REST API development mentioned\", \"proficiency_score\": 0, \"reason\": \"No clear API development experience\"}, {\"skill_name\": \"PostgreSQL\", \"has_skill\": false, \"evidence\": \"No database experience mentioned\", \"proficiency_score\": 0, \"reason\": \"No database skills listed\"}, {\"skill_name\": \"Docker\", \"has_skill\": false, \"evidence\": \"Not mentioned in resume\", \"proficiency_score\": 0, \"reason\": \"No containerization experience shown\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills, used in projects\", \"proficiency_score\": 7, \"reason\": \"Active GitHub usage and listed as technical skill\"}, {\"skill_name\": \"Unit Testing\", \"has_skill\": true, \"evidence\": \"Implemented Jacoco test coverage at Deutsche B\u00f6rse\", \"proficiency_score\": 5, \"reason\": \"Shows testing experience but in Java context\"}], \"relevant_experience\": [\"Research Intern at Center for Machine Perception: Python, PyTorch\", \"Software Integrator at Deutsche B\u00f6rse: Infrastructure, Testing\"], \"resume_strength_score\": 45, \"resume_strength_reason\": \"While showing technical aptitude, lacks specific backend development experience and several required skills. Strong in general software engineering but not specialized in the target role.\"}}",
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T11:37:46.010322",
+    "endTime": "2025-11-16T11:38:34.937640",
+    "totalDurationMs": 48927.318,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 0
+  },
+  "langsmith": {
+    "runId": "019a8c74-f3f2-7451-bc0d-5969206e1f14",
+    "url": null,
+    "project": "Synapse-Pipeline2"
+  },
+  "output": {
+    "filePath": null,
+    "sizeBytes": null
+  }
+}

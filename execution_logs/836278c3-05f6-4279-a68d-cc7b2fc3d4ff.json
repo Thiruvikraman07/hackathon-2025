@@ -1,0 +1,78 @@
+{
+  "execution_id": "836278c3-05f6-4279-a68d-cc7b2fc3d4ff",
+  "pipeline_name": "pipeline2_candidate_evaluator",
+  "repository_type": "local",
+  "repository_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+  "job_title": "Senior Python Backend Developer",
+  "salary_range": null,
+  "additional_requirements": [],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 11:33:53.286467",
+      "end_time": "2025-11-16 11:33:53.495766",
+      "duration_ms": 209.29694175720215,
+      "input_data": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "start_time": "2025-11-16 11:33:53.495819",
+      "end_time": "2025-11-16 11:34:47.015800",
+      "duration_ms": 53519.97995376587,
+      "input_data": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 4141
+      },
+      "output_data": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decision_point": null,
+      "tool_used": null,
+      "error": "Failed to validate structured output: 4 validation errors for CandidateEvaluation\ngithub_analysis.quality_assessments.0.code_quality_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.technical_depth_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.best_practices_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.files_analyzed\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"bel-learning\", \"job_title\": \"Backend Developer\", \"resume_analysis\": {\"years_of_experience\": 2, \"years_reason\": \"Calculated from work history: July 2024-Present (Jetbrains), Jan 2024-Aug 2024 (CMP), June 2023-Jan 2024 (Deutsche B\u00f6rse), April 2022-June 2022 (Hippo Cards)\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University (expected Dec 2025)\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used in research internship with PyTorch, visible in GitHub projects\", \"proficiency_score\": 7}, {\"skill_name\": \"FastAPI/Django\", \"has_skill\": false, \"proficiency_score\": 0}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills, used in all positions\", \"proficiency_score\": 7}, {\"skill_name\": \"Unit Testing\", \"has_skill\": true, \"evidence\": \"Implemented Jacoco test coverage at Deutsche B\u00f6rse\", \"proficiency_score\": 6}], \"resume_strength_score\": 65, \"resume_strength_reason\": \"Strong technical foundation but lacks specific backend development focus\"}, \"github_analysis\": {\"github_username\": \"bel-learning\", \"has_github\": true, \"projects_found\": 6, \"relevant_projects\": [{\"project_name\": \"multi-agent-path-finding\", \"github_url\": \"https://github.com/bel-learning/multi-agent-path-finding\", \"is_relevant\": true, \"relevance_score\": 6, \"technologies_matched\": [\"Python\"]}], \"quality_assessments\": [{\"project_name\": \"multi-agent-path-finding\", \"code_quality_score\": 7, \"technical_depth_score\": 6, \"best_practices_score\": 6, \"key_strengths\": [\"Algorithm implementation\", \"Code organization\"], \"key_weaknesses\": [\"No error handling\", \"Missing tests\", \"No API structure\"]}], \"github_contribution_score\": 55}, \"final_decision\": \"REJECT\", \"strengths\": [\"Strong Python programming skills\", \"Good algorithm implementation abilities\", \"Experience with version control (Git)\", \"Testing knowledge\", \"Computer Science education background\"], \"strengths_reason\": \"The candidate demonstrates solid foundational programming skills through their Python work and algorithm implementations. They have practical experience with essential development tools like Git and testing frameworks. Their Computer Science education provides theoretical backing.\", \"skill_gaps\": [\"No FastAPI/Django experience\", \"Lack of REST API development\", \"No PostgreSQL knowledge\", \"Missing Docker experience\", \"Limited backend development focus\"], \"skill_gaps_summary\": \"While the candidate shows strong programming fundamentals, they lack experience with key backend development technologies and frameworks required for the role. There is no demonstrated experience with web frameworks, API development, or database systems.\"}",
+      "error_traceback": "Traceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 415, in invoke\n    return self.schema.model_validate(json_data)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/pydantic/main.py\", line 716, in model_validate\n    return cls.__pydantic_validator__.validate_python(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        obj,\n        ^^^^\n    ...<5 lines>...\n        by_name=by_name,\n        ^^^^^^^^^^^^^^^^\n    )\n    ^\npydantic_core._pydantic_core.ValidationError: 4 validation errors for CandidateEvaluation\ngithub_analysis.quality_assessments.0.code_quality_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.technical_depth_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.best_practices_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.files_analyzed\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/observability/step_tracker.py\", line 240, in track_step\n    yield step\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/pipeline2_candidate_evaluator.py\", line 777, in evaluate_candidate\n    result = agent.invoke(\n        {\"messages\": [HumanMessage(content=prompt)]},\n        {\"run_id\": run_id, \"project_name\": langsmith_project, \"tags\": [\"candidate-evaluation\", \"resume-analysis\"]}\n    )\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 3094, in invoke\n    for chunk in self.stream(\n                 ~~~~~~~~~~~^\n        input,\n        ^^^^^^\n    ...<10 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 2679, in stream\n    for _ in runner.tick(\n             ~~~~~~~~~~~^\n        [t for t in loop.tasks.values() if not t.writes],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n        schedule_task=loop.accept_push,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py\", line 167, in tick\n    run_with_retry(\n    ~~~~~~~~~~~~~~^\n        t,\n        ^^\n    ...<10 lines>...\n        },\n        ^^\n    )\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py\", line 42, in run_with_retry\n    return task.proc.invoke(task.input, config)\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 656, in invoke\n    input = context.run(step.invoke, input, config, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 393, in invoke\n    ret = context.run(self.func, *args, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/prebuilt/chat_agent_executor.py\", line 746, in generate_structured_response\n    response = model_with_structured_output.invoke(messages, config)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 419, in invoke\n    raise ValueError(f\"Failed to validate structured output: {e}\\nContent: {content}\")\nValueError: Failed to validate structured output: 4 validation errors for CandidateEvaluation\ngithub_analysis.quality_assessments.0.code_quality_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.technical_depth_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.best_practices_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.files_analyzed\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"bel-learning\", \"job_title\": \"Backend Developer\", \"resume_analysis\": {\"years_of_experience\": 2, \"years_reason\": \"Calculated from work history: July 2024-Present (Jetbrains), Jan 2024-Aug 2024 (CMP), June 2023-Jan 2024 (Deutsche B\u00f6rse), April 2022-June 2022 (Hippo Cards)\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University (expected Dec 2025)\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used in research internship with PyTorch, visible in GitHub projects\", \"proficiency_score\": 7}, {\"skill_name\": \"FastAPI/Django\", \"has_skill\": false, \"proficiency_score\": 0}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills, used in all positions\", \"proficiency_score\": 7}, {\"skill_name\": \"Unit Testing\", \"has_skill\": true, \"evidence\": \"Implemented Jacoco test coverage at Deutsche B\u00f6rse\", \"proficiency_score\": 6}], \"resume_strength_score\": 65, \"resume_strength_reason\": \"Strong technical foundation but lacks specific backend development focus\"}, \"github_analysis\": {\"github_username\": \"bel-learning\", \"has_github\": true, \"projects_found\": 6, \"relevant_projects\": [{\"project_name\": \"multi-agent-path-finding\", \"github_url\": \"https://github.com/bel-learning/multi-agent-path-finding\", \"is_relevant\": true, \"relevance_score\": 6, \"technologies_matched\": [\"Python\"]}], \"quality_assessments\": [{\"project_name\": \"multi-agent-path-finding\", \"code_quality_score\": 7, \"technical_depth_score\": 6, \"best_practices_score\": 6, \"key_strengths\": [\"Algorithm implementation\", \"Code organization\"], \"key_weaknesses\": [\"No error handling\", \"Missing tests\", \"No API structure\"]}], \"github_contribution_score\": 55}, \"final_decision\": \"REJECT\", \"strengths\": [\"Strong Python programming skills\", \"Good algorithm implementation abilities\", \"Experience with version control (Git)\", \"Testing knowledge\", \"Computer Science education background\"], \"strengths_reason\": \"The candidate demonstrates solid foundational programming skills through their Python work and algorithm implementations. They have practical experience with essential development tools like Git and testing frameworks. Their Computer Science education provides theoretical backing.\", \"skill_gaps\": [\"No FastAPI/Django experience\", \"Lack of REST API development\", \"No PostgreSQL knowledge\", \"Missing Docker experience\", \"Limited backend development focus\"], \"skill_gaps_summary\": \"While the candidate shows strong programming fundamentals, they lack experience with key backend development technologies and frameworks required for the role. There is no demonstrated experience with web frameworks, API development, or database systems.\"}\nDuring task with name 'generate_structured_response' and id '02198025-1aa0-119d-1c86-24b1abad06a9'\n",
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 11:33:53.286437",
+  "end_time": "2025-11-16 11:34:47.015990",
+  "total_duration_ms": 53729.553,
+  "overall_status": "success",
+  "success": true,
+  "langsmith_run_id": "019a8c71-66d7-7306-98f7-ed833dbea0b7",
+  "langsmith_url": null,
+  "langsmith_project": "Synapse-Pipeline2",
+  "total_tokens": 0,
+  "total_cost_usd": 0.0,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}

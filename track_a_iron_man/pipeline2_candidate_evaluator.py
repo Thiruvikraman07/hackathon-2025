@@ -8,6 +8,8 @@ Every decision includes a 'reason' field explaining why.
 
 import sys
 import json
+import uuid
+import os
 from pathlib import Path
 from typing import List, Optional, Dict, Union, Any
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -36,6 +38,11 @@ if env_path.exists():
 sys.path.insert(0, './core')
 from react_agent.holistic_ai_bedrock import get_chat_model
 
+# Import observability
+from observability import (
+    StepType, StepStatus, StepData, PipelineExecution, StepTracker
+)
+
 
 # ============================================
 # Enhanced Schema with Reason Fields
@@ -45,16 +52,16 @@ class SkillMatch(BaseModel):
     """Skill matching with reasoning"""
     model_config = ConfigDict(populate_by_name=True)
 
-    skill_name: str = Field(description="Skill from JD", alias="skill")
+    skill_name: str = Field(default="Unknown", description="Skill from JD", alias="skill")
     has_skill: bool = Field(default=True, description="Does candidate have this skill")
     evidence: str = Field(default="", description="Where in resume/GitHub this skill is demonstrated")
-    proficiency_score: int = Field(description="Proficiency level 1-10", alias="proficiency")
+    proficiency_score: int = Field(default=5, description="Proficiency level 1-10", alias="proficiency")
     reason: str = Field(default="Based on resume analysis", description="Why this score was given")
 
 
 class ResumeAnalysis(BaseModel):
     """Resume analysis with reasoning"""
-    years_of_experience: int = Field(description="Total years of experience")
+    years_of_experience: int = Field(default=0, description="Total years of experience")
     years_reason: str = Field(default="Calculated from work history", description="How years were calculated")
 
     education_match: bool = Field(default=True, description="Education meets requirements")
@@ -91,29 +98,29 @@ class GitHubProjectRelevance(BaseModel):
     """GitHub project relevance with reasoning"""
     model_config = ConfigDict(populate_by_name=True)
 
-    project_name: str = Field(description="Project name", alias="name")
-    github_url: str = Field(description="GitHub URL", alias="url")
+    project_name: str = Field(default="Unknown", description="Project name", alias="name")
+    github_url: str = Field(default="", description="GitHub URL", alias="url")
     is_relevant: bool = Field(default=True, description="Is relevant to JD")
-    relevance_score: int = Field(description="Relevance score 1-10")
+    relevance_score: int = Field(default=5, description="Relevance score 1-10")
     relevance_reason: str = Field(default="Relevant to job requirements", description="Why relevant or not")
     technologies_matched: List[str] = Field(default_factory=list, description="Technologies that match JD", alias="technologies")
 
 
 class GitHubCodeQuality(BaseModel):
     """Code quality assessment with reasoning"""
-    project_name: str = Field(description="Project name")
-    code_quality_score: int = Field(description="Code quality 1-10")
-    code_quality_reason: str = Field(description="Why this quality score")
+    project_name: str = Field(default="Unknown", description="Project name")
+    code_quality_score: int = Field(default=5, description="Code quality 1-10")
+    code_quality_reason: str = Field(default="Code quality assessment", description="Why this quality score")
 
-    technical_depth_score: int = Field(description="Technical depth 1-10")
-    technical_depth_reason: str = Field(description="Why this depth score")
+    technical_depth_score: int = Field(default=5, description="Technical depth 1-10")
+    technical_depth_reason: str = Field(default="Technical depth assessment", description="Why this depth score")
 
-    best_practices_score: int = Field(description="Best practices 1-10")
-    best_practices_reason: str = Field(description="Why this practices score")
+    best_practices_score: int = Field(default=5, description="Best practices 1-10")
+    best_practices_reason: str = Field(default="Best practices assessment", description="Why this practices score")
 
-    files_analyzed: List[str] = Field(description="Files analyzed (2-3 max)")
-    key_strengths: List[str] = Field(description="Key strengths found")
-    key_weaknesses: List[str] = Field(description="Areas to improve")
+    files_analyzed: List[str] = Field(default_factory=list, description="Files analyzed (2-3 max)")
+    key_strengths: List[str] = Field(default_factory=list, description="Key strengths found")
+    key_weaknesses: List[str] = Field(default_factory=list, description="Areas to improve")
 
 
 class GitHubAnalysis(BaseModel):
@@ -177,8 +184,8 @@ class ExperienceGapAnalysis(BaseModel):
     """Gap analysis with detailed reasons"""
     model_config = ConfigDict(populate_by_name=True)
 
-    gap_name: str = Field(description="Name of the gap", alias="name")
-    severity: str = Field(description="critical, moderate, or minor")
+    gap_name: str = Field(default="Unknown gap", description="Name of the gap", alias="name")
+    severity: str = Field(default="moderate", description="critical, moderate, or minor")
     description: str = Field(default="Gap identified", description="Description of the gap", alias="details")
     reason: str = Field(default="Based on requirement analysis", description="Why this is a gap and its severity")
     can_be_learned: bool = Field(default=True, description="Can this gap be filled with training")
@@ -187,30 +194,30 @@ class ExperienceGapAnalysis(BaseModel):
 
 class FinalDecision(BaseModel):
     """Final hiring decision with comprehensive reasoning"""
-    is_fit: bool = Field(description="Is candidate a fit for the role")
-    fit_reason: str = Field(description="Comprehensive reason for fit/no-fit decision")
+    is_fit: bool = Field(default=False, description="Is candidate a fit for the role")
+    fit_reason: str = Field(default="Decision analysis", description="Comprehensive reason for fit/no-fit decision")
 
-    overall_score: int = Field(description="Overall candidate score 1-100")
-    overall_score_breakdown: str = Field(description="How overall score was calculated")
+    overall_score: int = Field(default=50, description="Overall candidate score 1-100")
+    overall_score_breakdown: str = Field(default="Score calculated from resume, GitHub, and skills", description="How overall score was calculated")
 
-    resume_score: int = Field(description="Resume contribution to score 1-100")
-    github_score: int = Field(description="GitHub contribution to score 1-100")
-    skill_match_score: int = Field(description="Skill matching score 1-100")
+    resume_score: int = Field(default=50, description="Resume contribution to score 1-100")
+    github_score: int = Field(default=50, description="GitHub contribution to score 1-100")
+    skill_match_score: int = Field(default=50, description="Skill matching score 1-100")
 
-    recommendation: str = Field(description="strong-hire, hire, maybe, no-hire")
-    recommendation_reason: str = Field(description="Why this recommendation level")
+    recommendation: str = Field(default="maybe", description="strong-hire, hire, maybe, no-hire")
+    recommendation_reason: str = Field(default="Based on overall assessment", description="Why this recommendation level")
 
-    confidence_level: int = Field(description="Confidence in decision 1-100")
-    confidence_reason: str = Field(description="Why this confidence level")
+    confidence_level: int = Field(default=50, description="Confidence in decision 1-100")
+    confidence_reason: str = Field(default="Confidence based on available information", description="Why this confidence level")
 
 
 class CandidateEvaluation(BaseModel):
     """Complete candidate evaluation with all reasoning"""
-    candidate_name: str = Field(description="Candidate name")
-    job_title: str = Field(description="Job title from JD")
+    candidate_name: str = Field(default="Unknown", description="Candidate name")
+    job_title: str = Field(default="Unknown", description="Job title from JD")
 
-    resume_analysis: ResumeAnalysis = Field(description="Resume analysis")
-    github_analysis: GitHubAnalysis = Field(description="GitHub analysis")
+    resume_analysis: Optional[ResumeAnalysis] = Field(default=None, description="Resume analysis")
+    github_analysis: Optional[GitHubAnalysis] = Field(default=None, description="GitHub analysis")
 
     skill_gaps: List[ExperienceGapAnalysis] = Field(default_factory=list, description="Identified gaps")
     skill_gaps_summary: str = Field(default="", description="Overall gaps summary with reasoning")
@@ -218,7 +225,7 @@ class CandidateEvaluation(BaseModel):
     strengths: List[str] = Field(default_factory=list, description="Top 5 candidate strengths")
     strengths_reason: str = Field(default="", description="Why these are the top strengths")
 
-    final_decision: FinalDecision = Field(description="Final hiring decision")
+    final_decision: Optional[FinalDecision] = Field(default=None, description="Final hiring decision")
 
     detailed_feedback: str = Field(default="", description="Detailed feedback for candidate (2-3 paragraphs)")
     hiring_manager_notes: str = Field(default="", description="Notes for hiring manager (2-3 paragraphs)")
@@ -523,6 +530,20 @@ def fetch_code_files(repo_full_name: str, file_paths: List[str]) -> dict:
 
 
 # ============================================
+# Helper Functions
+# ============================================
+
+def get_langsmith_url(run_id: str, project_name: str) -> Optional[str]:
+    """Generate LangSmith URL for a run."""
+    try:
+        if os.getenv('LANGSMITH_API_KEY') and os.getenv('LANGSMITH_TRACING') == 'true':
+            return f"https://smith.langchain.com/o/projects/p/{project_name}/r/{run_id}"
+    except:
+        pass
+    return None
+
+
+# ============================================
 # Main Pipeline 2 Function
 # ============================================
 
@@ -531,7 +552,8 @@ def evaluate_candidate(
     jd_text: str,
     jd_job_title: str,
     verbose: bool = True,
-    testing: bool = False
+    testing: bool = False,
+    enable_observability: bool = True
 ):
     """PIPELINE 2: Complete candidate evaluation with resume + GitHub analysis.
 
@@ -541,13 +563,31 @@ def evaluate_candidate(
         jd_job_title: Job title from JD
         verbose: Print details
         testing: Enable caching mode - fetches GitHub data once and reuses for subsequent runs
+        enable_observability: Enable execution tracking and logging
 
     Returns:
-        Tuple of (CandidateEvaluation, toon_output)
+        Tuple of (CandidateEvaluation, toon_output, execution)
     """
     # Set global testing mode
     global TESTING_MODE
     TESTING_MODE = testing
+
+    # Initialize observability
+    execution_id = str(uuid.uuid4())
+    execution = None
+    tracker = None
+
+    if enable_observability:
+        from datetime import datetime
+        execution = PipelineExecution(
+            execution_id=execution_id,
+            pipeline_name="pipeline2_candidate_evaluator",
+            repository_type="local",  # Using 'local' for resume files
+            repository_path=resume_pdf_path,
+            job_title=jd_job_title,
+            start_time=datetime.now()
+        )
+        tracker = StepTracker(execution)
 
     if verbose:
         print("\n" + "="*80)
@@ -557,19 +597,43 @@ def evaluate_candidate(
         print(f"💼 Job Title: {jd_job_title}")
         if testing:
             print(f"🧪 Testing Mode: ENABLED (caching GitHub data)")
+        if enable_observability:
+            print(f"🔍 Execution ID: {execution_id}")
         print()
 
-    # Create LLM and agent
-    llm = get_chat_model("claude-3-5-sonnet")
-    agent = create_react_agent(
-        llm,
-        tools=[extract_resume, get_github_profile, get_github_repositories,
-               get_repo_file_structure, fetch_code_files],
-        response_format=CandidateEvaluation
-    )
+    try:
+        # STEP 1: Initialize LLM and Agent
+        if tracker:
+            with tracker.track_step(
+                StepType.INITIALIZATION,
+                "Initialize LLM and Agent",
+                input_data={"model": "claude-3-5-sonnet"},
+                reason="Create agent with resume and GitHub analysis tools"
+            ):
+                llm = get_chat_model("claude-3-5-sonnet")
+                agent = create_react_agent(
+                    llm,
+                    tools=[extract_resume, get_github_profile, get_github_repositories,
+                           get_repo_file_structure, fetch_code_files],
+                    response_format=CandidateEvaluation
+                )
+                tracker.update_output({
+                    "tools_loaded": ["extract_resume", "get_github_profile", "get_github_repositories",
+                                   "get_repo_file_structure", "fetch_code_files"],
+                    "tool_count": 5,
+                    "response_format": "CandidateEvaluation"
+                })
+        else:
+            llm = get_chat_model("claude-3-5-sonnet")
+            agent = create_react_agent(
+                llm,
+                tools=[extract_resume, get_github_profile, get_github_repositories,
+                       get_repo_file_structure, fetch_code_files],
+                response_format=CandidateEvaluation
+            )
 
-    # Prompt
-    prompt = f"""Evaluate candidate completely against Job Description.
+        # Prompt
+        prompt = f"""Evaluate candidate completely against Job Description.
 
 JOB DESCRIPTION:
 {jd_text}
@@ -685,24 +749,110 @@ CRITICAL RULES:
 
 Return complete evaluation with all reasoning."""
 
-    # Invoke agent
-    if verbose:
-        print("🤖 Analyzing resume and GitHub projects...\n")
+        # STEP 2: Agent Evaluation with LangSmith tracing
+        try:
+            from langsmith import uuid7
+            run_id = str(uuid7())
+        except ImportError:
+            run_id = str(uuid.uuid4())
 
-    result = agent.invoke({
-        "messages": [HumanMessage(content=prompt)]
-    })
+        if tracker:
+            execution.langsmith_run_id = run_id
+            langsmith_project = "Synapse-Pipeline2"
+            execution.langsmith_project = langsmith_project
 
-    # Get structured output
-    data = result['structured_response']
+            with tracker.track_step(
+                StepType.AGENT_REASONING,
+                "Agent Candidate Evaluation",
+                input_data={
+                    "job_title": jd_job_title,
+                    "resume_path": resume_pdf_path,
+                    "prompt_length": len(prompt)
+                },
+                reason="Agent evaluates resume and GitHub projects against job requirements"
+            ):
+                if verbose:
+                    print("🤖 Analyzing resume and GitHub projects...\n")
 
-    # Convert to TOON
-    output_toon = toon_encode(data.model_dump())
+                result = agent.invoke(
+                    {"messages": [HumanMessage(content=prompt)]},
+                    {"run_id": run_id, "project_name": langsmith_project, "tags": ["candidate-evaluation", "resume-analysis"]}
+                )
 
-    if verbose:
-        print("="*80)
-        print("✅ EVALUATION COMPLETE")
-        print("="*80)
+                data = result['structured_response']
+
+                # Count tokens using tiktoken
+                try:
+                    import tiktoken
+                    encoding = tiktoken.encoding_for_model('gpt-4')
+
+                    def count_tokens(text: str) -> int:
+                        return len(encoding.encode(str(text)))
+
+                    input_tokens = count_tokens(prompt)
+                    output_tokens = 0
+                    if 'messages' in result:
+                        for msg in result['messages']:
+                            if hasattr(msg, 'content') and msg.content:
+                                output_tokens += count_tokens(msg.content)
+                            if hasattr(msg, 'tool_calls') and msg.tool_calls:
+                                output_tokens += count_tokens(str(msg.tool_calls))
+
+                    tokens_used = input_tokens + output_tokens
+                    input_cost = (input_tokens / 1_000_000) * 3.0
+                    output_cost = (output_tokens / 1_000_000) * 15.0
+                    cost_usd = input_cost + output_cost
+                except ImportError:
+                    tokens_used = 0
+                    cost_usd = 0.0
+
+                # Get LangSmith URL
+                langsmith_url = get_langsmith_url(run_id, langsmith_project)
+                if langsmith_url:
+                    execution.langsmith_url = langsmith_url
+
+                tracker.update_metrics(
+                    tokens=tokens_used if tokens_used > 0 else None,
+                    cost=cost_usd if cost_usd > 0 else None
+                )
+                tracker.update_output({
+                    "evaluation_generated": True,
+                    "is_fit": data.final_decision.is_fit if data.final_decision else False,
+                    "overall_score": data.final_decision.overall_score if data.final_decision else 0,
+                    "recommendation": data.final_decision.recommendation if data.final_decision else "unknown",
+                    "langsmith_run_id": run_id,
+                    "tokens_used": tokens_used,
+                    "cost_usd": round(cost_usd, 4) if cost_usd > 0 else 0
+                })
+        else:
+            if verbose:
+                print("🤖 Analyzing resume and GitHub projects...\n")
+
+            result = agent.invoke({
+                "messages": [HumanMessage(content=prompt)]
+            })
+            data = result['structured_response']
+
+        # STEP 3: Convert to TOON
+        if tracker:
+            with tracker.track_step(
+                StepType.OUTPUT_GENERATION,
+                "Generate TOON Output",
+                input_data={"output_format": "TOON"},
+                reason="Convert evaluation to TOON format for storage"
+            ):
+                output_toon = toon_encode(data.model_dump())
+                tracker.update_output({
+                    "encoding": "TOON",
+                    "size_bytes": len(output_toon)
+                })
+        else:
+            output_toon = toon_encode(data.model_dump())
+
+        if verbose:
+            print("="*80)
+            print("✅ EVALUATION COMPLETE")
+            print("="*80)
 
         print(f"\n👤 Candidate: {data.candidate_name}")
         print(f"💼 Position: {data.job_title}")
@@ -712,53 +862,59 @@ Return complete evaluation with all reasoning."""
         print("🎯 FINAL DECISION")
         print(f"{'='*80}")
 
-        fit_status = "✅ FIT" if data.final_decision.is_fit else "❌ NOT FIT"
-        print(f"\n{fit_status}")
-        print(f"Overall Score: {data.final_decision.overall_score}/100")
-        print(f"Recommendation: {data.final_decision.recommendation.upper()}")
-        print(f"Confidence: {data.final_decision.confidence_level}%")
+        if data.final_decision:
+            fit_status = "✅ FIT" if data.final_decision.is_fit else "❌ NOT FIT"
+            print(f"\n{fit_status}")
+            print(f"Overall Score: {data.final_decision.overall_score}/100")
+            print(f"Recommendation: {data.final_decision.recommendation.upper()}")
+            print(f"Confidence: {data.final_decision.confidence_level}%")
 
-        print(f"\n💡 Decision Reason:")
-        print(f"   {data.final_decision.fit_reason}")
+            print(f"\n💡 Decision Reason:")
+            print(f"   {data.final_decision.fit_reason}")
 
-        print(f"\n📊 Score Breakdown:")
-        print(f"   {data.final_decision.overall_score_breakdown}")
+            print(f"\n📊 Score Breakdown:")
+            print(f"   {data.final_decision.overall_score_breakdown}")
 
-        print(f"\n   Resume Score: {data.final_decision.resume_score}/100")
-        print(f"   GitHub Score: {data.final_decision.github_score}/100")
-        print(f"   Skill Match: {data.final_decision.skill_match_score}/100")
+            print(f"\n   Resume Score: {data.final_decision.resume_score}/100")
+            print(f"   GitHub Score: {data.final_decision.github_score}/100")
+            print(f"   Skill Match: {data.final_decision.skill_match_score}/100")
 
-        print(f"\n💡 Recommendation Reason:")
-        print(f"   {data.final_decision.recommendation_reason}")
+            print(f"\n💡 Recommendation Reason:")
+            print(f"   {data.final_decision.recommendation_reason}")
 
-        print(f"\n💡 Confidence Reason:")
-        print(f"   {data.final_decision.confidence_reason}")
+            print(f"\n💡 Confidence Reason:")
+            print(f"   {data.final_decision.confidence_reason}")
+        else:
+            print(f"\nFinal decision not completed - partial evaluation only")
 
         # Resume Analysis
         print(f"\n\n📄 RESUME ANALYSIS:")
         print("-"*80)
-        print(f"Years of Experience: {data.resume_analysis.years_of_experience}")
-        print(f"💡 {data.resume_analysis.years_reason}")
+        if data.resume_analysis:
+            print(f"Years of Experience: {data.resume_analysis.years_of_experience}")
+            print(f"💡 {data.resume_analysis.years_reason}")
 
-        print(f"\nEducation Match: {'✓' if data.resume_analysis.education_match else '✗'}")
-        print(f"💡 {data.resume_analysis.education_reason}")
+            print(f"\nEducation Match: {'✓' if data.resume_analysis.education_match else '✗'}")
+            print(f"💡 {data.resume_analysis.education_reason}")
 
-        print(f"\nResume Strength: {data.resume_analysis.resume_strength_score}/100")
-        print(f"💡 {data.resume_analysis.resume_strength_reason}")
+            print(f"\nResume Strength: {data.resume_analysis.resume_strength_score}/100")
+            print(f"💡 {data.resume_analysis.resume_strength_reason}")
 
-        # Skill Matches
-        print(f"\n\n🎯 SKILL MATCHING:")
-        print("-"*80)
-        for skill in data.resume_analysis.skill_matches:
-            status = "✓" if skill.has_skill else "✗"
-            print(f"\n{status} {skill.skill_name} - Proficiency: {skill.proficiency_score}/10")
-            print(f"   Evidence: {skill.evidence}")
-            print(f"   💡 {skill.reason}")
+            # Skill Matches
+            print(f"\n\n🎯 SKILL MATCHING:")
+            print("-"*80)
+            for skill in data.resume_analysis.skill_matches:
+                status = "✓" if skill.has_skill else "✗"
+                print(f"\n{status} {skill.skill_name} - Proficiency: {skill.proficiency_score}/10")
+                print(f"   Evidence: {skill.evidence}")
+                print(f"   💡 {skill.reason}")
+        else:
+            print(f"Resume analysis not completed")
 
         # GitHub Analysis
         print(f"\n\n💻 GITHUB ANALYSIS:")
         print("-"*80)
-        if data.github_analysis.has_github:
+        if data.github_analysis and data.github_analysis.has_github:
             print(f"Username: {data.github_analysis.github_username}")
             print(f"Projects Found: {data.github_analysis.projects_found}")
             print(f"💡 {data.github_analysis.github_check_reason}")
@@ -787,9 +943,11 @@ Return complete evaluation with all reasoning."""
 
             print(f"\nGitHub Score: {data.github_analysis.github_contribution_score}/100")
             print(f"💡 {data.github_analysis.github_score_reason}")
-        else:
+        elif data.github_analysis:
             print(f"No GitHub found")
             print(f"💡 {data.github_analysis.github_check_reason}")
+        else:
+            print(f"GitHub analysis not completed")
 
         # Gaps
         if data.skill_gaps:
@@ -822,19 +980,48 @@ Return complete evaluation with all reasoning."""
         print("-"*80)
         print(data.hiring_manager_notes)
 
-    # Save TOON
-    output_file = f"{data.candidate_name.replace(' ', '_')}_evaluation.toon"
-    with open(output_file, 'w') as f:
-        f.write(output_toon)
+        # Save TOON
+        output_file = f"{data.candidate_name.replace(' ', '_')}_evaluation.toon"
+        with open(output_file, 'w') as f:
+            f.write(output_toon)
 
-    if verbose:
-        print("\n" + "="*80)
-        print("💾 SAVED OUTPUT")
-        print("="*80)
-        print(f"✅ TOON: {output_file}")
-        print(f"   Size: {len(output_toon)} characters")
+        if verbose:
+            print("\n" + "="*80)
+            print("💾 SAVED OUTPUT")
+            print("="*80)
+            print(f"✅ TOON: {output_file}")
+            print(f"   Size: {len(output_toon)} characters")
+            if enable_observability and execution:
+                print(f"\n📊 Execution Logs:")
+                print(f"   Detailed: execution_logs/{execution_id}.json")
+                print(f"   Frontend: execution_logs/{execution_id}_frontend.json")
+                if execution.langsmith_url:
+                    print(f"\n🔍 LangSmith Trace: {execution.langsmith_url}")
 
-    return data, output_toon
+    except Exception as e:
+        if tracker:
+            tracker.finalize(success=False)
+        if verbose:
+            print(f"\n❌ Error: {str(e)}")
+        raise
+    finally:
+        # Finalize execution tracking
+        if enable_observability and tracker:
+            tracker.finalize()
+
+            # Save execution logs
+            log_dir = Path("execution_logs")
+            log_dir.mkdir(exist_ok=True)
+
+            log_file = log_dir / f"{execution_id}.json"
+            with open(log_file, 'w') as f:
+                json.dump(execution.model_dump(), f, indent=2, default=str)
+
+            frontend_log_file = log_dir / f"{execution_id}_frontend.json"
+            with open(frontend_log_file, 'w') as f:
+                json.dump(execution.to_frontend_json(), f, indent=2)
+
+    return data, output_toon, execution
 
 
 # ============================================
@@ -858,7 +1045,7 @@ if __name__ == "__main__":
     """
 
     # Example usage
-    evaluation, toon = evaluate_candidate(
+    evaluation, toon, execution = evaluate_candidate(
         resume_pdf_path="/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
         jd_text=jd_text,
         jd_job_title="Senior Python Backend Developer",
@@ -868,9 +1055,23 @@ if __name__ == "__main__":
 
     print(f"\n🎉 Pipeline 2 Complete!")
     print(f"   Candidate: {evaluation.candidate_name}")
-    print(f"   Fit: {'YES' if evaluation.final_decision.is_fit else 'NO'}")
-    print(f"   Score: {evaluation.final_decision.overall_score}/100")
-    print(f"   Recommendation: {evaluation.final_decision.recommendation}")
+    if evaluation.final_decision:
+        print(f"   Fit: {'YES' if evaluation.final_decision.is_fit else 'NO'}")
+        print(f"   Score: {evaluation.final_decision.overall_score}/100")
+        print(f"   Recommendation: {evaluation.final_decision.recommendation}")
+    else:
+        print(f"   Fit: INCOMPLETE")
+        print(f"   Score: N/A")
+        print(f"   Recommendation: partial-evaluation")
+
+    if execution:
+        print(f"\n📊 Execution Tracking:")
+        print(f"   Execution ID: {execution.execution_id}")
+        print(f"   Duration: {execution.total_duration_ms:.2f}ms")
+        print(f"   Total Tokens: {execution.total_tokens}")
+        print(f"   Total Cost: ${execution.total_cost_usd:.4f}")
+        if execution.langsmith_url:
+            print(f"   LangSmith: {execution.langsmith_url}")
 
     if TESTING_MODE:
         print(f"\n💾 Cache location: {CACHE_DIR}")

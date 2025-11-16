@@ -20,6 +20,8 @@ Evaluates:
 
 import sys
 import json
+import uuid
+import os
 from pathlib import Path
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -44,6 +46,11 @@ if env_path.exists():
 # Import Holistic AI Bedrock helper
 sys.path.insert(0, str(Path(__file__).parent.parent / 'core'))
 from react_agent.holistic_ai_bedrock import get_chat_model
+
+# Import observability
+from observability import (
+    StepType, StepStatus, StepData, PipelineExecution, StepTracker
+)
 
 
 # ============================================
@@ -98,17 +105,17 @@ class TechnicalSkillMatch(BaseModel):
     """Individual technical skill matching"""
     model_config = ConfigDict(populate_by_name=True)
 
-    skill_name: str = Field(description="Skill from JD", alias="skill")
+    skill_name: str = Field(default="Unknown", description="Skill from JD", alias="skill")
     required_level: str = Field(default="intermediate", description="Required proficiency level")
 
-    has_skill: bool = Field(description="Candidate has this skill")
+    has_skill: bool = Field(default=False, description="Candidate has this skill")
     candidate_level: str = Field(default="beginner", description="Candidate's proficiency level")
 
     years_of_experience: int = Field(default=0, description="Years using this skill")
-    evidence: str = Field(description="Where in resume this skill appears")
+    evidence: str = Field(default="Not mentioned", description="Where in resume this skill appears")
 
-    match_quality: str = Field(description="exact, close, partial, or missing")
-    match_reason: str = Field(description="Why this match quality")
+    match_quality: str = Field(default="missing", description="exact, close, partial, or missing")
+    match_reason: str = Field(default="Skill match analysis", description="Why this match quality")
 
     importance: str = Field(default="must-have", description="must-have or nice-to-have")
     gap_severity: Optional[str] = Field(default=None, description="If missing: critical, moderate, minor")
@@ -255,16 +262,16 @@ class GapAnalysis(BaseModel):
     """Detailed gap analysis"""
     model_config = ConfigDict(populate_by_name=True)
 
-    gap_category: str = Field(description="education, experience, technical, or soft-skills", alias="category")
-    gap_name: str = Field(description="Name of the gap", alias="name")
-    gap_description: str = Field(description="Detailed description", alias="description")
+    gap_category: str = Field(default="technical", description="education, experience, technical, or soft-skills", alias="category")
+    gap_name: str = Field(default="Unknown gap", description="Name of the gap", alias="name")
+    gap_description: str = Field(default="Gap identified", description="Detailed description", alias="description")
 
-    severity: str = Field(description="critical, moderate, or minor")
-    severity_reason: str = Field(description="Why this severity level")
+    severity: str = Field(default="moderate", description="critical, moderate, or minor")
+    severity_reason: str = Field(default="Gap severity analyzed", description="Why this severity level")
 
-    impact_on_hiring: str = Field(description="How this gap affects hiring decision")
+    impact_on_hiring: str = Field(default="This gap impacts hiring decision", description="How this gap affects hiring decision")
 
-    can_be_filled: bool = Field(description="Can gap be filled through training")
+    can_be_filled: bool = Field(default=True, description="Can gap be filled through training")
     time_to_fill: Optional[str] = Field(default=None, description="Estimated time to fill gap")
     fill_strategy: Optional[str] = Field(default=None, description="How to fill this gap")
 
@@ -403,6 +410,16 @@ def load_jd_from_toon(toon_file_path: str) -> dict:
         return {"error": f"Failed to load TOON file: {str(e)}"}
 
 
+def get_langsmith_url(run_id: str, project_name: str) -> Optional[str]:
+    """Generate LangSmith URL for a run."""
+    try:
+        if os.getenv('LANGSMITH_API_KEY') and os.getenv('LANGSMITH_TRACING') == 'true':
+            return f"https://smith.langchain.com/o/projects/p/{project_name}/r/{run_id}"
+    except:
+        pass
+    return None
+
+
 # ============================================
 # Main Pipeline 3 Function
 # ============================================
@@ -411,7 +428,8 @@ def match_resume_to_jd(
     resume_pdf_path: str,
     jd_input: Union[str, dict],
     jd_source: str = "text",  # "text", "toon", or "dict"
-    verbose: bool = True
+    verbose: bool = True,
+    enable_observability: bool = True
 ):
     """PIPELINE 3: Match resume directly to JD without GitHub dependency.
 
@@ -420,9 +438,10 @@ def match_resume_to_jd(
         jd_input: Job description (text string, TOON file path, or dict)
         jd_source: Source type - "text", "toon", or "dict"
         verbose: Print detailed output
+        enable_observability: Enable execution tracking and logging
 
     Returns:
-        Tuple of (ResumeJDMatch, toon_output)
+        Tuple of (ResumeJDMatch, toon_output, execution)
     """
     if verbose:
         print("\n" + "="*80)
@@ -432,33 +451,78 @@ def match_resume_to_jd(
         print(f"📋 JD Source: {jd_source}")
         print()
 
-    # Parse JD based on source
-    if jd_source == "toon":
-        if verbose:
-            print(f"📦 Loading JD from TOON file: {jd_input}")
-        jd_data = load_jd_from_toon(jd_input)
-        if "error" in jd_data:
-            raise ValueError(f"Failed to load TOON: {jd_data['error']}")
-        jd_text = json.dumps(jd_data, indent=2)
-        jd_title = jd_data.get('job_title', 'Unknown Position')
-    elif jd_source == "dict":
-        jd_data = jd_input
-        jd_text = json.dumps(jd_data, indent=2)
-        jd_title = jd_data.get('job_title', 'Unknown Position')
-    else:  # text
-        jd_text = jd_input
-        jd_title = "Position from JD"  # Will be extracted by LLM
+    # Initialize observability
+    execution_id = str(uuid.uuid4())
+    execution = None
+    tracker = None
 
-    # Create LLM and agent
-    llm = get_chat_model("claude-3-5-sonnet")
-    agent = create_react_agent(
-        llm,
-        tools=[extract_resume_text],
-        response_format=ResumeJDMatch
-    )
+    if enable_observability:
+        from datetime import datetime
+        execution = PipelineExecution(
+            execution_id=execution_id,
+            pipeline_name="pipeline3_resume_jd_matcher",
+            repository_type="local",  # Using 'local' for resume files
+            repository_path=resume_pdf_path,
+            job_title="JD Matching",  # Will be updated after parsing JD
+            start_time=datetime.now()
+        )
+        tracker = StepTracker(execution)
 
-    # Build comprehensive prompt
-    prompt = f"""Perform COMPLETE Resume-JD matching analysis WITHOUT GitHub dependency.
+
+        if enable_observability:
+            print(f"🔍 Execution ID: {execution_id}")
+
+    try:
+        # STEP 1: Parse JD based on source
+        if jd_source == "toon":
+            if verbose:
+                print(f"📦 Loading JD from TOON file: {jd_input}")
+            jd_data = load_jd_from_toon(jd_input)
+            if "error" in jd_data:
+                raise ValueError(f"Failed to load TOON: {jd_data['error']}")
+            jd_text = json.dumps(jd_data, indent=2)
+            jd_title = jd_data.get('job_title', 'Unknown Position')
+        elif jd_source == "dict":
+            jd_data = jd_input
+            jd_text = json.dumps(jd_data, indent=2)
+            jd_title = jd_data.get('job_title', 'Unknown Position')
+        else:  # text
+            jd_text = jd_input
+            jd_title = "Position from JD"  # Will be extracted by LLM
+
+        # Update execution with actual job title
+        if tracker and jd_title:
+            execution.job_title = jd_title
+
+        # STEP 2: Initialize LLM and Agent
+        if tracker:
+            with tracker.track_step(
+                StepType.INITIALIZATION,
+                "Initialize LLM and Agent",
+                input_data={"model": "claude-3-5-sonnet"},
+                reason="Create agent with resume extraction tool"
+            ):
+                llm = get_chat_model("claude-3-5-sonnet")
+                agent = create_react_agent(
+                    llm,
+                    tools=[extract_resume_text],
+                    response_format=ResumeJDMatch
+                )
+                tracker.update_output({
+                    "tools_loaded": ["extract_resume_text"],
+                    "tool_count": 1,
+                    "response_format": "ResumeJDMatch"
+                })
+        else:
+            llm = get_chat_model("claude-3-5-sonnet")
+            agent = create_react_agent(
+                llm,
+                tools=[extract_resume_text],
+                response_format=ResumeJDMatch
+            )
+
+        # Build comprehensive prompt
+        prompt = f"""Perform COMPLETE Resume-JD matching analysis WITHOUT GitHub dependency.
 
 JOB DESCRIPTION:
 {jd_text}
@@ -629,36 +693,151 @@ CRITICAL RULES:
 
 Return complete analysis with all reasoning."""
 
-    # Invoke agent
-    if verbose:
-        print("🤖 Analyzing resume against JD requirements...\n")
+        # STEP 3: Agent Matching with LangSmith tracing
+        try:
+            from langsmith import uuid7
+            run_id = str(uuid7())
+        except ImportError:
+            run_id = str(uuid.uuid4())
 
-    result = agent.invoke({
-        "messages": [HumanMessage(content=prompt)]
-    })
+        if tracker:
+            execution.langsmith_run_id = run_id
+            langsmith_project = "Synapse-Pipeline3"
+            execution.langsmith_project = langsmith_project
 
-    # Get structured output
-    data = result['structured_response']
+            with tracker.track_step(
+                StepType.AGENT_REASONING,
+                "Agent Resume-JD Matching",
+                input_data={
+                    "resume_path": resume_pdf_path,
+                    "jd_source": jd_source,
+                    "prompt_length": len(prompt)
+                },
+                reason="Agent matches resume against job description requirements"
+            ):
+                if verbose:
+                    print("🤖 Analyzing resume against JD requirements...\n")
 
-    # Convert to TOON
-    output_toon = toon_encode(data.model_dump())
+                result = agent.invoke(
+                    {"messages": [HumanMessage(content=prompt)]},
+                    {"run_id": run_id, "project_name": langsmith_project, "tags": ["resume-jd-matching", "no-github"]}
+                )
 
-    if verbose:
-        print_detailed_match_results(data)
+                data = result['structured_response']
 
-    # Save TOON
-    output_file = f"{data.candidate_name.replace(' ', '_')}_match.toon"
-    with open(output_file, 'w') as f:
-        f.write(output_toon)
+                # Count tokens using tiktoken
+                try:
+                    import tiktoken
+                    encoding = tiktoken.encoding_for_model('gpt-4')
 
-    if verbose:
-        print("\n" + "="*80)
-        print("💾 SAVED OUTPUT")
-        print("="*80)
-        print(f"✅ TOON: {output_file}")
-        print(f"   Size: {len(output_toon)} characters")
+                    def count_tokens(text: str) -> int:
+                        return len(encoding.encode(str(text)))
 
-    return data, output_toon
+                    input_tokens = count_tokens(prompt)
+                    output_tokens = 0
+                    if 'messages' in result:
+                        for msg in result['messages']:
+                            if hasattr(msg, 'content') and msg.content:
+                                output_tokens += count_tokens(msg.content)
+                            if hasattr(msg, 'tool_calls') and msg.tool_calls:
+                                output_tokens += count_tokens(str(msg.tool_calls))
+
+                    tokens_used = input_tokens + output_tokens
+                    input_cost = (input_tokens / 1_000_000) * 3.0
+                    output_cost = (output_tokens / 1_000_000) * 15.0
+                    cost_usd = input_cost + output_cost
+                except ImportError:
+                    tokens_used = 0
+                    cost_usd = 0.0
+
+                # Get LangSmith URL
+                langsmith_url = get_langsmith_url(run_id, langsmith_project)
+                if langsmith_url:
+                    execution.langsmith_url = langsmith_url
+
+                tracker.update_metrics(
+                    tokens=tokens_used if tokens_used > 0 else None,
+                    cost=cost_usd if cost_usd > 0 else None
+                )
+                tracker.update_output({
+                    "match_generated": True,
+                    "is_match": data.final_decision.is_match,
+                    "overall_score": data.final_decision.overall_match_score,
+                    "recommendation": data.final_decision.recommendation,
+                    "langsmith_run_id": run_id,
+                    "tokens_used": tokens_used,
+                    "cost_usd": round(cost_usd, 4) if cost_usd > 0 else 0
+                })
+        else:
+            if verbose:
+                print("🤖 Analyzing resume against JD requirements...\n")
+
+            result = agent.invoke({
+                "messages": [HumanMessage(content=prompt)]
+            })
+            data = result['structured_response']
+
+        # STEP 4: Convert to TOON
+        if tracker:
+            with tracker.track_step(
+                StepType.OUTPUT_GENERATION,
+                "Generate TOON Output",
+                input_data={"output_format": "TOON"},
+                reason="Convert matching results to TOON format for storage"
+            ):
+                output_toon = toon_encode(data.model_dump())
+                tracker.update_output({
+                    "encoding": "TOON",
+                    "size_bytes": len(output_toon)
+                })
+        else:
+            output_toon = toon_encode(data.model_dump())
+
+        if verbose:
+            print_detailed_match_results(data)
+
+        # Save TOON
+        output_file = f"{data.candidate_name.replace(' ', '_')}_match.toon"
+        with open(output_file, 'w') as f:
+            f.write(output_toon)
+
+        if verbose:
+            print("\n" + "="*80)
+            print("💾 SAVED OUTPUT")
+            print("="*80)
+            print(f"✅ TOON: {output_file}")
+            print(f"   Size: {len(output_toon)} characters")
+            if enable_observability and execution:
+                print(f"\n📊 Execution Logs:")
+                print(f"   Detailed: execution_logs/{execution_id}.json")
+                print(f"   Frontend: execution_logs/{execution_id}_frontend.json")
+                if execution.langsmith_url:
+                    print(f"\n🔍 LangSmith Trace: {execution.langsmith_url}")
+
+    except Exception as e:
+        if tracker:
+            tracker.finalize(success=False)
+        if verbose:
+            print(f"\n❌ Error: {str(e)}")
+        raise
+    finally:
+        # Finalize execution tracking
+        if enable_observability and tracker:
+            tracker.finalize()
+
+            # Save execution logs
+            log_dir = Path("execution_logs")
+            log_dir.mkdir(exist_ok=True)
+
+            log_file = log_dir / f"{execution_id}.json"
+            with open(log_file, 'w') as f:
+                json.dump(execution.model_dump(), f, indent=2, default=str)
+
+            frontend_log_file = log_dir / f"{execution_id}_frontend.json"
+            with open(frontend_log_file, 'w') as f:
+                json.dump(execution.to_frontend_json(), f, indent=2)
+
+    return data, output_toon, execution
 
 
 def print_detailed_match_results(data: ResumeJDMatch):
@@ -868,7 +1047,7 @@ if __name__ == "__main__":
     jd_toon_path = "/Users/thiruanand/2025-hackaton/hackathon-2025/fastapi_fastapi_jd.toon"
 
     # Run matching
-    match_result, toon = match_resume_to_jd(
+    match_result, toon, execution = match_resume_to_jd(
         resume_pdf_path="/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
         jd_input=jd_toon_path,
         jd_source="toon",
@@ -882,3 +1061,12 @@ if __name__ == "__main__":
     print(f"   Weighted Score: {match_result.final_decision.weighted_score:.2f}/100")
     print(f"   Recommendation: {match_result.final_decision.recommendation}")
     print(f"   Interview: {'YES' if match_result.final_decision.proceed_to_interview else 'NO'}")
+
+    if execution:
+        print(f"\n📊 Execution Tracking:")
+        print(f"   Execution ID: {execution.execution_id}")
+        print(f"   Duration: {execution.total_duration_ms:.2f}ms")
+        print(f"   Total Tokens: {execution.total_tokens}")
+        print(f"   Total Cost: ${execution.total_cost_usd:.4f}")
+        if execution.langsmith_url:
+            print(f"   LangSmith: {execution.langsmith_url}")

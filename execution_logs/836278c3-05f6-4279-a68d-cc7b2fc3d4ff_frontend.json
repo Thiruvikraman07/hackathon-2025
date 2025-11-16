@@ -1,0 +1,90 @@
+{
+  "executionId": "836278c3-05f6-4279-a68d-cc7b2fc3d4ff",
+  "pipeline": "pipeline2_candidate_evaluator",
+  "repository": {
+    "type": "local",
+    "path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": null,
+    "additionalRequirements": []
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T11:33:53.286467",
+      "endTime": "2025-11-16T11:33:53.495766",
+      "durationMs": 209.29694175720215,
+      "input": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "agent_reasoning",
+      "name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "startTime": "2025-11-16T11:33:53.495819",
+      "endTime": "2025-11-16T11:34:47.015800",
+      "durationMs": 53519.97995376587,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 4141
+      },
+      "output": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": "Failed to validate structured output: 4 validation errors for CandidateEvaluation\ngithub_analysis.quality_assessments.0.code_quality_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.technical_depth_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.best_practices_reason\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\ngithub_analysis.quality_assessments.0.files_analyzed\n  Field required [type=missing, input_value={'project_name': 'multi-a...s', 'No API structure']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"bel-learning\", \"job_title\": \"Backend Developer\", \"resume_analysis\": {\"years_of_experience\": 2, \"years_reason\": \"Calculated from work history: July 2024-Present (Jetbrains), Jan 2024-Aug 2024 (CMP), June 2023-Jan 2024 (Deutsche B\u00f6rse), April 2022-June 2022 (Hippo Cards)\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University (expected Dec 2025)\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used in research internship with PyTorch, visible in GitHub projects\", \"proficiency_score\": 7}, {\"skill_name\": \"FastAPI/Django\", \"has_skill\": false, \"proficiency_score\": 0}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills, used in all positions\", \"proficiency_score\": 7}, {\"skill_name\": \"Unit Testing\", \"has_skill\": true, \"evidence\": \"Implemented Jacoco test coverage at Deutsche B\u00f6rse\", \"proficiency_score\": 6}], \"resume_strength_score\": 65, \"resume_strength_reason\": \"Strong technical foundation but lacks specific backend development focus\"}, \"github_analysis\": {\"github_username\": \"bel-learning\", \"has_github\": true, \"projects_found\": 6, \"relevant_projects\": [{\"project_name\": \"multi-agent-path-finding\", \"github_url\": \"https://github.com/bel-learning/multi-agent-path-finding\", \"is_relevant\": true, \"relevance_score\": 6, \"technologies_matched\": [\"Python\"]}], \"quality_assessments\": [{\"project_name\": \"multi-agent-path-finding\", \"code_quality_score\": 7, \"technical_depth_score\": 6, \"best_practices_score\": 6, \"key_strengths\": [\"Algorithm implementation\", \"Code organization\"], \"key_weaknesses\": [\"No error handling\", \"Missing tests\", \"No API structure\"]}], \"github_contribution_score\": 55}, \"final_decision\": \"REJECT\", \"strengths\": [\"Strong Python programming skills\", \"Good algorithm implementation abilities\", \"Experience with version control (Git)\", \"Testing knowledge\", \"Computer Science education background\"], \"strengths_reason\": \"The candidate demonstrates solid foundational programming skills through their Python work and algorithm implementations. They have practical experience with essential development tools like Git and testing frameworks. Their Computer Science education provides theoretical backing.\", \"skill_gaps\": [\"No FastAPI/Django experience\", \"Lack of REST API development\", \"No PostgreSQL knowledge\", \"Missing Docker experience\", \"Limited backend development focus\"], \"skill_gaps_summary\": \"While the candidate shows strong programming fundamentals, they lack experience with key backend development technologies and frameworks required for the role. There is no demonstrated experience with web frameworks, API development, or database systems.\"}",
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T11:33:53.286437",
+    "endTime": "2025-11-16T11:34:47.015990",
+    "totalDurationMs": 53729.553,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 0
+  },
+  "langsmith": {
+    "runId": "019a8c71-66d7-7306-98f7-ed833dbea0b7",
+    "url": null,
+    "project": "Synapse-Pipeline2"
+  },
+  "output": {
+    "filePath": null,
+    "sizeBytes": null
+  }
+}

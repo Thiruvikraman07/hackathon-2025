@@ -1,0 +1,110 @@
+{
+  "execution_id": "b7569a02-70f3-4e24-9034-8f0ee7001adf",
+  "pipeline_name": "pipeline2_candidate_evaluator",
+  "repository_type": "local",
+  "repository_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+  "job_title": "Senior Python Backend Developer",
+  "salary_range": null,
+  "additional_requirements": [],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 11:46:05.985753",
+      "end_time": "2025-11-16 11:46:06.196830",
+      "duration_ms": 211.076021194458,
+      "input_data": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Candidate Evaluation",
+      "status": "success",
+      "start_time": "2025-11-16 11:46:06.196889",
+      "end_time": "2025-11-16 11:46:59.744549",
+      "duration_ms": 53547.65295982361,
+      "input_data": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 4141
+      },
+      "output_data": {
+        "evaluation_generated": true,
+        "is_fit": true,
+        "overall_score": 70,
+        "recommendation": "hire",
+        "langsmith_run_id": "019a8c7c-94f4-7733-9db9-2ab24f6bae4f",
+        "tokens_used": 8341,
+        "cost_usd": 0.1129
+      },
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": 8341,
+      "cost_usd": 0.112875,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_3",
+      "step_type": "output_generation",
+      "step_name": "Generate TOON Output",
+      "status": "success",
+      "start_time": "2025-11-16 11:46:59.744570",
+      "end_time": "2025-11-16 11:46:59.745062",
+      "duration_ms": 0.46896934509277344,
+      "input_data": {
+        "output_format": "TOON"
+      },
+      "output_data": {
+        "encoding": "TOON",
+        "size_bytes": 4760
+      },
+      "reason": "Convert evaluation to TOON format for storage",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 11:46:05.985727",
+  "end_time": "2025-11-16 11:46:59.745715",
+  "total_duration_ms": 53759.988,
+  "overall_status": "success",
+  "success": true,
+  "langsmith_run_id": "019a8c7c-94f4-7733-9db9-2ab24f6bae4f",
+  "langsmith_url": "https://smith.langchain.com/o/projects/p/Synapse-Pipeline2/r/019a8c7c-94f4-7733-9db9-2ab24f6bae4f",
+  "langsmith_project": "Synapse-Pipeline2",
+  "total_tokens": 8341,
+  "total_cost_usd": 0.112875,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}

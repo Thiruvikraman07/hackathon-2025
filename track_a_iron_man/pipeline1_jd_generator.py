@@ -53,10 +53,10 @@ from langgraph.prebuilt import create_react_agent
 from src.github.github_client import GitHubClient
 
 # Import Observability
-from track_a_iron_man.observability import (
+from observability import (
     StepType, StepStatus, StepData, PipelineExecution, StepTracker
 )
-from track_a_iron_man.observability.step_tracker import get_langsmith_url
+from observability.step_tracker import get_langsmith_url
 
 # Load environment variables
 env_path = Path('.env')

@@ -1,0 +1,78 @@
+{
+  "execution_id": "ce69d51c-a012-472e-af70-f88c114a68d8",
+  "pipeline_name": "pipeline2_candidate_evaluator",
+  "repository_type": "local",
+  "repository_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+  "job_title": "Senior Python Backend Developer",
+  "salary_range": null,
+  "additional_requirements": [],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 11:37:46.010370",
+      "end_time": "2025-11-16 11:37:46.226396",
+      "duration_ms": 216.01319313049316,
+      "input_data": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "start_time": "2025-11-16 11:37:46.226449",
+      "end_time": "2025-11-16 11:38:34.937584",
+      "duration_ms": 48711.1279964447,
+      "input_data": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 4141
+      },
+      "output_data": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decision_point": null,
+      "tool_used": null,
+      "error": "Failed to validate structured output: 2 validation errors for CandidateEvaluation\ngithub_analysis\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nfinal_decision\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"Bel\", \"job_title\": \"Backend Developer\", \"resume_analysis\": {\"years_of_experience\": 2, \"years_reason\": \"Based on work history from April 2022 to Present (2025), approximately 2 years of professional experience\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University shows strong technical foundation, though still completing degree (expected Dec 2025)\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in research internship at Center for Machine Perception\", \"proficiency_score\": 6, \"reason\": \"Shows Python usage in research context but limited production experience\"}, {\"skill_name\": \"FastAPI/Django\", \"has_skill\": false, \"evidence\": \"No mention of FastAPI or Django experience\", \"proficiency_score\": 0, \"reason\": \"No evidence of web framework experience\"}, {\"skill_name\": \"REST API\", \"has_skill\": false, \"evidence\": \"No explicit REST API development mentioned\", \"proficiency_score\": 0, \"reason\": \"No clear API development experience\"}, {\"skill_name\": \"PostgreSQL\", \"has_skill\": false, \"evidence\": \"No database experience mentioned\", \"proficiency_score\": 0, \"reason\": \"No database skills listed\"}, {\"skill_name\": \"Docker\", \"has_skill\": false, \"evidence\": \"Not mentioned in resume\", \"proficiency_score\": 0, \"reason\": \"No containerization experience shown\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills, used in projects\", \"proficiency_score\": 7, \"reason\": \"Active GitHub usage and listed as technical skill\"}, {\"skill_name\": \"Unit Testing\", \"has_skill\": true, \"evidence\": \"Implemented Jacoco test coverage at Deutsche B\u00f6rse\", \"proficiency_score\": 5, \"reason\": \"Shows testing experience but in Java context\"}], \"relevant_experience\": [\"Research Intern at Center for Machine Perception: Python, PyTorch\", \"Software Integrator at Deutsche B\u00f6rse: Infrastructure, Testing\"], \"resume_strength_score\": 45, \"resume_strength_reason\": \"While showing technical aptitude, lacks specific backend development experience and several required skills. Strong in general software engineering but not specialized in the target role.\"}}",
+      "error_traceback": "Traceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 415, in invoke\n    return self.schema.model_validate(json_data)\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/pydantic/main.py\", line 716, in model_validate\n    return cls.__pydantic_validator__.validate_python(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        obj,\n        ^^^^\n    ...<5 lines>...\n        by_name=by_name,\n        ^^^^^^^^^^^^^^^^\n    )\n    ^\npydantic_core._pydantic_core.ValidationError: 2 validation errors for CandidateEvaluation\ngithub_analysis\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nfinal_decision\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/observability/step_tracker.py\", line 240, in track_step\n    yield step\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/pipeline2_candidate_evaluator.py\", line 777, in evaluate_candidate\n    result = agent.invoke(\n        {\"messages\": [HumanMessage(content=prompt)]},\n        {\"run_id\": run_id, \"project_name\": langsmith_project, \"tags\": [\"candidate-evaluation\", \"resume-analysis\"]}\n    )\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 3094, in invoke\n    for chunk in self.stream(\n                 ~~~~~~~~~~~^\n        input,\n        ^^^^^^\n    ...<10 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/main.py\", line 2679, in stream\n    for _ in runner.tick(\n             ~~~~~~~~~~~^\n        [t for t in loop.tasks.values() if not t.writes],\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<2 lines>...\n        schedule_task=loop.accept_push,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ):\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_runner.py\", line 167, in tick\n    run_with_retry(\n    ~~~~~~~~~~~~~~^\n        t,\n        ^^\n    ...<10 lines>...\n        },\n        ^^\n    )\n    ^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/pregel/_retry.py\", line 42, in run_with_retry\n    return task.proc.invoke(task.input, config)\n           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 656, in invoke\n    input = context.run(step.invoke, input, config, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/_internal/_runnable.py\", line 393, in invoke\n    ret = context.run(self.func, *args, **kwargs)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/.venv/lib/python3.13/site-packages/langgraph/prebuilt/chat_agent_executor.py\", line 746, in generate_structured_response\n    response = model_with_structured_output.invoke(messages, config)\n  File \"/Users/thiruanand/2025-hackaton/hackathon-2025/core/react_agent/holistic_ai_bedrock.py\", line 419, in invoke\n    raise ValueError(f\"Failed to validate structured output: {e}\\nContent: {content}\")\nValueError: Failed to validate structured output: 2 validation errors for CandidateEvaluation\ngithub_analysis\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nfinal_decision\n  Field required [type=missing, input_value={'candidate_name': 'Bel',...d in the target role.'}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nContent: {\"candidate_name\": \"Bel\", \"job_title\": \"Backend Developer\", \"resume_analysis\": {\"years_of_experience\": 2, \"years_reason\": \"Based on work history from April 2022 to Present (2025), approximately 2 years of professional experience\", \"education_match\": true, \"education_reason\": \"Bachelor in Computer Science from Czech Technical University shows strong technical foundation, though still completing degree (expected Dec 2025)\", \"skill_matches\": [{\"skill_name\": \"Python\", \"has_skill\": true, \"evidence\": \"Used Python in research internship at Center for Machine Perception\", \"proficiency_score\": 6, \"reason\": \"Shows Python usage in research context but limited production experience\"}, {\"skill_name\": \"FastAPI/Django\", \"has_skill\": false, \"evidence\": \"No mention of FastAPI or Django experience\", \"proficiency_score\": 0, \"reason\": \"No evidence of web framework experience\"}, {\"skill_name\": \"REST API\", \"has_skill\": false, \"evidence\": \"No explicit REST API development mentioned\", \"proficiency_score\": 0, \"reason\": \"No clear API development experience\"}, {\"skill_name\": \"PostgreSQL\", \"has_skill\": false, \"evidence\": \"No database experience mentioned\", \"proficiency_score\": 0, \"reason\": \"No database skills listed\"}, {\"skill_name\": \"Docker\", \"has_skill\": false, \"evidence\": \"Not mentioned in resume\", \"proficiency_score\": 0, \"reason\": \"No containerization experience shown\"}, {\"skill_name\": \"Git\", \"has_skill\": true, \"evidence\": \"Listed in technical skills, used in projects\", \"proficiency_score\": 7, \"reason\": \"Active GitHub usage and listed as technical skill\"}, {\"skill_name\": \"Unit Testing\", \"has_skill\": true, \"evidence\": \"Implemented Jacoco test coverage at Deutsche B\u00f6rse\", \"proficiency_score\": 5, \"reason\": \"Shows testing experience but in Java context\"}], \"relevant_experience\": [\"Research Intern at Center for Machine Perception: Python, PyTorch\", \"Software Integrator at Deutsche B\u00f6rse: Infrastructure, Testing\"], \"resume_strength_score\": 45, \"resume_strength_reason\": \"While showing technical aptitude, lacks specific backend development experience and several required skills. Strong in general software engineering but not specialized in the target role.\"}}\nDuring task with name 'generate_structured_response' and id 'e1ee2cfa-fee7-da50-3a80-5afe00548727'\n",
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 11:37:46.010322",
+  "end_time": "2025-11-16 11:38:34.937640",
+  "total_duration_ms": 48927.318,
+  "overall_status": "success",
+  "success": true,
+  "langsmith_run_id": "019a8c74-f3f2-7451-bc0d-5969206e1f14",
+  "langsmith_url": null,
+  "langsmith_project": "Synapse-Pipeline2",
+  "total_tokens": 0,
+  "total_cost_usd": 0.0,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}

@@ -417,7 +417,7 @@ def combined_pipeline(
         print("STEP 1: Generating Job Description from Repository")
         print("="*80)
 
-    jd, jd_toon = generate_jd(
+    jd, jd_toon, jd_execution = generate_jd(
         company_repo=company_repo,
         job_title=job_title,
         salary_range=salary_range,
@@ -444,7 +444,7 @@ def combined_pipeline(
     # Create JD text from the generated JobDescription
     jd_text = format_jd_for_evaluation(jd)
 
-    evaluation, eval_toon = evaluate_candidate(
+    evaluation, eval_toon, eval_execution = evaluate_candidate(
         resume_pdf_path=resume_pdf_path,
         jd_text=jd_text,
         jd_job_title=job_title,
@@ -465,7 +465,7 @@ def combined_pipeline(
     with open(temp_jd_file, 'w') as f:
         f.write(jd_toon)
 
-    match_result, match_toon = match_resume_to_jd(
+    match_result, match_toon, match_execution = match_resume_to_jd(
         resume_pdf_path=resume_pdf_path,
         jd_input=temp_jd_file,
         jd_source="toon",
