@@ -1,0 +1,106 @@
+{
+  "execution_id": "467e0c4d-a497-4481-ad0a-a00836c50dcd",
+  "pipeline_name": "pipeline3_resume_jd_matcher",
+  "repository_type": "local",
+  "repository_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+  "job_title": "Senior Python Backend Developer",
+  "salary_range": null,
+  "additional_requirements": [],
+  "steps": [
+    {
+      "step_id": "step_1",
+      "step_type": "initialization",
+      "step_name": "Initialize LLM and Agent",
+      "status": "success",
+      "start_time": "2025-11-16 12:37:28.671394",
+      "end_time": "2025-11-16 12:37:28.676896",
+      "duration_ms": 5.473136901855469,
+      "input_data": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output_data": {
+        "tools_loaded": [
+          "extract_resume_text"
+        ],
+        "tool_count": 1,
+        "response_format": "ResumeJDMatch"
+      },
+      "reason": "Create agent with resume extraction tool",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_2",
+      "step_type": "agent_reasoning",
+      "step_name": "Agent Resume-JD Matching",
+      "status": "success",
+      "start_time": "2025-11-16 12:37:28.676980",
+      "end_time": "2025-11-16 12:38:07.294930",
+      "duration_ms": 38617.93518066406,
+      "input_data": {
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "jd_source": "toon",
+        "prompt_length": 12204
+      },
+      "output_data": {
+        "match_generated": true,
+        "is_match": false,
+        "overall_score": 50,
+        "recommendation": "partial-match",
+        "langsmith_run_id": "019a8cab-9de4-75dc-9ce7-9f41867893aa",
+        "tokens_used": 7824,
+        "cost_usd": 0.0842
+      },
+      "reason": "Agent matches resume against job description requirements",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": 7824,
+      "cost_usd": 0.08424,
+      "files_processed": null
+    },
+    {
+      "step_id": "step_3",
+      "step_type": "output_generation",
+      "step_name": "Generate TOON Output",
+      "status": "success",
+      "start_time": "2025-11-16 12:38:07.295014",
+      "end_time": "2025-11-16 12:38:07.296224",
+      "duration_ms": 1.154184341430664,
+      "input_data": {
+        "output_format": "TOON"
+      },
+      "output_data": {
+        "encoding": "TOON",
+        "size_bytes": 3844
+      },
+      "reason": "Convert matching results to TOON format for storage",
+      "decision_point": null,
+      "tool_used": null,
+      "error": null,
+      "error_traceback": null,
+      "tokens_used": null,
+      "cost_usd": null,
+      "files_processed": null
+    }
+  ],
+  "start_time": "2025-11-16 12:37:28.668926",
+  "end_time": "2025-11-16 12:38:07.297251",
+  "total_duration_ms": 38628.325,
+  "overall_status": "success",
+  "success": true,
+  "langsmith_run_id": "019a8cab-9de4-75dc-9ce7-9f41867893aa",
+  "langsmith_url": "https://smith.langchain.com/o/projects/p/Synapse-Pipeline3/r/019a8cab-9de4-75dc-9ce7-9f41867893aa",
+  "langsmith_project": "Synapse-Pipeline3",
+  "total_tokens": 7824,
+  "total_cost_usd": 0.08424,
+  "total_files_analyzed": 0,
+  "output_file_path": null,
+  "output_size_bytes": null
+}

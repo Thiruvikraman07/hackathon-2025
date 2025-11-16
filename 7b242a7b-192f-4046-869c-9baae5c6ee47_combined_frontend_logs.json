@@ -1,0 +1,9 @@
+{
+  "session_id": "9dbf5c33-dbdb-4cdc-9020-c7691a57d4d3",
+  "timestamp": "2025-11-16T12:46:02.804385",
+  "pipelines": [
+    {
+      "pipeline_id": "27b998b7-deca-47fa-82d7-50449fa56547",
+      "pipeline_name": "Pipeline 1: Job Description Generation",
+      "pipeline_number": 1,
+      "log_file": 

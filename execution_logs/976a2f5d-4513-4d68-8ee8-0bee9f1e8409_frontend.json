@@ -1,0 +1,153 @@
+{
+  "executionId": "976a2f5d-4513-4d68-8ee8-0bee9f1e8409",
+  "pipeline": "pipeline1_jd_generator",
+  "repository": {
+    "type": "github",
+    "path": "fastapi/fastapi"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": "$140k-$180k",
+    "additionalRequirements": [
+      "Experience with microservices architecture",
+      "Strong communication skills for remote work",
+      "Open source contribution experience"
+    ]
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "detection",
+      "name": "Detect Repository Type",
+      "status": "success",
+      "startTime": "2025-11-16T12:35:52.572822",
+      "endTime": "2025-11-16T12:35:52.572882",
+      "durationMs": 0.03790855407714844,
+      "input": {
+        "company_repo": "fastapi/fastapi"
+      },
+      "output": {
+        "repository_type": "GitHub",
+        "is_local": false,
+        "detection_method": "pattern_match"
+      },
+      "reason": "Determine if input is a GitHub repository or local file path",
+      "decisionPoint": "Repository detected as GitHub using pattern_match",
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T12:35:52.572912",
+      "endTime": "2025-11-16T12:35:52.776041",
+      "durationMs": 203.1238079071045,
+      "input": {
+        "model": "claude-3-5-sonnet",
+        "repository_type": "GitHub"
+      },
+      "output": {
+        "tools_loaded": [
+          "fetch_repo_metadata",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 3,
+        "response_format": "JobDescription"
+      },
+      "reason": "Create agent with appropriate tools based on repository type",
+      "decisionPoint": "Loaded 3 tools for GitHub repository",
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_3",
+      "type": "agent_reasoning",
+      "name": "Agent Repository Analysis & JD Generation",
+      "status": "success",
+      "startTime": "2025-11-16T12:35:52.776106",
+      "endTime": "2025-11-16T12:36:40.521516",
+      "durationMs": 47745.41115760803,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "salary_range": "$140k-$180k",
+        "prompt_length": 1901
+      },
+      "output": {
+        "jd_generated": true,
+        "responsibilities_count": 6,
+        "qualifications_count": 8,
+        "experience_level": "Senior",
+        "langsmith_run_id": "39a6fc9e-d36c-4c6f-8a2c-110912d20e0b",
+        "tokens_used": 99827,
+        "cost_usd": 1.4921
+      },
+      "reason": "Agent analyzes repository using tools and generates complete job description",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": 99827,
+        "cost": 1.492053,
+        "filesProcessed": 10
+      }
+    },
+    {
+      "id": "step_4",
+      "type": "output_generation",
+      "name": "Generate and Save TOON Output",
+      "status": "success",
+      "startTime": "2025-11-16T12:36:40.521644",
+      "endTime": "2025-11-16T12:36:40.524659",
+      "durationMs": 2.9251575469970703,
+      "input": {
+        "output_format": "TOON"
+      },
+      "output": {
+        "file_path": "fastapi_fastapi_jd.toon",
+        "size_bytes": 4113,
+        "encoding": "TOON"
+      },
+      "reason": "Convert JobDescription to TOON format and save to file",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T12:35:52.572785",
+    "endTime": "2025-11-16T12:36:40.525456",
+    "totalDurationMs": 47952.671,
+    "totalTokens": 99827,
+    "totalCostUsd": 1.492053,
+    "filesAnalyzed": 10
+  },
+  "langsmith": {
+    "runId": "39a6fc9e-d36c-4c6f-8a2c-110912d20e0b",
+    "url": "https://smith.langchain.com/o/projects/p/Synapse/r/39a6fc9e-d36c-4c6f-8a2c-110912d20e0b",
+    "project": "Synapse"
+  },
+  "output": {
+    "filePath": "fastapi_fastapi_jd.toon",
+    "sizeBytes": 4113
+  }
+}

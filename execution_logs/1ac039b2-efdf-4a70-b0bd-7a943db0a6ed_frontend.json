@@ -1,0 +1,90 @@
+{
+  "executionId": "1ac039b2-efdf-4a70-b0bd-7a943db0a6ed",
+  "pipeline": "pipeline2_candidate_evaluator",
+  "repository": {
+    "type": "local",
+    "path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf"
+  },
+  "config": {
+    "jobTitle": "Senior Python Backend Developer",
+    "salaryRange": null,
+    "additionalRequirements": []
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T12:33:17.268200",
+      "endTime": "2025-11-16T12:33:17.277696",
+      "durationMs": 9.473085403442383,
+      "input": {
+        "model": "claude-3-5-sonnet"
+      },
+      "output": {
+        "tools_loaded": [
+          "extract_resume",
+          "get_github_profile",
+          "get_github_repositories",
+          "get_repo_file_structure",
+          "fetch_code_files"
+        ],
+        "tool_count": 5,
+        "response_format": "CandidateEvaluation"
+      },
+      "reason": "Create agent with resume and GitHub analysis tools",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "agent_reasoning",
+      "name": "Agent Candidate Evaluation",
+      "status": "failed",
+      "startTime": "2025-11-16T12:33:17.277830",
+      "endTime": "2025-11-16T12:34:08.077779",
+      "durationMs": 50799.91602897644,
+      "input": {
+        "job_title": "Senior Python Backend Developer",
+        "resume_path": "/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
+        "prompt_length": 6732
+      },
+      "output": {},
+      "reason": "Agent evaluates resume and GitHub projects against job requirements",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": "Failed to validate structured output: 6 validation errors for CandidateEvaluation\nresume_analysis.skill_matches.0.has_skill\n  Input should be a valid boolean [type=bool_type, input_value={'has_skill': True, 'proficiency': 6}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/bool_type\nresume_analysis.skill_matches.1.has_skill\n  Input should be a valid boolean [type=bool_type, input_value={'has_skill': False, 'proficiency': 0}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/bool_type\nresume_analysis.skill_matches.2.has_skill\n  Input should be a valid boolean [type=bool_type, input_value={'has_skill': True, 'proficiency': 8}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/bool_type\nresume_analysis.skill_matches.3.has_skill\n  Input should be a valid boolean [type=bool_type, input_value={'has_skill': False, 'proficiency': 0}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/bool_type\nresume_analysis.skill_matches.4.has_skill\n  Input should be a valid boolean [type=bool_type, input_value={'has_skill': True, 'proficiency': 5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/bool_type\ngithub_analysis.relevant_projects\n  Input should be a valid list [type=list_type, input_value=1, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.12/v/list_type\nContent: {\"job_title\": \"Senior Python Backend Developer - FastAPI Core Team\", \"candidate_name\": \"bel-learning\", \"resume_analysis\": {\"years_of_experience\": 2, \"education\": \"Pursuing Bachelor's (exp. Dec 2025)\", \"skill_matches\": {\"Python\": {\"has_skill\": true, \"proficiency\": 6}, \"FastAPI\": {\"has_skill\": false, \"proficiency\": 0}, \"Git\": {\"has_skill\": true, \"proficiency\": 8}, \"Docker\": {\"has_skill\": false, \"proficiency\": 0}, \"Testing\": {\"has_skill\": true, \"proficiency\": 5}}, \"overall_score\": 45, \"relevant_roles\": [\"Research Intern - Center for Machine Perception\", \"Software Integrator - Deutsche B\u00f6rse\"]}, \"github_analysis\": {\"username\": \"bel-learning\", \"projects_count\": 6, \"relevant_projects\": 1, \"contribution_score\": 35, \"main_project\": {\"name\": \"multi-agent-path-finding\", \"relevance_score\": 4, \"technologies\": [\"Python\"]}}, \"strengths\": [\"Strong Git version control experience\", \"Basic Python programming skills\", \"Testing experience with Jacoco\", \"Shows learning aptitude\", \"Academic algorithmic development\"], \"strengths_reason\": \"The candidate demonstrates solid fundamentals in version control and testing practices, along with basic Python skills primarily in ML contexts. Their academic projects show ability to tackle complex technical problems, though not in the specific domain required.\", \"skill_gaps\": [\"Insufficient years of experience (2 vs required 5+)\", \"No FastAPI/Starlette experience\", \"Lack of async web framework experience\", \"No Docker/containerization experience\", \"Limited production backend development experience\"], \"skill_gaps_summary\": \"The candidate has significant gaps for a senior role on the FastAPI core team. The most critical gaps are insufficient years of experience and complete lack of FastAPI/async web framework experience. While some gaps like Docker could be learned, the experience gap and lack of core technology expertise present major obstacles.\", \"detailed_feedback\": \"The candidate shows promise as a developing engineer but is not currently suited for this senior role. Their 2 years of experience and ongoing bachelor's degree indicate they are early in their career, while the position requires senior-level expertise (5+ years). While they have some Python experience, it's primarily in machine learning rather than backend development.\\n\\nTheir GitHub profile reveals academic-focused projects that, while technically interesting, don't demonstrate the production-level backend development experience needed for FastAPI core development. The complete absence of FastAPI, async framework, and containerization experience are significant technical gaps.\\n\\nThe candidate would be better suited for junior backend roles where they can build expertise in web frameworks and async programming. They might be worth reconsidering for this team in 3-4 years after gaining relevant experience.\", \"hiring_manager_notes\": \"This candidate should not proceed further in the interview process for this role. The experience gap (2 years vs required 5+) and lack of FastAPI/async framework experience make them unsuitable for a senior position on the core team. \\n\\nWhile they show good potential and learning ability, they would require extensive training and mentoring that isn't appropriate for a senior role. Their background in ML and algorithms suggests they might be better suited for data engineering or backend roles with less framework-specific requirements.\\n\\nRecommend declining but keeping their profile for future junior backend openings.\", \"final_decision\": \"Reject - Does not meet minimum experience requirements and lacks critical technical expertise in FastAPI/async frameworks needed for senior core team role.\"}",
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T12:33:17.268070",
+    "endTime": "2025-11-16T12:34:08.078357",
+    "totalDurationMs": 50810.287000000004,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 0
+  },
+  "langsmith": {
+    "runId": "019a8ca7-c7dd-77de-89e6-6e0817981427",
+    "url": null,
+    "project": "Synapse-Pipeline2"
+  },
+  "output": {
+    "filePath": null,
+    "sizeBytes": null
+  }
+}

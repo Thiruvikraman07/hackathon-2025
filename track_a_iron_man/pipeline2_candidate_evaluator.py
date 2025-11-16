@@ -1021,7 +1021,7 @@ Return complete evaluation with all reasoning."""
             with open(frontend_log_file, 'w') as f:
                 json.dump(execution.to_frontend_json(), f, indent=2)
 
-    return data, output_toon, execution
+    return data, output_toon, execution, frontend_log_file
 
 
 # ============================================
@@ -1045,7 +1045,7 @@ if __name__ == "__main__":
     """
 
     # Example usage
-    evaluation, toon, execution = evaluate_candidate(
+    evaluation, toon, execution, frontend_log_file = evaluate_candidate(
         resume_pdf_path="/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
         jd_text=jd_text,
         jd_job_title="Senior Python Backend Developer",

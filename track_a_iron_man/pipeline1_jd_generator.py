@@ -1004,7 +1004,7 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
                 if execution.langsmith_url:
                     print(f"\n🔍 LangSmith Trace: {execution.langsmith_url}")
 
-    return data, output_toon, execution
+    return data, output_toon, execution, frontend_log_file
 
 
 # ============================================
@@ -1014,7 +1014,7 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
 if __name__ == "__main__":
     # Example 1: Using a GitHub repository
     print("EXAMPLE 1: Using GitHub Repository")
-    jd, toon, execution = generate_jd(
+    jd, toon, execution, frontend_log_file = generate_jd(
         company_repo="fastapi/fastapi",
         job_title="Senior Backend Engineer",
         salary_range="$140k-$180k",

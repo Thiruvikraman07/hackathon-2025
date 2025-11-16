@@ -837,7 +837,7 @@ Return complete analysis with all reasoning."""
             with open(frontend_log_file, 'w') as f:
                 json.dump(execution.to_frontend_json(), f, indent=2)
 
-    return data, output_toon, execution
+    return data, output_toon, execution, frontend_log_file
 
 
 def print_detailed_match_results(data: ResumeJDMatch):
@@ -1047,7 +1047,7 @@ if __name__ == "__main__":
     jd_toon_path = "/Users/thiruanand/2025-hackaton/hackathon-2025/fastapi_fastapi_jd.toon"
 
     # Run matching
-    match_result, toon, execution = match_resume_to_jd(
+    match_result, toon, execution, frontend_log_file = match_resume_to_jd(
         resume_pdf_path="/Users/thiruanand/2025-hackaton/hackathon-2025/track_a_iron_man/Resume V20.pdf",
         jd_input=jd_toon_path,
         jd_source="toon",

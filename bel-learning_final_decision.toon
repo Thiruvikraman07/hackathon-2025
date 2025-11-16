@@ -2,25 +2,25 @@ candidate_name: bel-learning
 job_title: Senior Python Backend Developer
 company_repo: fastapi/fastapi
 pipeline2_score: 30
-pipeline2_has_github: true
-pipeline2_weight: 0.6
+pipeline2_has_github: false
+pipeline2_weight: 0.3
 pipeline3_score: 50
-pipeline3_weight: 0.4
-final_score: 38
-score_calculation: (30 × 0.6) + (50 × 0.4) = 38
+pipeline3_weight: 0.7
+final_score: 44
+score_calculation: (30 × 0.3) + (50 × 0.7) = 44
 is_hire: false
 decision_category: no-hire
 proceed_to_interview: false
-decision_reason: "NO-HIRE DECISION: Candidate scores 38/100 overall, below hiring threshold.\nPipeline 2 (GitHub analysis): 30/100 - Reject\nPipeline 3 (Resume-JD match): 50/100 - Match analysis completed\n\nDETAILED ANALYSIS:\n\n1. EDUCATION (75/100):\n   Degree: Bachelor of Computer Science\n   Match: ✓\n   Reason: Computer Science degree is relevant for backend development role\n   Score Reason: While the field matches perfectly, candidate is still pursuing degree (expected 2025) which may impact immediate readiness for senior role\n\n2. EXPERIENCE (40/100):\n   Required: 7+ years (Senior)\n   Candidate: 2 years (junior)\n   Match: ✗\n   Reason: Candidate has approximately 2 years of experience vs required 7+ years\n   Score Reason: Significant gap in years of experience and lack of specific framework development experience\n   ⚠️ GAP: 5 years below requirement\n\n3. TECHNICAL SKILLS (50/100):\n   Total Required: 0\n   Matched: 0\n   Missing: 0\n   Must-Have Match: 0/0 (0%)\n   Reason: Technical skills analyzed\n\n4. GITHUB CONTRIBUTIONS (35/100):\n   Projects Found: 6\n   Relevant Projects: 1\n   Reason: Based on GitHub activity\n\nCRITICAL GAPS IDENTIFIED:\n   1. FastAPI ecosystem experience (critical)\n   2. Significant experience gap (2 years vs required 7+ years)\n   3. Python expertise level below requirements\n   4. Limited senior-level project experience\n\nGaps Summary: The candidate shows promising potential but has several significant gaps for a senior role. The most critical gaps are the experience level (5 years short of requirement), lack of FastAPI expertise, and intermediate rather than expert-level Python skills. Additionally, being still in university may impact immediate availability and senior-level readiness."
-why_hire_or_not: "The candidate does not meet the requirements for this Senior Python Backend Developer role. Critical gaps identified: FastAPI ecosystem experience (critical), Significant experience gap (2 years vs required 7+ years), Python expertise level below requirements. Experience gap: 5 years below requirement. Seniority level (junior) does not match requirement (Senior). "
-top_strengths[5]: Experience with Git version control,Demonstrated progression in career roles,"Experience with major tech companies (Jetbrains, Deutsche Börse)",Academic research background,Strong educational background in Computer Science
-critical_gaps[4]: FastAPI ecosystem experience (critical),Significant experience gap (2 years vs required 7+ years),Python expertise level below requirements,Limited senior-level project experience
-education_score: 75
-experience_score: 40
+decision_reason: "NO-HIRE DECISION: Candidate scores 44/100 overall, below hiring threshold.\nPipeline 2 (GitHub analysis): 30/100 - Reject for Senior Position - Consider for Junior/Mid-Level Role\nPipeline 3 (Resume-JD match): 50/100 - Match analysis completed\n\nDETAILED ANALYSIS:\n\n1. EDUCATION (85/100):\n   Degree: Bachelor of Computer Science\n   Match: ✓\n   Reason: Computer Science degree is highly relevant for backend development role\n   Score Reason: Strong CS degree with relevant coursework, but still completing education\n\n2. EXPERIENCE (60/100):\n   Required: 5+ years (Senior)\n   Candidate: 2 years (junior)\n   Match: ✗\n   Reason: Candidate has approximately 2 years of experience, below required 5+ years\n   Score Reason: Based on experience analysis\n   ⚠️ GAP: 3 years below requirement\n\n3. TECHNICAL SKILLS (50/100):\n   Total Required: 0\n   Matched: 0\n   Missing: 0\n   Must-Have Match: 0/0 (0%)\n   Reason: Technical skills analyzed\n\n4. GITHUB: Not available\n   Reason: GitHub profile checked\n\nCRITICAL GAPS IDENTIFIED:\n   1. Insufficient years of experience (2 vs required 5+)\n   2. Python skills not at expert level\n   3. No senior-level experience\n\nGaps Summary: The candidate has significant gaps in experience level and technical skills required for this senior position. The main concerns are insufficient years of experience, lack of FastAPI expertise, and Python skills not yet at expert level. Additionally, they are still completing their education."
+why_hire_or_not: "The candidate does not meet the requirements for this Senior Python Backend Developer role. Critical gaps identified: Insufficient years of experience (2 vs required 5+), Python skills not at expert level, No senior-level experience. Experience gap: 3 years below requirement. Seniority level (junior) does not match requirement (Senior). "
+top_strengths[5]: Strong computer science educational background,Experience at reputable tech companies,Python programming,Version control (Git),Software engineering fundamentals
+critical_gaps[3]: Insufficient years of experience (2 vs required 5+),Python skills not at expert level,No senior-level experience
+education_score: 85
+experience_score: 60
 technical_skills_score: 50
-github_contribution_score: 35
+github_contribution_score: 0
 hiring_recommendation: NOT RECOMMENDED FOR HIRE at this time. Candidate may be better suited for Junior Developer.
-suggestions_for_candidate: Gain 5+ more years of relevant experience. Increase GitHub contributions and build more substantial projects.
+suggestions_for_candidate: Gain 3+ more years of relevant experience. Build a GitHub profile with relevant projects to demonstrate technical skills.
 alternative_roles[3]: Junior Developer,Associate Engineer,Entry-level positions
-confidence_level: 62
-confidence_reason: "Based on comprehensive analysis across 2 evaluation pipelines. GitHub analysis provides additional validation of technical skills. "
+confidence_level: 60
+confidence_reason: "Based on comprehensive analysis across 1 evaluation pipelines. Limited to resume analysis due to missing GitHub profile. "
