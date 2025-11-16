@@ -24,7 +24,7 @@ from langgraph.prebuilt import create_react_agent
 from pdf_extractor import extract_pdf
 
 # Load environment variables
-env_path = Path('../.env')
+env_path = Path('./.env')
 if env_path.exists():
     load_dotenv(env_path)
 
