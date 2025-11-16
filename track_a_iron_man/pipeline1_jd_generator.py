@@ -1,16 +1,39 @@
 """
-PIPELINE 1: JD Generator - FIXED VERSION
-Input: Company Repo + Job Title + Salary + Additional Requirements
+PIPELINE 1: JD Generator - ENHANCED VERSION
+Input: Company Repo (GitHub OR Local Path) + Job Title + Salary + Additional Requirements
 Output: Complete Job Description (TOON format)
 
-Fixed Issues:
-1. Simplified schema to reduce token usage
-2. Better prompt structure with explicit output format
-3. Added retry logic for validation errors
+Features:
+1. Support for both GitHub repositories and local file system repositories
+2. Automatic detection of repository type (GitHub vs Local)
+3. Simplified schema to reduce token usage
+4. Better prompt structure with explicit output format
+5. Added retry logic for validation errors
+
+Usage:
+    # GitHub Repository
+    generate_jd(
+        company_repo="facebook/react",
+        job_title="Senior Frontend Developer",
+        salary_range="$120k-$160k"
+    )
+
+    # Local Repository
+    generate_jd(
+        company_repo="/path/to/your/local/repo",
+        job_title="Backend Engineer",
+        salary_range="$100k-$140k"
+    )
+
+How it works:
+- If company_repo is a valid directory path -> Uses local file system tools
+- If company_repo contains '/' and is not a path -> Uses GitHub API tools
+- Automatically selects appropriate tools for repository analysis
 """
 
 import sys
 import json
+import os
 from pathlib import Path
 from typing import List, Optional, Dict, Union, Any
 from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
@@ -197,6 +220,179 @@ def save_to_cache(repo_full_name: str, cache_type: str, data: dict) -> None:
         print(f"Warning: Failed to save cache to {cache_path}: {e}")
 
 # ============================================
+# Local Repository Tools
+# ============================================
+
+@tool
+def fetch_local_repo_metadata(repo_path: str) -> dict:
+    """Fetch repository metadata from a local path.
+
+    Args:
+        repo_path: Local path to the repository
+
+    Returns:
+        Repository metadata including file count, languages, and structure
+    """
+    try:
+        repo_path_obj = Path(repo_path)
+        if not repo_path_obj.exists():
+            return {"error": f"Repository path {repo_path} does not exist"}
+
+        if not repo_path_obj.is_dir():
+            return {"error": f"Path {repo_path} is not a directory"}
+
+        # Count files by extension
+        language_stats = {}
+        total_files = 0
+
+        for root, dirs, files in os.walk(repo_path):
+            # Skip common non-code directories
+            dirs[:] = [d for d in dirs if d not in ['.git', 'node_modules', '__pycache__',
+                                                      '.venv', 'venv', 'build', 'dist', '.next']]
+
+            for file in files:
+                total_files += 1
+                ext = Path(file).suffix.lower()
+                if ext:
+                    language_stats[ext] = language_stats.get(ext, 0) + 1
+
+        # Map extensions to language names
+        ext_to_lang = {
+            '.py': 'Python', '.js': 'JavaScript', '.ts': 'TypeScript',
+            '.jsx': 'React', '.tsx': 'TypeScript React', '.java': 'Java',
+            '.go': 'Go', '.rs': 'Rust', '.rb': 'Ruby', '.php': 'PHP',
+            '.cpp': 'C++', '.c': 'C', '.h': 'C/C++ Header', '.cs': 'C#',
+            '.swift': 'Swift', '.kt': 'Kotlin', '.md': 'Markdown'
+        }
+
+        languages = {}
+        for ext, count in language_stats.items():
+            lang = ext_to_lang.get(ext, ext)
+            languages[lang] = languages.get(lang, 0) + count
+
+        return {
+            'name': repo_path_obj.name,
+            'full_name': f"local/{repo_path_obj.name}",
+            'description': f"Local repository at {repo_path}",
+            'languages': languages,
+            'total_files': total_files,
+            'path': str(repo_path_obj.absolute())
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@tool
+def get_local_repo_file_structure(repo_path: str) -> dict:
+    """Get complete file and directory structure of a local repository.
+
+    Args:
+        repo_path: Local path to the repository
+
+    Returns:
+        Repository file structure with paths, types, and sizes
+    """
+    try:
+        repo_path_obj = Path(repo_path)
+        if not repo_path_obj.exists():
+            return {"error": f"Repository path {repo_path} does not exist"}
+
+        code_extensions = {'.py', '.js', '.ts', '.jsx', '.tsx', '.java', '.go', '.rs',
+                          '.rb', '.php', '.cpp', '.c', '.h', '.cs', '.swift', '.kt'}
+        doc_extensions = {'.md', '.txt', '.rst'}
+
+        relevant_files = []
+
+        for root, dirs, files in os.walk(repo_path):
+            # Skip common non-code directories
+            dirs[:] = [d for d in dirs if d not in ['.git', 'node_modules', '__pycache__',
+                                                      '.venv', 'venv', 'build', 'dist', '.next']]
+
+            for file in files:
+                file_path = Path(root) / file
+                relative_path = file_path.relative_to(repo_path_obj)
+
+                # Include README files, code files, and important config files
+                path_lower = str(relative_path).lower()
+                if (any(path_lower.endswith(ext) for ext in code_extensions) or
+                    any(path_lower.endswith(ext) for ext in doc_extensions) or
+                    'readme' in path_lower or
+                    file in ['package.json', 'requirements.txt', 'go.mod', 'cargo.toml', 'pom.xml']):
+
+                    try:
+                        size = file_path.stat().st_size
+                        relevant_files.append({
+                            'path': str(relative_path),
+                            'type': 'blob',
+                            'size': size
+                        })
+                    except OSError:
+                        continue
+
+        return {
+            'structure': relevant_files[:500],  # Limit to first 500 relevant files
+            'total_files': len(relevant_files)
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@tool
+def fetch_local_code_files(repo_path: str, file_paths: List[str]) -> dict:
+    """Fetch specific code files from a local repository by their paths.
+
+    Args:
+        repo_path: Local path to the repository
+        file_paths: List of relative file paths to fetch (e.g., ['README.md', 'src/main.py'])
+
+    Returns:
+        Files with their content
+    """
+    try:
+        repo_path_obj = Path(repo_path)
+        if not repo_path_obj.exists():
+            return {"error": f"Repository path {repo_path} does not exist"}
+
+        files = []
+        max_file_size = 1_000_000  # 1MB max per file
+
+        for relative_path in file_paths:
+            file_path = repo_path_obj / relative_path
+
+            if not file_path.exists():
+                print(f"Warning: File {relative_path} does not exist")
+                continue
+
+            try:
+                size = file_path.stat().st_size
+                if size > max_file_size:
+                    print(f"Warning: Skipping {relative_path} - file too large ({size} bytes)")
+                    continue
+
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+
+                files.append({
+                    'path': relative_path,
+                    'content': content,
+                    'size': size
+                })
+            except UnicodeDecodeError:
+                print(f"Warning: Skipping {relative_path} - binary file or encoding issue")
+                continue
+            except Exception as e:
+                print(f"Warning: Failed to read {relative_path}: {e}")
+                continue
+
+        return {
+            'files': files,
+            'total_fetched': len(files)
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# ============================================
 # GitHub Tools
 # ============================================
 
@@ -342,12 +538,12 @@ def generate_jd(
     """PIPELINE 1: Generate detailed Job Description from company repo and user input.
 
     Args:
-        company_repo: Company repository (e.g., 'facebook/react')
+        company_repo: Company repository (e.g., 'facebook/react') OR local path (e.g., '/path/to/repo')
         job_title: Job title (e.g., 'Senior Python Developer')
         salary_range: Salary range (e.g., '$120k-$160k')
         additional_requirements: List of additional requirements (e.g., ['Remote work', 'Team lead experience'])
         verbose: Print details
-        testing: Enable caching mode - fetches GitHub data once and reuses for subsequent runs
+        testing: Enable caching mode - fetches GitHub data once and reuses for subsequent runs (GitHub only)
 
     Returns:
         Tuple of (JobDescription, toon_output)
@@ -356,27 +552,56 @@ def generate_jd(
     global TESTING_MODE
     TESTING_MODE = testing
 
+    # Detect if company_repo is a local path or GitHub repo
+    is_local_repo = False
+    repo_path_obj = Path(company_repo)
+
+    if repo_path_obj.exists() and repo_path_obj.is_dir():
+        is_local_repo = True
+        repo_type = "Local"
+    elif '/' in company_repo and not company_repo.startswith('/'):
+        # Looks like a GitHub repo (e.g., 'owner/repo')
+        is_local_repo = False
+        repo_type = "GitHub"
+    else:
+        # Try to check if it's a path that doesn't exist
+        if '/' in company_repo or '\\' in company_repo:
+            raise ValueError(f"Local repository path '{company_repo}' does not exist or is not a directory")
+        else:
+            raise ValueError(f"Invalid repository format. Use 'owner/repo' for GitHub or provide a valid local path")
+
     if verbose:
         print("\n" + "="*80)
         print("🚀 PIPELINE 1: JD Generator")
         print("="*80)
         print(f"📦 Company Repo: {company_repo}")
+        print(f"🔍 Repository Type: {repo_type}")
         print(f"💼 Job Title: {job_title}")
         if salary_range:
             print(f"💰 Salary: {salary_range}")
         if additional_requirements:
             print(f"📋 Additional Requirements: {len(additional_requirements)}")
-        if testing:
+        if testing and not is_local_repo:
             print(f"🧪 Testing Mode: ENABLED (caching GitHub data)")
         print()
 
-    # Create LLM and agent
+    # Create LLM and agent with appropriate tools
     llm = get_chat_model("claude-3-5-sonnet")
-    agent = create_react_agent(
-        llm,
-        tools=[fetch_repo_metadata, get_repo_file_structure, fetch_code_files],
-        response_format=JobDescription
-    )
+
+    if is_local_repo:
+        # Use local repository tools
+        agent = create_react_agent(
+            llm,
+            tools=[fetch_local_repo_metadata, get_local_repo_file_structure, fetch_local_code_files],
+            response_format=JobDescription
+        )
+    else:
+        # Use GitHub tools
+        agent = create_react_agent(
+            llm,
+            tools=[fetch_repo_metadata, get_repo_file_structure, fetch_code_files],
+            response_format=JobDescription
+        )
 
     # Build additional requirements text
     additional_reqs_text = ""
@@ -386,8 +611,26 @@ ADDITIONAL USER REQUIREMENTS (include these in additional_requirements field):
 {chr(10).join(f"- {req}" for req in additional_requirements)}
 """
 
-    # USE THE MORE EXPLICIT PROMPT AS DEFAULT (previously was fallback)
-    prompt = f"""CRITICAL: Generate COMPLETE JobDescription for {job_title} at {company_repo}.
+    # Build the prompt based on repository type
+    if is_local_repo:
+        prompt = f"""CRITICAL: Generate COMPLETE JobDescription for {job_title} based on local repository at {company_repo}.
+
+INSTRUCTIONS:
+1. Use fetch_local_repo_metadata to get repo info, languages, and file statistics
+2. Use get_local_repo_file_structure to see all available files in the repository
+3. Analyze the file structure and intelligently choose:
+   - 1 README file (README.md or similar)
+   - 2 most relevant code files (main entry points, core logic files based on the job title)
+4. Use fetch_local_code_files to get ONLY those 3 selected files (pass exact relative paths as a list)
+5. Analyze the fetched files and generate ALL required fields
+
+INPUTS:
+- Repository Path: {company_repo}
+- Job Title: {job_title}
+- Salary: {salary_range or 'Not specified'}
+{additional_reqs_text}"""
+    else:
+        prompt = f"""CRITICAL: Generate COMPLETE JobDescription for {job_title} at {company_repo}.
 
 INSTRUCTIONS:
 1. Use fetch_repo_metadata to get repo info, stars, languages
@@ -402,7 +645,10 @@ INPUTS:
 - Repository: {company_repo}
 - Job Title: {job_title}
 - Salary: {salary_range or 'Not specified'}
-{additional_reqs_text}
+{additional_reqs_text}"""
+
+    # Common prompt continuation
+    prompt += f"""
 
 You MUST include ALL these fields or the validation will fail:
 - job_title, company_repo, salary_range, overview, overview_reason
@@ -514,8 +760,15 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
         print("-"*80)
         print(f"Files Analyzed: {data.total_files_analyzed}")
 
-    # Save TOON
-    output_file = f"{company_repo.replace('/', '_')}_jd.toon"
+    # Save TOON with appropriate filename
+    if is_local_repo:
+        # For local repos, use the directory name
+        repo_name = repo_path_obj.name
+        output_file = f"local_{repo_name}_jd.toon"
+    else:
+        # For GitHub repos, use owner_repo format
+        output_file = f"{company_repo.replace('/', '_')}_jd.toon"
+
     with open(output_file, 'w') as f:
         f.write(output_toon)
 
@@ -534,7 +787,8 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
 # ============================================
 
 if __name__ == "__main__":
-    # Example usage
+    # Example 1: Using a GitHub repository
+    print("EXAMPLE 1: Using GitHub Repository")
     jd, toon = generate_jd(
         company_repo="fastapi/fastapi",
         job_title="Senior Backend Engineer",
@@ -556,3 +810,25 @@ if __name__ == "__main__":
     if TESTING_MODE:
         print(f"\n💾 Cache location: {CACHE_DIR}")
         print(f"   Subsequent runs will use cached data until testing=False")
+
+    # Example 2: Using a local repository
+    # Uncomment the following to use a local repository instead:
+    """
+    print("\n\nEXAMPLE 2: Using Local Repository")
+    jd_local, toon_local = generate_jd(
+        company_repo="/path/to/your/local/repo",  # Provide your local repo path
+        job_title="Full Stack Developer",
+        salary_range="$100k-$140k",
+        additional_requirements=[
+            "Experience with modern web frameworks",
+            "Strong problem-solving skills"
+        ],
+        verbose=True,
+        testing=False  # Testing mode not applicable for local repos
+    )
+
+    print(f"\n🎉 Pipeline 1 Complete!")
+    print(f"   Job Title: {jd_local.job_title}")
+    print(f"   Experience Level: {jd_local.experience_requirement.level}")
+    print(f"   Total Qualifications: {len(jd_local.qualifications)}")
+    """

@@ -1,0 +1,42 @@
+job_title: Senior Backend Engineer
+company_repo: /Users/thiruanand/2025-hackaton/hackathon-2025/test_local_repo
+salary_range: $140k-$180k
+overview: "We're seeking a Senior Backend Engineer to lead the development of our scalable e-commerce platform built with Python, FastAPI, and PostgreSQL. You'll be responsible for architecting and implementing high-performance APIs, managing database operations, and mentoring team members."
+overview_reason: "Repository shows a sophisticated FastAPI application with async database operations, structured API endpoints, and comprehensive testing setup."
+technical_requirements:
+  primary_languages[1,]{name,importance,reason}:
+    Python 3.11+,must-have,Required based on repository analysis
+  frameworks_libraries[4,]{name,importance,reason}:
+    FastAPI,must-have,Required based on repository analysis
+    SQLAlchemy,must-have,Required based on repository analysis
+    uvicorn,must-have,Required based on repository analysis
+    pytest,must-have,Required based on repository analysis
+  tools_platforms[3,]{name,importance,reason}:
+    Docker,must-have,Required based on repository analysis
+    AWS,must-have,Required based on repository analysis
+    GitHub Actions,must-have,Required based on repository analysis
+  databases[1,]{name,importance,reason}:
+    PostgreSQL,must-have,Required based on repository analysis
+responsibilities[6,]{responsibility,reason}:
+  Lead the development and maintenance of our FastAPI-based microservices architecture,Based on repository structure
+  Design and implement scalable database solutions using PostgreSQL and SQLAlchemy,Evident from database implementations
+  Optimize API performance and implement robust error handling,Critical for system reliability
+  Review code and mentor junior team members,Senior level position requirement
+  Implement and maintain automated testing strategies,Present in codebase
+  Collaborate with DevOps to improve deployment and monitoring processes,Infrastructure requirements
+qualifications[8,]{qualification,importance,reason}:
+  Bachelor's degree in Computer Science or related field,must-have,Standard requirement for senior role
+  5+ years of Python development experience,must-have,Complexity of codebase
+  Strong expertise in FastAPI or similar async web frameworks,must-have,Primary framework used
+  Advanced knowledge of PostgreSQL and SQLAlchemy ORM,must-have,Core database technologies
+  Experience with asynchronous programming patterns,must-have,Async implementations present
+  Proficiency in API design and RESTful services,must-have,Core architecture requirement
+  Experience with containerization using Docker,must-have,Infrastructure requirement
+  Track record of leading technical projects and mentoring developers,must-have,Leadership responsibilities
+experience_requirement:
+  level: Senior
+  minimum_years: 5
+  reason: "Codebase shows complex async patterns, sophisticated database handling, and architecture decisions that require senior-level expertise."
+additional_requirements[6]: 5+ years of Python experience,Experience with FastAPI or similar frameworks,Strong understanding of async programming,PostgreSQL database expertise,Experience with containerization (Docker),Team leadership experience preferred
+what_youll_learn[5]: Advanced FastAPI patterns including dependency injection and middleware implementation,Scalable database design with async PostgreSQL and SQLAlchemy,Modern API security practices and authentication systems,Microservices architecture and distributed systems patterns,Team leadership and technical mentorship skills
+total_files_analyzed: 3
