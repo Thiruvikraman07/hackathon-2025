@@ -51,10 +51,7 @@ HOLISTIC_AI_API_TOKEN=your-api-token-here
 # Alternative: OpenAI (optional)
 OPENAI_API_KEY=sk-your-key-here
 
-# Optional
-VALYU_API_KEY=your-valyu-key-here
-LANGSMITH_API_KEY=your-langsmith-key-here
-```
+
 
 **API Guide**: [../assets/api-guide.pdf](../assets/api-guide.pdf)
 
