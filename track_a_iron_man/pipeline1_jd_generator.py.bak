@@ -754,7 +754,7 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
 
         if tracker:
             execution.langsmith_run_id = run_id
-            langsmith_project = "Synapse"  # Set explicitly as requested
+            langsmith_project = os.getenv('LANGSMITH_PROJECT', 'default')
             execution.langsmith_project = langsmith_project
 
             with tracker.track_step(
@@ -772,65 +772,24 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
 
                 result = agent.invoke(
                     {"messages": [HumanMessage(content=prompt)]},
-                    {"run_id": run_id, "project_name": langsmith_project, "tags": ["jd-generation", execution.repository_type]}
+                    {"run_id": run_id, "tags": ["jd-generation", execution.repository_type]}
                 )
 
                 data = result['structured_response']
-
-                # Count tokens using tiktoken (similar to tutorial 04)
-                try:
-                    import tiktoken
-                    encoding = tiktoken.encoding_for_model('gpt-4')
-
-                    def count_tokens(text: str) -> int:
-                        """Count tokens in text using tiktoken."""
-                        return len(encoding.encode(str(text)))
-
-                    # Count input tokens (original prompt)
-                    input_tokens = count_tokens(prompt)
-
-                    # Count output tokens from all messages
-                    output_tokens = 0
-                    if 'messages' in result:
-                        for msg in result['messages']:
-                            if hasattr(msg, 'content') and msg.content:
-                                output_tokens += count_tokens(msg.content)
-                            # Also count tool calls if present
-                            if hasattr(msg, 'tool_calls') and msg.tool_calls:
-                                output_tokens += count_tokens(str(msg.tool_calls))
-
-                    tokens_used = input_tokens + output_tokens
-
-                    # Calculate cost (Claude Sonnet 3.5 pricing from Bedrock)
-                    # Input: $3/1M tokens, Output: $15/1M tokens
-                    input_cost = (input_tokens / 1_000_000) * 3.0
-                    output_cost = (output_tokens / 1_000_000) * 15.0
-                    cost_usd = input_cost + output_cost
-
-                except ImportError:
-                    # Fallback if tiktoken not available
-                    tokens_used = 0
-                    cost_usd = 0.0
 
                 # Get LangSmith URL
                 langsmith_url = get_langsmith_url(run_id, langsmith_project)
                 if langsmith_url:
                     execution.langsmith_url = langsmith_url
 
-                # Update metrics with token usage
-                tracker.update_metrics(
-                    files=data.total_files_analyzed,
-                    tokens=tokens_used if tokens_used > 0 else None,
-                    cost=cost_usd if cost_usd > 0 else None
-                )
+                # Update metrics
+                tracker.update_metrics(files=data.total_files_analyzed)
                 tracker.update_output({
                     "jd_generated": True,
                     "responsibilities_count": len(data.responsibilities),
                     "qualifications_count": len(data.qualifications),
                     "experience_level": data.experience_requirement.level,
-                    "langsmith_run_id": run_id,
-                    "tokens_used": tokens_used,
-                    "cost_usd": round(cost_usd, 4) if cost_usd > 0 else 0
+                    "langsmith_run_id": run_id
                 })
         else:
             # No tracking - original logic
@@ -882,75 +841,75 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
             print("="*80)
 
             print(f"\n📌 {data.job_title}")
-            print(f"🏢 Repository: {data.company_repo}")
-            if data.salary_range:
-                print(f"💰 Salary: {data.salary_range}")
-    
-            print(f"\n📝 OVERVIEW:")
-            print(f"   {data.overview}")
-            print(f"\n   💡 Reason: {data.overview_reason}")
-    
-            print(f"\n\n💻 TECHNICAL REQUIREMENTS:")
-            print("-"*80)
-    
-            print(f"\n🔹 Languages:")
-            for lang in data.technical_requirements.primary_languages:
-                print(f"   • {lang.name} [{lang.importance}]")
-                print(f"     💡 {lang.reason}")
-    
-            print(f"\n🔹 Frameworks/Libraries:")
-            for fw in data.technical_requirements.frameworks_libraries:
-                print(f"   • {fw.name} [{fw.importance}]")
-                print(f"     💡 {fw.reason}")
-    
-            if data.technical_requirements.tools_platforms:
-                print(f"\n🔹 Tools/Platforms:")
-                for tool in data.technical_requirements.tools_platforms:
-                    print(f"   • {tool.name} [{tool.importance}]")
-                    print(f"     💡 {tool.reason}")
-    
-            print(f"\n\n📋 RESPONSIBILITIES:")
-            print("-"*80)
-            for i, resp in enumerate(data.responsibilities, 1):
-                print(f"\n{i}. {resp.responsibility}")
-                print(f"   💡 {resp.reason}")
-    
-            print(f"\n\n🎯 QUALIFICATIONS:")
-            print("-"*80)
-            must_have = [q for q in data.qualifications if q.importance == "must-have"]
-            nice_to_have = [q for q in data.qualifications if q.importance == "nice-to-have"]
-    
-            print(f"\nMust Have:")
-            for qual in must_have:
-                print(f"   ✓ {qual.qualification}")
+        print(f"🏢 Repository: {data.company_repo}")
+        if data.salary_range:
+            print(f"💰 Salary: {data.salary_range}")
+
+        print(f"\n📝 OVERVIEW:")
+        print(f"   {data.overview}")
+        print(f"\n   💡 Reason: {data.overview_reason}")
+
+        print(f"\n\n💻 TECHNICAL REQUIREMENTS:")
+        print("-"*80)
+
+        print(f"\n🔹 Languages:")
+        for lang in data.technical_requirements.primary_languages:
+            print(f"   • {lang.name} [{lang.importance}]")
+            print(f"     💡 {lang.reason}")
+
+        print(f"\n🔹 Frameworks/Libraries:")
+        for fw in data.technical_requirements.frameworks_libraries:
+            print(f"   • {fw.name} [{fw.importance}]")
+            print(f"     💡 {fw.reason}")
+
+        if data.technical_requirements.tools_platforms:
+            print(f"\n🔹 Tools/Platforms:")
+            for tool in data.technical_requirements.tools_platforms:
+                print(f"   • {tool.name} [{tool.importance}]")
+                print(f"     💡 {tool.reason}")
+
+        print(f"\n\n📋 RESPONSIBILITIES:")
+        print("-"*80)
+        for i, resp in enumerate(data.responsibilities, 1):
+            print(f"\n{i}. {resp.responsibility}")
+            print(f"   💡 {resp.reason}")
+
+        print(f"\n\n🎯 QUALIFICATIONS:")
+        print("-"*80)
+        must_have = [q for q in data.qualifications if q.importance == "must-have"]
+        nice_to_have = [q for q in data.qualifications if q.importance == "nice-to-have"]
+
+        print(f"\nMust Have:")
+        for qual in must_have:
+            print(f"   ✓ {qual.qualification}")
+            print(f"     💡 {qual.reason}")
+
+        if nice_to_have:
+            print(f"\nNice to Have:")
+            for qual in nice_to_have:
+                print(f"   • {qual.qualification}")
                 print(f"     💡 {qual.reason}")
-    
-            if nice_to_have:
-                print(f"\nNice to Have:")
-                for qual in nice_to_have:
-                    print(f"   • {qual.qualification}")
-                    print(f"     💡 {qual.reason}")
-    
-            print(f"\n\n⏱️  EXPERIENCE REQUIREMENT:")
+
+        print(f"\n\n⏱️  EXPERIENCE REQUIREMENT:")
+        print("-"*80)
+        print(f"Level: {data.experience_requirement.level} ({data.experience_requirement.minimum_years}+ years)")
+        print(f"💡 Reason: {data.experience_requirement.reason}")
+
+        if data.additional_requirements:
+            print(f"\n\n📌 ADDITIONAL REQUIREMENTS:")
             print("-"*80)
-            print(f"Level: {data.experience_requirement.level} ({data.experience_requirement.minimum_years}+ years)")
-            print(f"💡 Reason: {data.experience_requirement.reason}")
-    
-            if data.additional_requirements:
-                print(f"\n\n📌 ADDITIONAL REQUIREMENTS:")
-                print("-"*80)
-                for req in data.additional_requirements:
-                    print(f"   • {req}")
-    
-            print(f"\n\n🚀 WHAT YOU'LL LEARN:")
-            print("-"*80)
-            for item in data.what_youll_learn:
-                print(f"   • {item}")
-    
-            print(f"\n\n📊 ANALYSIS STATS:")
-            print("-"*80)
-            print(f"Files Analyzed: {data.total_files_analyzed}")
-    
+            for req in data.additional_requirements:
+                print(f"   • {req}")
+
+        print(f"\n\n🚀 WHAT YOU'LL LEARN:")
+        print("-"*80)
+        for item in data.what_youll_learn:
+            print(f"   • {item}")
+
+        print(f"\n\n📊 ANALYSIS STATS:")
+        print("-"*80)
+        print(f"Files Analyzed: {data.total_files_analyzed}")
+
         # Save TOON (for non-tracked mode)
         if not tracker:
             if is_local_repo:
@@ -989,7 +948,7 @@ Use the tools to analyze the repo, then generate ALL fields. Keep reasons concis
             # Save detailed execution log
             log_file = log_dir / f"{execution_id}.json"
             with open(log_file, 'w') as f:
-                json.dump(execution.model_dump(), f, indent=2, default=str)
+                json.dump(execution.dict(), f, indent=2, default=str)
 
             # Save frontend-ready JSON
             frontend_log_file = log_dir / f"{execution_id}_frontend.json"

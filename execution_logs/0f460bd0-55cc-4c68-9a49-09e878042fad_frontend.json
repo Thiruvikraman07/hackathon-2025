@@ -1,0 +1,154 @@
+{
+  "executionId": "0f460bd0-55cc-4c68-9a49-09e878042fad",
+  "pipeline": "pipeline1_jd_generator",
+  "repository": {
+    "type": "local",
+    "path": "/Users/thiruanand/2025-hackaton/hackathon-2025/test_local_repo"
+  },
+  "config": {
+    "jobTitle": "Senior Backend Engineer",
+    "salaryRange": "$140k-$180k",
+    "additionalRequirements": [
+      "5+ years of Python experience",
+      "Experience with FastAPI or similar frameworks",
+      "Strong understanding of async programming",
+      "PostgreSQL database expertise",
+      "Experience with containerization (Docker)",
+      "Team leadership experience preferred"
+    ]
+  },
+  "timeline": [
+    {
+      "id": "step_1",
+      "type": "detection",
+      "name": "Detect Repository Type",
+      "status": "success",
+      "startTime": "2025-11-16T10:41:02.877553",
+      "endTime": "2025-11-16T10:41:02.877625",
+      "durationMs": 0.052928924560546875,
+      "input": {
+        "company_repo": "/Users/thiruanand/2025-hackaton/hackathon-2025/test_local_repo"
+      },
+      "output": {
+        "repository_type": "Local",
+        "is_local": true,
+        "detection_method": "filesystem_check"
+      },
+      "reason": "Determine if input is a GitHub repository or local file path",
+      "decisionPoint": "Repository detected as Local using filesystem_check",
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_2",
+      "type": "initialization",
+      "name": "Initialize LLM and Agent",
+      "status": "success",
+      "startTime": "2025-11-16T10:41:02.877643",
+      "endTime": "2025-11-16T10:41:03.110649",
+      "durationMs": 233.00623893737793,
+      "input": {
+        "model": "claude-3-5-sonnet",
+        "repository_type": "Local"
+      },
+      "output": {
+        "tools_loaded": [
+          "fetch_local_repo_metadata",
+          "get_local_repo_file_structure",
+          "fetch_local_code_files"
+        ],
+        "tool_count": 3,
+        "response_format": "JobDescription"
+      },
+      "reason": "Create agent with appropriate tools based on repository type",
+      "decisionPoint": "Loaded 3 tools for Local repository",
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    },
+    {
+      "id": "step_3",
+      "type": "agent_reasoning",
+      "name": "Agent Repository Analysis & JD Generation",
+      "status": "success",
+      "startTime": "2025-11-16T10:41:03.110699",
+      "endTime": "2025-11-16T10:41:41.746222",
+      "durationMs": 38635.518074035645,
+      "input": {
+        "job_title": "Senior Backend Engineer",
+        "salary_range": "$140k-$180k",
+        "prompt_length": 2161
+      },
+      "output": {
+        "jd_generated": true,
+        "responsibilities_count": 6,
+        "qualifications_count": 8,
+        "experience_level": "Senior",
+        "langsmith_run_id": "492fafde-bf0a-4c5d-b79d-3b988271a64f"
+      },
+      "reason": "Agent analyzes repository using tools and generates complete job description",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": 3
+      }
+    },
+    {
+      "id": "step_4",
+      "type": "output_generation",
+      "name": "Generate and Save TOON Output",
+      "status": "success",
+      "startTime": "2025-11-16T10:41:41.746246",
+      "endTime": "2025-11-16T10:41:41.748712",
+      "durationMs": 2.4449825286865234,
+      "input": {
+        "output_format": "TOON"
+      },
+      "output": {
+        "file_path": "local_test_local_repo_jd.toon",
+        "size_bytes": 3635,
+        "encoding": "TOON"
+      },
+      "reason": "Convert JobDescription to TOON format and save to file",
+      "decisionPoint": null,
+      "toolUsed": null,
+      "error": null,
+      "metrics": {
+        "tokens": null,
+        "cost": null,
+        "filesProcessed": null
+      }
+    }
+  ],
+  "summary": {
+    "status": "success",
+    "success": true,
+    "startTime": "2025-11-16T10:41:02.877509",
+    "endTime": "2025-11-16T10:41:41.748793",
+    "totalDurationMs": 38871.284,
+    "totalTokens": 0,
+    "totalCostUsd": 0.0,
+    "filesAnalyzed": 3
+  },
+  "langsmith": {
+    "runId": "492fafde-bf0a-4c5d-b79d-3b988271a64f",
+    "url": null,
+    "project": "default"
+  },
+  "output": {
+    "filePath": "local_test_local_repo_jd.toon",
+    "sizeBytes": 3635
+  }
+}
