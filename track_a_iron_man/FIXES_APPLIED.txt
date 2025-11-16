@@ -1,0 +1,27 @@
+PIPELINE 3 FIXES APPLIED
+========================
+
+ROOT CAUSE:
+LLM returned simplified structure instead of complex nested schema:
+- Returned: {"programming_languages": {"Python": {...}}}
+- Expected: {"programming_languages": [{"skill_name": "Python", ...}]}
+
+FIXES:
+1. Added default values to ALL fields (60+ fields)
+2. Added validator to convert dict → list for technical skills
+3. Added validator to convert strings → GapAnalysis objects  
+4. Cleaned up unused imports
+
+VALIDATORS ADDED:
+
+1. TechnicalSkillsAnalysis.convert_dict_to_list()
+   - Converts {"Python": {...}} → [{"skill_name": "Python", ...}]
+   - Handles both dict and nested dict formats
+   - Applies to: programming_languages, frameworks_libraries, tools_platforms, databases, other_technical
+
+2. ResumeJDMatch.convert_gaps_strings()
+   - Converts ["Incomplete degree", ...] → [{"gap_name": "Incomplete degree", ...}]
+   - Auto-detects severity from keywords (critical/moderate/minor)
+   - Auto-detects category from keywords (education/experience/technical/soft-skills)
+
+NOW READY TO RUN!

@@ -1,0 +1,54 @@
+candidate_name: bel-learning
+job_title: Senior Backend Developer - FastAPI Framework Team
+resume_analysis:
+  years_of_experience: 2
+  years_reason: Calculated from work history
+  education_match: false
+  education_reason: Education information analyzed
+  skill_matches[3,]{skill_name,has_skill,evidence,proficiency_score,reason}:
+    Python,true,"",6,Based on resume analysis
+    FastAPI,false,"",0,Based on resume analysis
+    Git,true,"",7,Based on resume analysis
+  relevant_experience[0]:
+  relevant_experience_reason: Based on work history
+  resume_strength_score: 45
+  resume_strength_reason: Based on overall resume quality
+github_analysis:
+  github_username: bel-learning
+  has_github: true
+  github_check_reason: GitHub profile checked
+  projects_found: 6
+  projects_found_reason: GitHub profile analyzed
+  relevant_projects[1]:
+    - project_name: multi-agent-path-finding
+      github_url: "https://github.com/multi-agent-path-finding"
+      is_relevant: true
+      relevance_score: 4
+      relevance_reason: Relevant to job requirements
+      technologies_matched[0]:
+  quality_assessments[0]:
+  github_contribution_score: 35
+  github_score_reason: Based on GitHub activity
+skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
+  FastAPI ecosystem experience (critical),critical,FastAPI ecosystem experience (critical),"Gap identified: FastAPI ecosystem experience (critical)",true,Can be acquired through training and practice
+  Professional experience (5+ year gap),moderate,Professional experience (5+ year gap),"Gap identified: Professional experience (5+ year gap)",true,Can be acquired through training and practice
+  Web Framework Development experience,moderate,Web Framework Development experience,"Gap identified: Web Framework Development experience",true,Can be acquired through training and practice
+  Backend API design experience,moderate,Backend API design experience,"Gap identified: Backend API design experience",true,Can be acquired through training and practice
+  Container orchestration experience,moderate,Container orchestration experience,"Gap identified: Container orchestration experience",true,Can be acquired through training and practice
+skill_gaps_summary: "The candidate has significant gaps in both experience level and technical skills required for this senior role. With only 2 years of experience versus required 7+, and no demonstrated experience with FastAPI or web framework development, these gaps represent fundamental mismatches for the position."
+strengths[5]: Strong Python programming foundation,Experience with Git version control,Academic research background,Active GitHub presence,Infrastructure experience from Deutsche Börse role
+strengths_reason: "The candidate shows solid foundational technical skills particularly in Python programming and version control. Their research background and infrastructure experience demonstrate ability to work with complex systems, though not directly aligned with web framework development."
+final_decision:
+  is_fit: false
+  fit_reason: Reject
+  overall_score: 30
+  overall_score_breakdown: Based on overall evaluation
+  resume_score: 50
+  github_score: 50
+  skill_match_score: 50
+  recommendation: no-hire
+  recommendation_reason: Reject
+  confidence_level: 70
+  confidence_reason: Based on available information
+detailed_feedback: "The candidate shows promise in their technical foundation, particularly with Python programming and version control systems. Their academic research background and infrastructure experience at Deutsche Börse demonstrate capability with complex technical systems.\n\nHowever, there are significant gaps between the candidate's current experience level and the role requirements. With only 2 years of professional experience versus the required 7+, and no demonstrated experience with FastAPI or web framework development, the candidate does not meet the core requirements for this senior position.\n\nWhile the candidate maintains an active GitHub presence, their projects primarily focus on academic and algorithmic implementations rather than web development or framework contributions. The lack of experience with the FastAPI ecosystem (including Starlette and Pydantic) represents a critical gap for this specific role."
+hiring_manager_notes: "While the candidate shows technical potential, they are not currently suited for this senior role. The 5+ year experience gap and lack of specific web framework development experience are significant concerns. Consider keeping their profile for more junior backend development positions that may open in the future.\n\nThe candidate would need several years of focused web framework development experience before being ready for a senior role of this nature. Their current skill set would be better aligned with entry to mid-level backend development positions, particularly those focused on general Python development or infrastructure."

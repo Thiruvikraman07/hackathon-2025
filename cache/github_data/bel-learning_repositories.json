@@ -1,0 +1,78 @@
+{
+  "username": "bel-learning",
+  "repositories": [
+    {
+      "name": "mila-compiler",
+      "full_name": "bel-learning/mila-compiler",
+      "description": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "C++",
+      "size": 202,
+      "updated_at": "2024-06-28T18:07:52+00:00",
+      "url": "https://github.com/bel-learning/mila-compiler",
+      "default_branch": "main"
+    },
+    {
+      "name": "multi-agent-path-finding",
+      "full_name": "bel-learning/multi-agent-path-finding",
+      "description": "An implementation of MAPF with visualization",
+      "stars": 1,
+      "forks": 1,
+      "language": "Python",
+      "size": 6,
+      "updated_at": "2025-07-31T00:40:08+00:00",
+      "url": "https://github.com/bel-learning/multi-agent-path-finding",
+      "default_branch": "main"
+    },
+    {
+      "name": "practice_c",
+      "full_name": "bel-learning/practice_c",
+      "description": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "C",
+      "size": 58,
+      "updated_at": "2024-03-15T16:28:10+00:00",
+      "url": "https://github.com/bel-learning/practice_c",
+      "default_branch": "main"
+    },
+    {
+      "name": "practice_cpp",
+      "full_name": "bel-learning/practice_cpp",
+      "description": null,
+      "stars": 0,
+      "forks": 0,
+      "language": "C++",
+      "size": 1767,
+      "updated_at": "2024-03-15T16:29:04+00:00",
+      "url": "https://github.com/bel-learning/practice_cpp",
+      "default_branch": "main"
+    },
+    {
+      "name": "regionalizing-prague-ml",
+      "full_name": "bel-learning/regionalizing-prague-ml",
+      "description": "A final project for a course Machine Learning 1 that regionalizes prague given unknown features in unsupervised learning fashion with customized algorithm.",
+      "stars": 0,
+      "forks": 0,
+      "language": "Jupyter Notebook",
+      "size": 871,
+      "updated_at": "2024-03-07T21:04:35+00:00",
+      "url": "https://github.com/bel-learning/regionalizing-prague-ml",
+      "default_branch": "main"
+    },
+    {
+      "name": "Terminal-chatting-in-C",
+      "full_name": "bel-learning/Terminal-chatting-in-C",
+      "description": "An attempt to learn socket programming in C.",
+      "stars": 0,
+      "forks": 0,
+      "language": "C",
+      "size": 9,
+      "updated_at": "2022-05-17T13:39:35+00:00",
+      "url": "https://github.com/bel-learning/Terminal-chatting-in-C",
+      "default_branch": "main"
+    }
+  ],
+  "total": 6
+}

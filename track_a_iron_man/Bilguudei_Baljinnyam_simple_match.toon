@@ -1,0 +1,24 @@
+candidate_name: Bilguudei Baljinnyam
+job_title: Senior Python Backend Developer - FastAPI
+education_summary: "Currently pursuing Bachelor's in Computer Science at Czech Technical University with a strong GPA of 3.8. While the education is relevant, candidate is still a student."
+education_score: 70
+experience_summary: "Has diverse but relatively junior experience across different roles at Jetbrains, Center for Machine Perception, Deutsche Börse, and Hippo Cards."
+years_experience: 2
+experience_score: 45
+technical_skills_summary: "Shows experience with Python and various technologies, but lacks specific FastAPI and many required framework experiences."
+skills_matched[4]: Python,Git,CI/CD (Jenkins),"Cloud platforms (AWS, GCP)"
+skills_missing[9]: FastAPI,Starlette,Pydantic,asyncio,uvicorn,OpenAPI/Swagger,Docker,SQL/NoSQL databases,Database ORMs
+technical_score: 55
+soft_skills_summary: "Demonstrates collaboration abilities, research capabilities, and project leadership through various roles and projects."
+soft_skills_score: 75
+strengths[5]: Strong academic background in Computer Science,Experience with cloud infrastructure and CI/CD,Demonstrated ability to learn new technologies,Project management experience with successful outcomes,Good collaboration skills
+weaknesses[4]: Limited professional experience (still a student),Lack of specific FastAPI experience,No demonstrated async Python expertise,Limited backend development focus
+gaps[4]: Missing required 5+ years professional experience,No experience with FastAPI ecosystem,No demonstrated API design experience,Limited database expertise
+overall_score: 55
+is_match: false
+recommendation: no-match
+proceed_to_interview: false
+match_reason: "While the candidate shows promise, they lack the senior-level experience (5+ years) required for this role and have no demonstrated experience with FastAPI or its ecosystem. The position requires deep expertise in async Python and API development, which isn't evident in the candidate's background."
+candidate_feedback: "You show strong potential in software development, but this senior role requires extensive experience with FastAPI and async Python development. Consider gaining experience with FastAPI, async programming, and API development, then apply for more junior roles in this stack first."
+recruiter_notes: "Candidate is still pursuing their bachelor's degree and lacks the senior-level experience required for this role. While they show promise, they would be better suited for junior positions. Consider keeping their profile for future junior backend developer positions."
+interview_focus_areas[0]:

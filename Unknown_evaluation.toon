@@ -1,0 +1,58 @@
+candidate_name: Unknown
+job_title: Senior Backend Developer
+resume_analysis:
+  years_of_experience: 2
+  years_reason: Calculated from work history
+  education_match: true
+  education_reason: Education information analyzed
+  skill_matches[7,]{skill_name,has_skill,evidence,proficiency_score,reason}:
+    Python,true,"",6,Based on resume analysis
+    FastAPI/Django,false,"",0,Based on resume analysis
+    REST API,false,"",0,Based on resume analysis
+    PostgreSQL,false,"",0,Based on resume analysis
+    Docker,false,"",0,Based on resume analysis
+    Git,true,"",7,Based on resume analysis
+    Unit Testing,true,"",5,Based on resume analysis
+  relevant_experience[0]:
+  relevant_experience_reason: Based on work history
+  resume_strength_score: 45
+  resume_strength_reason: Based on overall resume quality
+github_analysis:
+  github_username: bel-learning
+  has_github: false
+  github_check_reason: GitHub profile checked
+  projects_found: 6
+  projects_found_reason: GitHub profile analyzed
+  relevant_projects[1]:
+    - project_name: multi-agent-path-finding
+      github_url: "https://github.com/bel-learning/multi-agent-path-finding"
+      is_relevant: true
+      relevance_score: 5
+      relevance_reason: Relevant to job requirements
+      technologies_matched[1]: Python
+  quality_assessments[0]:
+  github_contribution_score: 35
+  github_score_reason: Based on GitHub activity
+skill_gaps[5,]{gap_name,severity,description,reason,can_be_learned,learning_reason}:
+  Insufficient years of experience for senior role,moderate,Insufficient years of experience for senior role,"Gap identified: Insufficient years of experience for senior role",true,Can be acquired through training and practice
+  No FastAPI/Django experience,moderate,No FastAPI/Django experience,"Gap identified: No FastAPI/Django experience",true,Can be acquired through training and practice
+  Lack of REST API development,moderate,Lack of REST API development,"Gap identified: Lack of REST API development",true,Can be acquired through training and practice
+  Missing database experience,moderate,Missing database experience,"Gap identified: Missing database experience",true,Can be acquired through training and practice
+  No Docker knowledge,moderate,No Docker knowledge,"Gap identified: No Docker knowledge",true,Can be acquired through training and practice
+skill_gaps_summary: "The candidate lacks the necessary experience level for a senior position, with only 2 years of professional experience. There are significant technical gaps in crucial backend development areas including web frameworks (FastAPI/Django), REST API development, database management, and containerization. While they have Python experience, it's primarily in research/academic context rather than production backend development."
+strengths[5]: Strong computer science foundation,Python programming experience,Git version control proficiency,Testing experience,Algorithm implementation skills
+strengths_reason: "The candidate demonstrates solid theoretical knowledge through their CS education and shows practical experience with Python programming, version control, and testing. Their GitHub projects, particularly the pathfinding implementation, showcase ability to work with algorithms."
+final_decision:
+  is_fit: false
+  fit_reason: Reject
+  overall_score: 30
+  overall_score_breakdown: Based on overall evaluation
+  resume_score: 50
+  github_score: 50
+  skill_match_score: 50
+  recommendation: no-hire
+  recommendation_reason: Reject
+  confidence_level: 70
+  confidence_reason: Based on available information
+detailed_feedback: "The candidate shows promise with a strong computer science background and fundamental programming skills, particularly in Python and version control. Their experience with testing and algorithm implementation demonstrates good technical foundations.\n\nHowever, there are significant gaps between their current experience level and the requirements for a senior backend developer position. With only 2 years of professional experience and no direct backend development work, they lack the depth needed for a senior role. Their technical stack is missing crucial components like web frameworks, API development, and database management.\n\nThe GitHub profile shows mainly academic and learning projects, without production-level backend development work. While the code quality in existing projects is reasonable, they lack important production considerations like error handling, documentation, and proper testing."
+hiring_manager_notes: "While this candidate shows good potential and strong fundamentals, they are not currently suitable for a senior backend developer position. Their experience level (2 years) and skill gaps in key backend technologies make them too junior for this role.\n\nConsider keeping their profile for future junior backend developer positions. They would benefit from gaining experience with web frameworks, API development, and database management. Their strong CS foundation and learning ability suggest good potential for growth.\n\nIf pursuing further discussions, recommend focusing on their willingness to learn backend technologies and potential for a more junior role."

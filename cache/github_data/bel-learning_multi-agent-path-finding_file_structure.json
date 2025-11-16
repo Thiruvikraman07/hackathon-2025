@@ -1,0 +1,14 @@
+{
+  "repo": "bel-learning/multi-agent-path-finding",
+  "files": {
+    "code_files": [
+      "main.py",
+      "pathfinding.py"
+    ],
+    "config_files": [],
+    "doc_files": [
+      "README.md"
+    ]
+  },
+  "total_code_files": 2
+}
