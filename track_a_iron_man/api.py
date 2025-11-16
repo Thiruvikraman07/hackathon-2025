@@ -5,7 +5,7 @@ import json
 
 app = FastAPI()
 
-LOG_DIR = Path("")  # You can set this to your logs folder
+LOG_DIR = Path(__file__).parent.parent  # You can set this to your logs folder
 
 @app.get("/logs/combined")
 def get_combined_logs():
@@ -23,7 +23,9 @@ def get_combined_logs():
 
 @app.get("/logs/file/{file_name}")
 def get_log_file(file_name: str):
+    print("Requested file:", file_name)
     file_path = LOG_DIR / file_name
+    print("Full path:", file_path)
     if not file_path.exists() or not file_path.is_file():
         raise HTTPException(status_code=404, detail="File not found")
     
@@ -34,6 +36,7 @@ def get_log_file(file_name: str):
         raise HTTPException(status_code=400, detail="File is not a valid JSON")
     
     return data
+
 
 
 if __name__ == "__main__":
