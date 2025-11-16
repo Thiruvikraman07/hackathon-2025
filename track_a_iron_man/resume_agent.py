@@ -24,12 +24,12 @@ from langgraph.prebuilt import create_react_agent
 from pdf_extractor import extract_pdf
 
 # Load environment variables
-env_path = Path('../.env')
+env_path = Path('./.env')
 if env_path.exists():
     load_dotenv(env_path)
 
 # Import Holistic AI Bedrock helper
-sys.path.insert(0, '../core')
+sys.path.insert(0, './core')
 try:
     from react_agent.holistic_ai_bedrock import get_chat_model
 except ImportError:

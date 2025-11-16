@@ -1,4 +1,8 @@
 """Pain Point Analyzer - Agent 1.2."""
+
+"""Logging setup"""
+
+
 import json
 from typing import Any, Dict
 from langchain.tools import BaseTool
